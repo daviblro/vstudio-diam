@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Formulário</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <section>
+            <figure>
+                <a href="https://www.festivalvilardemouros.pt/festival/"
+                   target="_blank">
+                    <img id="image"
+                         onmouseenter="hideImage()"
+                         onmouseout="showImage()"
+                         src="images/esticada.jpg"
+                         alt="Erro ao carregar imagem!"
+                         class="image-class" />
+                </a>
+            </figure>
+        </section>
+        <!--<h1>Festival Vilar de Mouros</h1>-->
+    </header>
+    <section>
+        <nav class="sidebar">
+            <a href="index.html"><h2>Home</h2></a>
+            <a href="formulario.html"><h2>Formulário</h2></a>
+            <a href="agenda.html"><h2>Agenda</h2></a>
+        </nav>
+        <section class="center-text">
+            <h2>Formulário</h2>
+            <section class="formulario">
+                <form action="candidaturaAceite.html" method="get" target="_blank">
+                    <label for="name">Nome</label>
+                    <input type="text" required id="name" name="name" /><br /><br />
+                    Contacto
+                    <input type="tel"
+                           id="phone"
+                           name="phone"
+                           value="+351-"
+                           pattern="\+351-9[0-9]{8}"
+                           required
+                           title="+351-111222333" /><br /><br />
+                    Data
+                    <input type="date"
+                           id="data"
+                           name="data"
+                           max="2025-08-23"
+                           min="2025-08-21"
+                           required /><br /><br />
+                    Comentário
+                    <input type="text" id="comentario" />
+                    <p id="error" style="opacity: 0">
+                        O comentário tem insultos
+                    </p>
+                    <input type="button"
+                           class="botao"
+                           value="Validar Comentário"
+                           onClick="validarComentario()" />
+                    <br /><br />
+                    <input type="submit" class="botao" value="Submeter" />
+
+                </form>
+            </section>
+
+            <br />
+            <nav class="center-text">
+                <a href="https://google.com">Google</a>
+                <a href="https://youtube.com">Youtube</a>
+            </nav>
+            <br />
+        </section>
+    </section>
+
+    <footer>
+        <section>
+            <p>Festival Vilar de Mouros 2025.</p>
+        </section>
+    </footer>
+</body>
+</html>

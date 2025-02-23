@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Inscrição de Voluntários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #29627e;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #1c465a;
+            }
+
+        table {
+            width: 80%;
+            max-width: 600px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #29627e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="confirmacao.html">
+        Nome
+        <input type="text" required id="name" name="name"><br /><br />
+        Contacto
+        <input type="tel" id="phone" name="phone" pattern="\+351-9[0-9]{8}" required title="+351-111222333"><br /><br />
+        Data
+        <input type="date" id="data" name="data" max="2025-08-23" min="2025-08-21" required><br /><br />
+        <input type="submit" value="Submeter">
+    </form>
+    <table>
+        <tr>
+            <th colspan="2"><center>Horario</center></th>
+            <th>Artists</th>
+        </tr>
+        <tr>
+            <td rowspan="5">Dia 21, 22, 23</td>
+            <td>13h</td>
+            <td>Zé</td>
+        </tr>
+        <tr>
+            <td>14h</td>
+            <td>Otávio</td>
+        </tr>
+        <tr>
+            <td>15h</td>
+            <td>André</td>
+        </tr>
+        <tr>
+            <td>16h</td>
+            <td>Gui</td>
+        </tr>
+        <tr>
+            <td>17h</td>
+            <td>Shakira</td>
+        </tr>
+    </table>
+</body>
+</html>

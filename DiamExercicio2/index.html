@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Página Inicial</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <section>
+            <figure>
+                <a href="https://www.festivalvilardemouros.pt/festival/"
+                   target="_blank">
+                    <img id="image"
+                         onmouseenter="hideImage()"
+                         onmouseout="showImage()"
+                         src="images/esticada.jpg"
+                         alt="Erro ao carregar imagem!"
+                         class="image-class" />
+                </a>
+            </figure>
+        </section>
+    </header>
+    <section>
+        <nav class="sidebar">
+            <a href="index.html"><h2>Home</h2></a>
+            <a href="formulario.html"><h2>Formulário</h2></a>
+            <a href="agenda.html"><h2>Agenda</h2></a>
+        </nav>
+        <section class="content">
+            <section class="container">
+                <div class="mySlides">
+                    <div class="numbertext">1 / 6</div>
+                    <img src="images/slideshow/1.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">2 / 6</div>
+                    <img src="images/slideshow/2.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">3 / 6</div>
+                    <img src="images/slideshow/3.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">4 / 6</div>
+                    <img src="images/slideshow/4.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">5 / 6</div>
+                    <img src="images/slideshow/5.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">6 / 6</div>
+                    <img src="images/slideshow/6.jpg" style="width:100%">
+                </div>
+                <script>
+                    let slideIndex = 1;
+                    showSlides(slideIndex);
+                </script>
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+
+                <div class="row">
+                    <div class="column">
+                        <img class="demo cursor" src="images/slideshow/1.jpg" style="width:100%" onclick="currentSlide(1)" alt="1">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor" src="images/slideshow/2.jpg" style="width:100%" onclick="currentSlide(2)" alt="2">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor" src="images/slideshow/3.jpg" style="width:100%" onclick="currentSlide(3)" alt="3">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor" src="images/slideshow/4.jpg" style="width:100%" onclick="currentSlide(4)" alt="4">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor" src="images/slideshow/5.jpg" style="width:100%" onclick="currentSlide(5)" alt="5">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor" src="images/slideshow/6.jpg" style="width:100%" onclick="currentSlide(6)" alt="6">
+                    </div>
+                </div>
+            </section>
+        </section>
+        <nav class="center-text">
+            <a href="https://google.com">Google</a>
+            <a href="https://youtube.com">Youtube</a>
+        </nav>
+    </section>
+    <footer>
+        <section>
+            <p>Festival Vilar de Mouros 2025.</p>
+        </section>
+    </footer>
+</body>
+</html>
