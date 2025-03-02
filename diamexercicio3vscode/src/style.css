@@ -1,0 +1,244 @@
+/* Reset some default browser styles */
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,a {
+  margin: 0;
+  margin-top: 0px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set a default font and background color for the body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #bfd4d4;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for headings */
+h1,h2,h3,h4,h5,h6 {
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+/* Style for paragraphs */
+p {
+  margin-bottom: 1rem;
+}
+
+/* Style for links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Style for lists */
+ul,
+ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}  
+figure{
+  margin: 0;
+  padding: 0;
+}
+header {
+    width: 100%;
+    height: 200px;
+    background-color: #8ea19b;
+    color: #000000;
+    text-align: center;
+}
+.image-class{
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+form {
+  margin-top: 20px;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+}
+nav a {
+  margin-right: 10px;
+}
+section{
+  margin: 0;
+}
+.sidebar {
+  float: left;
+  width: 15%;
+  top: 200px;
+  bottom: 0;
+  height: 100vh; /* Adjusted to fill the space until the footer */
+  background: #8ea19b;
+  padding: 20px;
+  text-align: center;
+}
+
+footer {
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  background-color: #848c8a;
+  color: #050505;
+  position: fixed;
+}
+table {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px; 
+  width: 50%;
+  text-align: center;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  border: 1px solid #333;
+  text-align: center;
+}
+table th,
+table td {
+  border: 1px solid #333;
+  padding: 12px;
+  text-align: left;
+  background-color: rgb(124, 187, 219);
+}
+.center-text{
+  text-align: center;
+}
+
+.botao{
+  background-color: #86d27c;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px; 
+}
+.botao:hover{
+  background-color: #62cf54;
+}
+.botaoSubmeter:active {
+  background-color: #57d246;
+  transform: scale(0.98);
+}
+.formulario{
+  margin: 0 auto;
+  text-align: center;
+}
+.container {
+  position: relative;
+  width: 80%;  
+}
+.content {
+  width: 85%;
+  margin: 0 auto; /* Centraliza a seção na página */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os elementos filhos dentro dela */
+}
+
+/* Hide the images by default */
+.mySlides {
+  width: 100%;
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+* {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+  width: 100%;
+}
