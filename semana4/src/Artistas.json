@@ -1,0 +1,47 @@
+[
+    {
+        "nome": "XUTOS & PONTAPÉS",
+        "imagem": "images/1.jpg",
+        "estilo": "Rock",
+        "descricao": "Os Xutos & Pontapés são uma banda portuguesa de rock formada no final do ano de 1978",
+        "urlvideo": "https://www.youtube.com/embed/zbs06__3378",
+        "data": "2025-8-21",
+        "hora": "18:00"
+    },
+    {
+        "nome": "Soulfly",
+        "imagem": "images/2.jpg",
+        "estilo": "heavy metal",
+        "descricao": "Soulfly is an American heavy metal band formed in Phoenix, Arizona in 1997. Soulfly is led by former Sepultura frontman Max Cavalera, who formed the band after he left the Brazilian group in 1996. To date the band has released twelve studio albums, one tour EP, twenty-three singles, one video album, and twelve music videos. Their debut album, Soulfly, was released on April 21, 1998, while their most recent album, Totem, was released on August 5, 2022.",
+        "urlvideo": "https://www.youtube.com/embed/FRaFA1-UYLI",
+        "data": "2025-8-21",
+        "hora": "21:00"
+    },
+    {
+        "nome": "Crystal Fighters",
+        "imagem": "images/3.jpg",
+        "estilo": "Alternative dancesynth-pop folk folktronica indie popindie rock",
+        "descricao": "Crystal Fighters é uma banda de música eletrônica anglo-espanhola, formada em 2007. Seu álbum de estreia, Star of Love, foi lançado em outubro de 2010 no Reino Unido e nos EUA pela Atlantic Records em abril de 2012.",
+        "urlvideo": "https://www.youtube.com/embed/mxk24nL7xQY",
+        "data": "2025-8-22",
+        "hora": "19:00"
+    },
+    {
+        "nome": "Franz Ferdinand",
+        "imagem": "images/4.jpg",
+        "estilo": "Rock alternativo Indie rockNew waveArt rockRevival pós-punk Dance-punk",
+        "descricao": "Franz Ferdinand é uma banda de rock formada em 2002 em Glasgow, Escócia. A banda é formada por Alex Kapranos, Bob Hardy, junto com Dino Bardot, Julian Corrie e Audrey Tait.",
+        "urlvideo": "https://www.youtube.com/embed/Ijk4j-r7qPA",
+        "data": "2025-8-22",
+        "hora": "22:00"
+    },
+    {
+        "nome": "SZA",
+        "imagem": "images/5.jpg",
+        "estilo": "R&B hip hop",
+        "descricao": "Solána Imani Rowe, mais conhecida pelo seu nome artístico SZA, é uma cantora e compositora estadunidense.",
+        "urlvideo": "https://www.youtube.com/embed/GfCqMv--ncA",
+        "data": "2025-8-23",
+        "hora": "23:00"
+    }
+]
