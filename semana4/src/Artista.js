@@ -1,14 +1,14 @@
 import React from "react";
 
 function Artista(props) {
-  function handleClick(nome) {
 
+  function handleClick(nome) {
     const video = document.getElementById(nome);
-    if (video.style.display === "none") {
-      video.style.display = "block";
+    if (video.style.display === "block") {
+      video.style.display = "none";
     }
     else {
-      video.style.display = "none";
+      video.style.display = "block";
     }
   }
 
@@ -28,7 +28,6 @@ function Artista(props) {
         ></img>
         <iframe title={props.nome} id={props.nome} className="VideoArtista"
           src={props.urlvideo} // Passando a URL do vídeo
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
         <p className="EstiloArtista">

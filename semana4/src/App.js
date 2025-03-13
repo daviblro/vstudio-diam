@@ -6,9 +6,9 @@ import Artistas from "./Artistas";
 function App() {
   return (
     <>
-      <Header />
+      <Header key="header"/>
 
-      {Artistas.map((artista, index) => (
+      {Artistas.map((artista) => (
         <Artista
           nome={artista.nome}
           imagem={artista.imagem}
@@ -17,7 +17,8 @@ function App() {
           data={artista.data}
           hora={artista.hora}
           urlvideo={artista.urlvideo}
-          id={index}
+          id={artista.id}
+          key={artista.id}
           length={Artistas.length - 1}
         />
       ))}
