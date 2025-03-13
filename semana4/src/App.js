@@ -7,23 +7,8 @@ function App() {
   return (
     <>
       <Header />
-      <p style={{ textAlign: "center", fontSize: "30px", fontWeight: "bold" }}>
-        Alínea 1
-      </p>
-      <Artista
-        nome="ArtistaNome"
-        imagem="/images/6.jpg"
-        estilo="Pop"
-        descricao="Descrição: Algo sobre o Festival."
-        data="2021-07-30"
-        hora="21:00"
-        urlvideo="https://www.youtube.com/embed/zbs06__3378"
-      />
-      <h3 style={{ textAlign: "center", fontSize: "30px", fontWeight: "bold" }}>
-        Alínea 3
-      </h3>
 
-      {Artistas.map((artista) => (
+      {Artistas.map((artista, index) => (
         <Artista
           nome={artista.nome}
           imagem={artista.imagem}
@@ -32,6 +17,8 @@ function App() {
           data={artista.data}
           hora={artista.hora}
           urlvideo={artista.urlvideo}
+          id={index}
+          length={Artistas.length - 1}
         />
       ))}
     </>
