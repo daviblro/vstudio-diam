@@ -1,17 +1,16 @@
-import React from "react";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import AppSemana4 from "./AppSemana4";
-import AppSemana5 from "./AppSemana5";
-import reportWebVitals from "./reportWebVitals";
-import FormVoluntario from "./FormVoluntario";
+import reportWebVitals from './reportWebVitals';
+import FormVoluntario from './FormVoluntario';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<AppSemana5/>} />
+      <Route path="/" element={<App/>} />
       <Route path="/FormVoluntario" element={<FormVoluntario/>} />
     </Routes>
   </BrowserRouter>

@@ -2,64 +2,56 @@ import Footer from "./Footer";
 import React from "react";
 import Header from "./Header";
 import "./Footer.css";
+import "./Form.css"
 
 function FormVoluntario() {
   const [nome, setNome] = React.useState("");
   const [contacto, setContacto] = React.useState("+351-");
-  const [data, setData] = React.useState(new Date());
+  const [data, setData] = React.useState("2025-08-21");
   const [comentario, setComentario] = React.useState("");
 
   const [isCommentValid, setIsCommentValid] = React.useState(true);
 
+  const palavrasProibidas = [
+    "Abécula",
+    "Abentesma",
+    "Achavascado",
+    "Alimária",
+    "Andrajoso",
+    "Barregã",
+    "Biltre",
+    "Cacóstomo",
+    "Cuarra",
+    "Estólido",
+    "Estroso",
+    "Estultilóquio",
+    "Nefelibata",
+    "Néscio",
+    "Pechenga",
+    "Sevandija",
+    "Somítico",
+    "Tatibitate",
+    "Xexé ou Cheché",
+    "Xexelento",
+  ];
+
   const handleComentarioChange = (e) => {
     const text = e.target.value;
     setComentario(text);
-    const palavra = [
-      "Abécula",
-      "Abentesma",
-      "Achavascado",
-      "Alimária",
-      "Andrajoso",
-      "Barregã",
-      "Biltre",
-      "Cacóstomo",
-      "Cuarra",
-      "Estólido",
-      "Estroso",
-      "Estultilóquio",
-      "Nefelibata",
-      "Néscio",
-      "Pechenga",
-      "Sevandija",
-      "Somítico",
-      "Tatibitate",
-      "Xexé ou Cheché",
-      "Xexelento",
-    ];
-    for (let word of palavra) {
-      if (text.includes(word)) {
-        setIsCommentValid(false);
-        return;
-      }
-    }
-    setIsCommentValid(true);
+    setIsCommentValid(!palavrasProibidas.some((word) => text.includes(word)));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Obrigado ${nome} pela sua inscrição! Em breve será contactado pela organização do festival.`);
+  };
+  
 
   return (
     <>
       <Header />
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault(); //impedir de recarregar a página, senao usar abra outra janela dps.
-          alert(
-            `Obrigado ${nome} pela sua inscrição, em breve será contactado pela organização do festival.`
-          );
-        }}
-        method="get"
-        target="_blank"
-        style={{ textAlign: "center", height: "70.5vh" }} //brute force ocupar espaço
-      >
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name">Nome</label>
         <input
           type="text"
@@ -69,9 +61,7 @@ function FormVoluntario() {
           value={nome}
           onChange={(e) => setNome(e.target.value)}
         />
-        <br />
-        <br />
-        Contacto
+        <label htmlFor="phone">Contacto</label>
         <input
           type="tel"
           id="phone"
@@ -80,34 +70,29 @@ function FormVoluntario() {
           onChange={(e) => setContacto(e.target.value)}
           pattern="\+351-9[0-9]{8}"
           required
-          title="+351-111222333"
+          title="+351-999888777"
         />
-        <br />
-        <br />
-        Data
+        <label htmlFor="data">Data</label>
         <input
           type="date"
           id="data"
           name="data"
-          max="2025-08-23"
           min="2025-08-21"
-          value={data.toISOString().split("T")[0]}
-          onChange={(e) => setData(new Date(e.target.value))}
+          max="2025-08-23"
+          value={data}
+          onChange={(e) => setData(e.target.value)}
           required
         />
-        <br />
-        <br />
-        Comentário
+        <label htmlFor="name">Comentário</label>
         <input
           type="text"
           id="comentario"
           value={comentario}
           onChange={handleComentarioChange}
         />
-        <p style={{fontSize: "30px", opacity: isCommentValid ? 0 : 1 }}>
+        <p style={{ fontSize: "30px", opacity: isCommentValid ? 0 : 1 }}>
           O comentário tem insultos!!!
         </p>
-        <br />
         <input
           type="submit"
           className="botao"
