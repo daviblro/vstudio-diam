@@ -1,23 +1,19 @@
 import React from "react";
 import "./Footer.css";
 
-function Footer() {//seria melhor em vez de mudar opacidade, eliminar e adicionar os elementos, assim grantiamos a centralização
-  const [isVisible, setIsVisible] = React.useState(true);
+function Footer() {
+  const textos = [
+    "Festival Vilar de Mouros 2025.",
+    "Autores da Página: Davi Balieiro, Guilherme Riço, Ji Zhu."
+  ];
+  
+  const [index, setIndex] = React.useState(0);
 
   return (
-    <>
-      <footer onClick={() => setIsVisible(!isVisible)} className="footer">
-        {/* <div className={`${!isVisible ? "opacity-1" : "opacity-0"} div  `}>Versão Original ....</div> */}
-        <div className={`${isVisible ? "opacity-1" : "opacity-0"} div `}>
-          Davi Balieiro
-          <br />
-          Guilherme Riço
-          <br />
-          Ji Zhu
-          <br />
-        </div>
-      </footer>
-    </>
+    <footer onClick={() => setIndex((prevIndex) => 1 - prevIndex)} className="footer">
+      <div className="div">{textos[index]}</div>
+    </footer>
   );
 }
+
 export default Footer;

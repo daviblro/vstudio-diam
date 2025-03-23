@@ -5,7 +5,7 @@ function Header() {
   return (
     <div className="Header">
       Semana 5 - Apresentação de Artistas
-      <div style={{ display: "flex", width: "100%", justifyContent: "flex-start" }}>
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
         <Link to="/">
           <button className="btn">Home</button>
         </Link>

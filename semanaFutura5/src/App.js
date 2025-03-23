@@ -7,7 +7,7 @@ import Footer from "./Footer";
 function App() {
   return (
     <>
-      <Header key="header"/>
+      <Header key="header" />
 
       {Artistas.map((artista) => (
         <Artista
@@ -23,7 +23,7 @@ function App() {
           length={Artistas.length - 1}
         />
       ))}
-      <Footer/>
+      <Footer />
     </>
   );
 }
