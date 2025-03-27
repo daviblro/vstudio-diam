@@ -16,7 +16,6 @@ function Header() {
         <Link to="/Inquerito">
           <button className="btn">Inquérito</button>
         </Link>
-       
       </div>
     </div>
   );
