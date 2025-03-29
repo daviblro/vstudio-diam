@@ -32,10 +32,16 @@ form input {
     text-align: center;
 }
 
-/* Estilização do campo de comentário */
-#comentario {
+textarea {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
     height: 80px;
-    resize: none;
+    resize: vertical;
 }
 
 /* Mensagem de erro */
@@ -55,6 +61,7 @@ form p {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 10px;
 }
 
 .botao:hover {
@@ -76,4 +83,37 @@ form p {
     form input {
         width: 100%;
     }
+}
+
+/* Estilo dos checkboxes */
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    margin: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 2px solid #666;
+    transition: 0.2s;
+}
+
+.checkbox-label input:checked {
+    background: #007bff;
+    border-color: #007bff;
 }

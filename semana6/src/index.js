@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import FormVoluntario from './FormVoluntario';
 import Inquerito from './Inquerito'
 import RespostaInquerito from './RespostaInquerito';
+import Resultados from './Resultados';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
       <Route path="/FormVoluntario" element={<FormVoluntario/>} />
       <Route path="/Inquerito" element={<Inquerito/>} />
       <Route path="/RespostaInquerito" element={<RespostaInquerito/>} />
+      <Route path="/Resultados" element={<Resultados/>} />
     </Routes>
   </BrowserRouter>
 );

@@ -11,7 +11,7 @@ function Footer() {
 
   return (
     <footer onClick={() => setIndex((prevIndex) => 1 - prevIndex)} className="footer">
-      <div className="div">{textos[index]}</div>
+      {textos[index]}
     </footer>
   );
 }

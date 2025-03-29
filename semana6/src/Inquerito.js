@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
-import artistas from "./Artistas"; // Assuming this is an array of objects
+import artistas from "./Artistas";
 
 function Inquerito() {
-  const [pergunta1, setPergunta1] = useState([]);
-  const [pergunta2, setPergunta2] = useState([]);
-  const [pergunta3, setPergunta3] = useState("");
-  const navigate = useNavigate();
-
   const [selectedArtists, setSelectedArtists] = useState([]);
   const [selectedHorarios, setSelectedHorarios] = useState([]);
+  const [criticas, setCriticas] = useState("");
+  const navigate = useNavigate();
 
-  const horarios = ["20:00", "22:00", "23:00", "00:00"];
+  const horarios = ["18:00", "19:00", "21:00", "22:00", "23:00"];
+
+  // Carregar respostas anteriores do sessionStorage
+  useEffect(() => {
+    const storedData = sessionStorage.getItem("respostasInquerito");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setSelectedArtists(parsedData.selectedArtists || []);
+      setSelectedHorarios(parsedData.selectedHorarios || []);
+      setCriticas(parsedData.criticas || "");
+    }
+  }, []);
+
+  // Atualizar sessionStorage quando as respostas mudarem
+  // useEffect(() => {
+  //   const respostas = { pergunta1: selectedArtists, pergunta2: selectedHorarios, pergunta3: criticas };
+  //   sessionStorage.setItem("respostasInquerito", JSON.stringify(respostas));
+  // }, [selectedArtists, selectedHorarios, criticas]);
 
   const handleSelectedArtistsChange = (e) => {
     const value = e.target.value;
@@ -31,107 +45,89 @@ function Inquerito() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const dados = {
-      pergunta1: selectedArtists.join(", "),
-      pergunta2: selectedHorarios.join(", "),
-      pergunta3,
-    };
-    navigate("/RespostaInquerito", { state: { dados } });
+
+    // Recupera os dados anteriores do sessionStorage
+    const storedData = JSON.parse(sessionStorage.getItem("respostasInquerito")) || [];
+
+    // Garante que os dados sejam armazenados como array
+    const previousData = Array.isArray(storedData) ? storedData : [];
+
+    // Adiciona a nova resposta
+    const updatedData = [...previousData, { selectedArtists, selectedHorarios, criticas }];
+
+    // Salva no sessionStorage
+    sessionStorage.setItem("respostasInquerito", JSON.stringify(updatedData));
+
+    navigate("/RespostaInquerito", {
+      state: { dados: { pergunta1: selectedArtists, pergunta2: selectedHorarios, pergunta3: criticas } },
+    });
   }
 
   return (
     <>
-      <Header />
-      <form onSubmit={handleSubmit}>
-        <label
-          htmlFor="pergunta1"
-          style={{ width: "100%", textAlign: "center" }}
-        >
-          Quais foram os artistas que gostou no festival?
-        </label>
-        <br />
-        <section
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-          }}
-        >
-          {artistas.map((artista, index) => (
-            <label
-              key={index}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                width: "100%",
-              }}
-            >
-              <input
-                type="checkbox"
-                value={artista.nome} // Assuming the artist name is stored in a "name" property
-                checked={selectedArtists.includes(artista.nome)}
-                onChange={handleSelectedArtistsChange}
-                style={{
-                  position: "relative",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <div>{artista.nome}</div> {/* Display the artist name */}
-            </label>
-          ))}
-        </section>
+      <div className="container">
+        <Header />
+        <div className="content">
+          <form onSubmit={handleSubmit}>
 
-        <label htmlFor="pergunta2">
-          Qual o seu horário preferido para os concertos?
-        </label>
-        <section
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-          }}
-        >
-          {horarios.map((horario, index) => (
-            <label
-              key={index}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                width: "100%",
-              }}
-            >
-              <input
-                type="checkbox"
-                value={horario}
-                checked={selectedHorarios.includes(horario)}
-                onChange={handleHorarioChange}
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  verticalAlign: "middle",
-                }}
-              />
-              <div>{horario}</div>
-            </label>
-          ))}
-        </section>
+            <label htmlFor="selectedArtistas">Quais foram os artistas que gostou no festival?</label>
+            <div className="checkbox-container">
+              {artistas.map((artista, index) => (
+                <label
+                  key={index}
+                  className="checkbox-label"
+                >
+                  <input
+                    type="checkbox"
+                    value={artista.nome}
+                    checked={selectedArtists.includes(artista.nome)}
+                    onChange={handleSelectedArtistsChange}
+                  />
+                  {artista.nome}
+                </label>
+              ))}
+            </div>
 
-        <label htmlFor="pergunta3">Críticas:</label>
-        <input
-          type="text"
-          required
-          id="pergunta3"
-          name="pergunta3"
-          value={pergunta3}
-          onChange={(e) => setPergunta3(e.target.value)}
-        />
+            <label htmlFor="selectedHorarios">Qual o seu horário preferido para os concertos?</label>
+            <div className="checkbox-container">
+              {horarios.map((horario, index) => (
+                <label
+                  key={index}
+                  className="checkbox-label"
+                >
+                  <input
+                    type="checkbox"
+                    value={horario}
+                    checked={selectedHorarios.includes(horario)}
+                    onChange={handleHorarioChange}
+                  />
+                  {horario}
+                </label>
+              ))}
+            </div>
 
-        <input type="submit" className="botao" value="Submeter" />
-      </form>
-      <Footer />
+            <label htmlFor="criticas">Críticas:</label>
+            <textarea
+              type="text"
+              required
+              id="criticas"
+              name="criticas"
+              value={criticas}
+              onChange={(e) => setCriticas(e.target.value)}
+            />
+
+            <input type="submit" className="botao" value="Submeter" />
+          </form>
+
+          <div style={{ textAlign: "center" , height: "10vh"}}>
+            <button className="botao" onClick={() => navigate("/Resultados")}>
+              Ver Resultados
+            </button>
+          </div>
+
+          <Footer />
+        </div>
+      </div>
     </>
   );
 }
