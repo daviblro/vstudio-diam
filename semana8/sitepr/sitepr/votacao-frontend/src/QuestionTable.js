@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
-import DetailModal from "./DetailModal";
-import VoteModal from "./VoteModal";
+import DetailPage from "./DetailPage";
+import VotePage from "./VotePage";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function QuestionTable() {
   const URL_QUESTIONS = "http://localhost:8000/votacao/api/questions/"; // (1)
@@ -13,31 +14,31 @@ function QuestionTable() {
       setQuestionList(request.data);
     });
   };
+
   useEffect(() => {
     //(4)
     getQuestions();
   }, []);
-  return (
+
+  const navigate = useNavigate();
+
+  return(  
     <Table light="true">
       {" "}
       {/* (5) */}
       <thead>
         <tr>
           <th style={{ textAlign: "left" }}>Texto</th>
-          <th style={{textAlign: "right" }}>Controls</th>
+          <th style={{ textAlign: "right" }}>Controls</th>
         </tr>
       </thead>
       <tbody>
-        {questionList.map(
-          (
-            question // (6)
-          ) => (
+        {questionList.map( ( question ) => (  //por cada elemento do map
             <tr key={question.pk}>
               <td>{question.questao_texto}</td>
-              <td style={{textAlign: "center" }}>
-                <DetailModal question={question} />
-                &nbsp;
-                <VoteModal question={question} />
+              <td style={{ textAlign: "center" }}>  
+                <DetailPage question={question} />
+                <VotePage question={question} />
               </td>
             </tr>
           )
