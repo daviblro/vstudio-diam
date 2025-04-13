@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Table, Label } from "reactstrap";
 import axios from "axios";
 import moment from "moment";
@@ -6,6 +7,7 @@ import moment from "moment";
 function VoteForm({ options, question, toggle }) {
   const URL_OPTION = "http://localhost:8000/votacao/api/option/"; // (1)
   const [selectedOption, setSelectedOption] = useState(-1); // (2)
+  const navigate = useNavigate();
   const voteAndCloseModal = (event) => {
     // (3)
     event.preventDefault();
@@ -73,7 +75,10 @@ function VoteForm({ options, question, toggle }) {
             </tbody>
           </Table>
         </FormGroup>
-        <Button>Votar</Button> {/* (5) */}
+        <div className="d-flex justify-content-center gap-2">
+          <Button color="primary">Votar</Button> {/* (5) */}
+          <Button color="secondary" onClick={() => navigate("/")}>Página Inicial</Button>
+        </div>
       </Form>
     </>
   );

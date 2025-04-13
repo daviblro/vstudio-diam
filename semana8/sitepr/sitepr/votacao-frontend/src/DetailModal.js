@@ -1,37 +1,36 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import axios from "axios";
-import VoteForm from "./VoteForm";
+import DetailData from "./DetailData";
 
-function VoteModal({ question }) {
-
+function DetailModal({ question }) {
   const URL_OPTIONS = "http://localhost:8000/votacao/api/options/";
   const [showModal, setShowModal] = useState(false);
   const [optionList, setOptionList] = useState([]);
 
   const getOptions = () => {
-    axios.get(URL_OPTIONS + question.pk).then((request) => {
-      setOptionList(request.data);
+    axios.get(URL_OPTIONS + question.pk).then((res) => {
+      setOptionList(res.data);
     });
   };
 
   const toggleModal = () => {
     if (!showModal) getOptions();
-    setShowModal((showModal) => !showModal);
+    setShowModal((prev) => !prev);
   };
-
 
   return (
     <>
-      <Button onClick={toggleModal} className="btn-success">
-        Votar
+      <Button onClick={toggleModal} className="btn-warning">
+        Detalhe
       </Button>
+
       <Modal isOpen={showModal} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>
-          Voto na questão {question.pk}
+          Detalhes da questão {question.pk}
         </ModalHeader>
         <ModalBody>
-          <VoteForm
+          <DetailData
             options={optionList}
             question={question}
             toggle={toggleModal}
@@ -41,4 +40,5 @@ function VoteModal({ question }) {
     </>
   );
 }
-export default VoteModal;
+
+export default DetailModal;

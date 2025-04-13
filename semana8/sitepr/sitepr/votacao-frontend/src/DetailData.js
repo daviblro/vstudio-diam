@@ -43,7 +43,9 @@ function DetailData({ options, question, toggle }) {
           </tbody>
         </Table>
       </FormGroup>
-      <Button>Fechar</Button> {/* (3) */}
+      <div className="d-flex justify-content-center gap-2">
+        <Button color="secondary">Página Inicial</Button> {/* (3) */}
+      </div>
     </Form>
   );
 }

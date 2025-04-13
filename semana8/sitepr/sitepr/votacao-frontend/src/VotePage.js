@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import DetailData from "./DetailData";
 import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import VoteForm from "./VoteForm";
 
-function DetailPage() {
+function VotePage() {
   const URL_OPTIONS = "http://localhost:8000/votacao/api/options/";
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
@@ -23,10 +23,10 @@ function DetailPage() {
 
   return (
     <div className="container">
-      <h2>Detalhes da Votação</h2>
-      <DetailData question={question} options={options} toggle={() => navigate(-1)} />
+      <h2>Votação</h2>
+      <VoteForm question={question} options={options} toggle={() => navigate(-1)} />
     </div>
   );
 }
 
-export default DetailPage;
+export default VotePage;
