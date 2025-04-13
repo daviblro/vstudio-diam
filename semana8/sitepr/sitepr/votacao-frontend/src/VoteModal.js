@@ -3,18 +3,18 @@ import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import axios from "axios";
 import VoteForm from "./VoteForm";
 
-function VoteModal({ question }) {
-  
+function VotePage({ question }) {
+
   const URL_OPTIONS = "http://localhost:8000/votacao/api/options/";
   const [showModal, setShowModal] = useState(false);
   const [optionList, setOptionList] = useState([]);
-  
+
   const getOptions = () => {
     axios.get(URL_OPTIONS + question.pk).then((request) => {
       setOptionList(request.data);
     });
   };
-  
+
   const toggleModal = () => {
     if (!showModal) getOptions();
     setShowModal((showModal) => !showModal);
@@ -41,4 +41,4 @@ function VoteModal({ question }) {
     </>
   );
 }
-export default VoteModal;
+export default VotePage;

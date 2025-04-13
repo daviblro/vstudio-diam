@@ -5,18 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import VotePage from "./VotePage";
+import VotePage from "./VoteModal";
 import DetailPage from "./DetailPage";
 import Exemplo from "./Exemplo"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
- <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App/>} />
-        <Route path="/VotePage" element={<VotePage/>} />
-        <Route path="/DetailPage" element={<DetailPage/>} />
-        <Route path="/Exemplo" element={<Exemplo/>} />
+        <Route path="/" element={<App />} />
+        <Route path="/VotePage" element={<VotePage />} />
+        <Route path="/DetailPage" element={<DetailPage />} />
+        <Route path="/Exemplo" element={<Exemplo />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

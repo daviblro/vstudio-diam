@@ -34,7 +34,7 @@ function DetailData({ options, question, toggle }) {
               (
                 o // (6)
               ) => (
-                <tr>
+                <tr key={o.pk}>
                   <td style={{ textAlign: "left" }}>{o.opcao_texto}</td>
                   <td style={{ textAlign: "right" }}>{o.votos}</td>
                 </tr>

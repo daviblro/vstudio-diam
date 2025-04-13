@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import DetailPage from "./DetailPage";
-import VotePage from "./VotePage";
+import VotePage from "./VoteModal";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function QuestionTable() {
   const URL_QUESTIONS = "http://localhost:8000/votacao/api/questions/"; // (1)
   const [questionList, setQuestionList] = useState([]); // (2)
   const getQuestions = () => {
     // (3)
-    axios.get(URL_QUESTIONS).then((request) => {
-      setQuestionList(request.data);
+    axios.get(URL_QUESTIONS).then((res) => {
+      setQuestionList(res.data);
     });
   };
 
@@ -20,11 +19,8 @@ function QuestionTable() {
     getQuestions();
   }, []);
 
-  const navigate = useNavigate();
-
-  return(  
-    <Table light="true">
-      {" "}
+  return (
+    <Table light>
       {/* (5) */}
       <thead>
         <tr>
@@ -33,15 +29,24 @@ function QuestionTable() {
         </tr>
       </thead>
       <tbody>
-        {questionList.map( ( question ) => (  //por cada elemento do map
+        {questionList.length === 0 ? (
+          <tr>
+            <td colSpan="2" style={{ textAlign: "center" }}>
+              Nenhuma pergunta disponível.
+            </td>
+          </tr>
+        ) : (
+          questionList.map((question) => (//por cada elemento do map
             <tr key={question.pk}>
               <td>{question.questao_texto}</td>
-              <td style={{ textAlign: "center" }}>  
-                <DetailPage question={question} />
-                <VotePage question={question} />
+              <td style={{ textAlign: "center" }}>
+                <div className="d-flex justify-content-center gap-2">
+                  <DetailPage question={question} />
+                  <VotePage question={question} />
+                </div>
               </td>
             </tr>
-          )
+          ))
         )}
       </tbody>
     </Table>

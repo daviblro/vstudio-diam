@@ -6,15 +6,15 @@ import "./App.css";
 function App() {
   return (
     <>
-      <Header/> 
-      <Content/>
+      <Header />
+      <Content />
     </>
   );
 }
 
 function Content() {
   return (
-    <Container style={{width: "100%",display: "flex",justifyContent: "center", alignItems: "center",}}>
+    <Container style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", }}>
       <Row>
         <Col>
           <QuestionTable />
