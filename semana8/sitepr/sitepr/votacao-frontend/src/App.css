@@ -1,66 +1,69 @@
 .App {
-    text-align: center;
-  }
-  
-  .Header {
-    background-color: #3e79f973;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    padding: 0;
-  }
-  .btn-warning {
-    background-color: orange;
-    border: none;
-    border-radius: 5px;
-    color: rgb(0, 0, 0);
-    padding: 6px 8px;
-    text-align: center;
-    display: inline-block;
-    font-size: 18px;
-    margin: 6px;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  
-  .btn-warning:hover {
-    background-color: rgb(244, 184, 72);
-  }
-  .btn-success {
-    background-color: green;
-    border: none;
-    border-radius: 5px;
-    color: rgb(0, 0, 0);
-    padding: 6px 8px;
-    text-align: center;
-    display: inline-block;
-    font-size: 18px;
-    margin: 6px;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  
-  .btn-sucess:hover {
-    background-color: rgb(2, 140, 2);
-  }
-  body {
-    margin: 0;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .content {
-    flex-grow: 1;
-    text-align: center;
-  }
-  
-  ul {
-    text-align: center;
-    list-style-position: inside;
-  }
+  text-align: center;
+}
+
+.Header {
+  background-color: #3e79f973;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  padding: 0;
+}
+
+.btn-warning {
+  background-color: orange;
+  border: none;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 6px 8px;
+  text-align: center;
+  display: inline-block;
+  font-size: 18px;
+  margin: 6px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn-warning:hover {
+  background-color: rgb(244, 184, 72);
+}
+
+.btn-success {
+  background-color: green;
+  border: none;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 6px 8px;
+  text-align: center;
+  display: inline-block;
+  font-size: 18px;
+  margin: 6px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn-sucess:hover {
+  background-color: rgb(2, 140, 2);
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+  text-align: center;
+}
+
+ul {
+  text-align: center;
+  list-style-position: inside;
+}

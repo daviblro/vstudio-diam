@@ -1,39 +1,32 @@
-import React, { useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import DetailData from "./DetailData";
-import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-//
-function DetailPage({ question }) {
-  // (1)
-  const URL_OPTIONS = "http://localhost:8000/votacao/api/options/"; // (2)
-  const [showModal, setShowModal] = useState(false); // (3)
-  const [optionList, setOptionList] = useState([]); // (4)
-  const getOptions = () => {
-    // (5)
-    axios.get(URL_OPTIONS + question.pk).then((request) => {
-      setOptionList(request.data);
-    });
-  };
-
+function DetailPage() {
+  const URL_OPTIONS = "http://localhost:8000/votacao/api/options/";
+  const { id } = useParams();
+  const [question, setQuestion] = useState(null);
+  const [options, setOptions] = useState([]);
   const navigate = useNavigate();
 
-  const toggleModal = () => {
-    // (6)
-    if (!showModal) getOptions();
-    setShowModal((showModal) => !showModal);
-  };
+  useEffect(() => {
+    axios.get(URL_OPTIONS + id).then((res) => {
+      setQuestion(res.data);
+    });
+    axios.get(URL_OPTIONS + id).then((res) => {
+      setOptions(res.data);
+    });
+  }, [id]);
+
+  if (!question) return <p>Carregando...</p>;
+
   return (
-    <>
-      <button
-        onClick={() => navigate("/Exemplo", { state: { question } })}
-        className="btn-warning"
-      >
-        Detalhe
-      </button>
-    </>
+    <div className="container">
+      <h2>Detalhes da Votação</h2>
+      <DetailData question={question} options={options} toggle={() => navigate(-1)} />
+    </div>
   );
 }
+
 export default DetailPage;

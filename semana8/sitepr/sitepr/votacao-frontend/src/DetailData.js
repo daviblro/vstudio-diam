@@ -34,7 +34,7 @@ function DetailData({ options, question, toggle }) {
               (
                 o // (6)
               ) => (
-                <tr>
+                <tr key={o.pk}>
                   <td style={{ textAlign: "left" }}>{o.opcao_texto}</td>
                   <td style={{ textAlign: "right" }}>{o.votos}</td>
                 </tr>
@@ -43,7 +43,9 @@ function DetailData({ options, question, toggle }) {
           </tbody>
         </Table>
       </FormGroup>
-      <Button>Fechar</Button> {/* (3) */}
+      <div className="d-flex justify-content-center gap-2">
+        <Button color="secondary">Página Inicial</Button> {/* (3) */}
+      </div>
     </Form>
   );
 }
