@@ -21,8 +21,9 @@ import login.views as views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/signup/", views.signup),
+    path("api/signup/", views.signup_view),
     path("api/login/", views.login_view),
     path("api/logout/", views.logout_view),
     path("api/user/", views.user_view),
+    path("api/csrf/", views.csrf_view),
 ]

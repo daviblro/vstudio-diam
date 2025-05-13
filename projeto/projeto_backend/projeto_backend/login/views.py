@@ -6,6 +6,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from django.middleware.csrf import get_token
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -29,7 +31,7 @@ def logout_view(request):
 
 
 @api_view(['POST'])
-def signup(request):
+def signup_view(request):
  username = request.data.get('username')
  password = request.data.get('password')
  if username is None or password is None:
@@ -43,3 +45,7 @@ def signup(request):
 @permission_classes([IsAuthenticated])
 def user_view(request):
  return Response({'username': request.user.username})
+
+@api_view(['GET'])
+def csrf_view(request):
+    return JsonResponse({'csrfToken': get_token(request)})

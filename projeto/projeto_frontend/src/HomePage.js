@@ -1,5 +1,17 @@
+import "./HomePage.css";
+import Header from "./Header";
+
+
+
 function HomePage() {
-    return <h1>Hello, World!</h1>;
+    // Render the HomePage component with Header, Content, and Footer
+    return(
+        <>
+        <Header/>
+        {/* <Content/> */}
+        {/* <Footer/> */}
+        </>
+    );
 }
 
 export default HomePage;
