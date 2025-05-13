@@ -1,0 +1,39 @@
+/* Style for the grid container */
+.grid {
+  display: flex; /* Use flexbox for a row layout */
+  flex-wrap: wrap; /* Allow wrapping if items don't fit in a single row */
+  gap: 1.5rem; /* Add spacing between items */
+}
+
+/* Style for individual cards */
+.card {
+  display: flex;             /* Enables flexbox */
+  flex-direction: column; 
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;   /* Espaço entre o texto e o card*/
+  text-align: center;
+  
+  max-width: calc(25% - 1.5rem); /* Prevent growing beyond row */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.card:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.card-price {
+  font-size: 1rem;
+  color: #666;
+}
+
+.add-button {
+    padding-bottom: 20px;
+}
