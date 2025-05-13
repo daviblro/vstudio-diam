@@ -11,10 +11,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App/>} />
-      <Route path="/LoginForm" element={<LoginForm/>} />
-      <Route path="/SignUp" element={<SignUp/>} />
-      <Route path="/HomePage" element={<HomePage/>} />
+      <Route path="/" element={<App />} />
+      <Route path="/LoginForm" element={<LoginForm />} />
+      <Route path="/SignUp" element={<SignUp />} />
+      <Route path="/HomePage" element={<HomePage />} />
     </Routes>
   </BrowserRouter>
 );

@@ -1,41 +1,67 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import { FaUser } from "react-icons/fa";
-import { FaShoppingCart } from 'react-icons/fa';  // 🛒 clássico
-import { FaSearch } from 'react-icons/fa';  // 🛒 clássico
-
+import { FaUser, FaShoppingCart, FaSearch, FaSignOutAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Header() {
-  return (
-    <>
-      <div className="Header">
-        <Link to="/HomePage">
-          <button className="logo">Our Store Logo</button>
-        </Link>
-        <div className="searchBar">
-                      <FaSearch color="gray" className="searchIcon" />
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-          <input
-            type="text"
-            placeholder="Pesquisar..."
-            className="searchInput"
-          >
-            </input>
-        </div>
-        <div className="userIcon">
-          <FaUser color="white" size={24}/>
-          <button className="btn">
-            Olá!<br/>Inicie sessão
-          </button>
-        </div>
-        <Link to="/">
-          <button className="btn">
-            <FaShoppingCart style={{ marginRight: '8px' }} />
-                Carrinho
-          </button>
-        </Link>
+  useEffect(() => {
+    // Tenta obter o utilizador armazenado localmente
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await axios.get("http://localhost:8000/api/logout/", { withCredentials: true });
+      localStorage.removeItem("user");
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+    }
+  };
+
+  return (
+    <header className="Header">
+      <Link to="/HomePage" className="logo">
+        <button className="logo">Logo</button>
+      </Link>
+
+      <div className="searchBar">
+        <FaSearch color="gray" className="searchIcon" />
+        <input type="text" placeholder="Pesquisar..." className="searchInput" />
       </div>
-    </>
+
+      <div className="userSection">
+        <FaUser color="white" size={24} style={{ marginRight: "8px" }} />
+        {user ? (
+          <>
+            <span className="welcome">Olá, {user.username}</span>
+            <button className="btn" onClick={handleLogout}>
+              <FaSignOutAlt style={{ marginRight: "4px" }} />
+              Sair
+            </button>
+          </>
+        ) : (
+          <Link to="/Login">
+            <button className="btn">Iniciar Sessão</button>
+          </Link>
+        )}
+      </div>
+
+      <Link to="/Carrinho">
+        <button className="btn">
+          <FaShoppingCart style={{ marginRight: "8px" }} />
+          Carrinho
+        </button>
+      </Link>
+    </header>
   );
 }
 

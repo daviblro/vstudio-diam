@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginForm() {
-  const [username, setUsername] = useState("");
+  const location = useLocation();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -20,22 +21,29 @@ function LoginForm() {
       .catch((error) => {
         console.error("Erro ao buscar CSRF token:", error);
       });
-  }, []);
-  
+
+    if (location.state) {
+      const { email: emailFromSignup, password: passwordFromSignup } = location.state;
+      if (emailFromSignup) setEmail(emailFromSignup);
+      if (passwordFromSignup) setPassword(passwordFromSignup);
+    }
+  }, [location.state]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         "http://localhost:8000/api/login/",
-        { username, password },
-        { withCredentials: true,
-            headers: {
+        { email, password },
+        {
+          withCredentials: true,
+          headers: {
             "X-CSRFToken": csrfToken,
           },
         }
       );
 
-      if (response.data.message === "Logged in successfully") {
+      if (response.data.success) {
         setMessage("Login bem-sucedido!");
         localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/HomePage", { state: { user: response.data.user } });
@@ -53,15 +61,15 @@ function LoginForm() {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label className="labelLogin" htmlFor="username">
+          <label className="labelLogin" htmlFor="email">
             Email:
           </label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
