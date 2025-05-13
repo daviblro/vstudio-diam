@@ -6,7 +6,38 @@ import axios from "axios";
 function HomePage() {
     const [csrfToken, setCsrfToken] = useState("");
     const [user, setUser] = useState("");
+    const [products, setProducts] = useState([]);
 
+    const dummyProducts = [
+  {
+    id: 1,
+    name: "Wireless Headphones",
+    price: "$99.99",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 2,
+    name: "Smartphone",
+    price: "$499.99",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 3,
+    name: "Laptop",
+    price: "$999.99",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 4,
+    name: "Smart Watch",
+    price: "$199.99",
+    image: "https://via.placeholder.com/150",
+  },
+];
+    useEffect(() => {
+    // Simulating a fetch from an API
+    setProducts(dummyProducts);
+  }, []);
     useEffect(() => {
         // Busca o CSRF token do endpoint backend
         axios
@@ -24,6 +55,30 @@ function HomePage() {
         <>
             <Header />
             {/* <Content/> */}
+                            {/* Product Listing */}
+      <main>
+        <h2>Our Products</h2>
+        <div className="grid">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="card"
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+              />
+              <h3 className="card-title">{product.name}</h3>
+              <p className="card-price">{product.price}</p>
+              <div className="add-button">
+                <button>
+                Add to Cart
+              </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
             {/* <Footer/> */}
         </>
     );

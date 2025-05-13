@@ -31,29 +31,29 @@ def login_view(request):
 
 @api_view(['GET'])
 def logout_view(request):   
- logout(request)
- return Response({'message': 'Logged out successfully'})
+    logout(request)
+    return Response({'message': 'Logged out successfully'})
 
 
 @api_view(['POST'])
 def signup_view(request):
- email = request.data.get('email')
- username = request.data.get('username')
- password = request.data.get('password')
- if email is None or password is None or username is None:
-    return Response({'error': 'Email, username e password são obrigatórios.'}, status=status.HTTP_400_BAD_REQUEST)
- if User.objects.filter(email=email).exists():
-    return Response({'error': 'Email já existe'}, status=status.HTTP_400_BAD_REQUEST)
- if User.objects.filter(username=username).exists():
-    return Response({'error': 'Username já existe'}, status=status.HTTP_400_BAD_REQUEST)
- 
- user = User.objects.create_user(username=username, email=email, password=password)
- return Response({'success': True, 'user': {'username': user.username, 'email': user.email}, 'message': 'Utilizador criado com sucesso.'}, status=status.HTTP_201_CREATED)
+    email = request.data.get('email')
+    username = request.data.get('username')
+    password = request.data.get('password')
+    if email is None or password is None or username is None:
+        return Response({'error': 'Email, username e password são obrigatórios.'}, status=status.HTTP_400_BAD_REQUEST)
+    if User.objects.filter(email=email).exists():
+        return Response({'error': 'Email já existe'}, status=status.HTTP_400_BAD_REQUEST)
+    if User.objects.filter(username=username).exists():
+        return Response({'error': 'Username já existe'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user = User.objects.create_user(username=username, email=email, password=password)
+    return Response({'success': True, 'user': {'username': user.username, 'email': user.email}, 'message': 'Utilizador criado com sucesso.'}, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_view(request):
- return Response({'username': request.user.username})
+    return Response({'username': request.user.username})
 
 @api_view(['GET'])
 def csrf_view(request):
