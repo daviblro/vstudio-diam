@@ -1,9 +1,15 @@
-import { Link , useNavigate} from "react-router-dom";
+// Header.js (atualizado com layout central de 80vw)
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useState, useEffect } from "react";
-import Artistas from "./Artistas";
-import Artista from "./Artista"; // Importa o componente Artista
-import {FaUser,  FaShoppingCart,FaSearch,FaSignOutAlt, FaBars,} from "react-icons/fa";
+
+import {
+  FaUser,
+  FaShoppingCart,
+  FaSearch,
+  FaSignOutAlt,
+  FaBars,
+} from "react-icons/fa";
 import axios from "axios";
 
 function Header() {
@@ -13,7 +19,6 @@ function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    // Tenta obter o utilizador armazenado localmente
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -36,13 +41,12 @@ function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY <= 0) {
-        setShowMenuBar(true); // Está no topo
+        setShowMenuBar(true);
       } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setShowMenuBar(false); // Rolar para baixo
+        setShowMenuBar(false);
       } else if (currentScrollY < lastScrollY) {
-        setShowMenuBar(true); // Rolar para cima
+        setShowMenuBar(true);
       }
       setLastScrollY(currentScrollY);
     };
@@ -54,84 +58,64 @@ function Header() {
   return (
     <>
       <div className="Header">
-        <Link to="/HomePage">
-          <button className="logo">Our Store Logo</button>
-        </Link>
-        <div className="searchBar">
-          <FaSearch className="searchIcon" />
-          <input
-            type="text"
-            placeholder="Pesquisar..."
-            className="searchInput"
-          />
-        </div>
-        <div className="userSection">
-          <FaUser color="white" size={24} style={{ marginRight: "8px" }} />
-          {user ? (
-            <>
-              <span className="welcome">Olá, {user.username}</span>
-              <button className="btn" onClick={handleLogout}>
-                <FaSignOutAlt style={{ marginRight: "4px" }} />
-                Sair
+        <div className="HeaderContent">
+          <Link to="/HomePage">
+            <button className="logo">Our Store Logo</button>
+          </Link>
+
+          <div className="searchBar">
+            <FaSearch className="searchIcon" />
+            <input
+              type="text"
+              placeholder="Pesquisar..."
+              className="searchInput"
+            />
+          </div>
+
+          <div className="userSection">
+            <FaUser color="white" size={24} style={{ marginRight: "8px" }} />
+            {user ? (
+              <>
+                <span className="welcome">Olá, {user.username}</span>
+                <button className="btn" onClick={handleLogout}>
+                  <FaSignOutAlt style={{ marginRight: "4px" }} />
+                  Sair
+                </button>
+              </>
+            ) : (
+              <Link to="/Login">
+                <button className="btn">Iniciar Sessão</button>
+              </Link>
+            )}
+            <Link to="/">
+              <button className="btn">
+                <FaShoppingCart style={{ marginRight: "8px" }} />
+                Carrinho
               </button>
-            </>
-          ) : (
-            <Link to="/Login">
-              <button className="btn">Iniciar Sessão</button>
             </Link>
-          )}
+          </div>
         </div>
-        <Link to="/">
-          <button className="btn">
-            <FaShoppingCart style={{ marginRight: "8px" }} />
-            Carrinho
-          </button>
-        </Link>
       </div>
+
       <div className={`menuBar ${showMenuBar ? "show" : ""}`}>
-        <nav className="menuNavMenu">
-          <Link to="/Menu" className="menuLinkMenu">
-            <FaBars style={{ marginRight: "8px" }} />
-            Menu
-          </Link>
-        </nav>
-
-        <nav className="menuNav">
-          <Link to="/novidades" className="menuLink">
-            Novidades
-          </Link>
-          <Link to="/promocoes" className="menuLink">
-            Promoções
-          </Link>
-          <Link to="/maisVendidos" className="menuLink">
-            maisVendidos
-          </Link>
-          <Link to="/Contactos" className="menuLink">
-            Contactos
-          </Link>
-          <Link to="/Lojas" className="menuLink">
-            Lojas
-          </Link>
-          <Link to="/Ajuda" className="menuLink">
-            Ajuda
-          </Link>
-        </nav>
+        
+        <div className="menuBarContent">
+          <nav className="menuBarLeft">
+            <Link to="/Menu" className="menuLinkMenu"><FaBars style={{ marginRight: "8px" }} />Menu</Link>
+          </nav>
+          <nav className="menuNav">
+            <Link to="/novidades" className="menuLink">Novidades</Link>
+            <Link to="/promocoes" className="menuLink">Promoções</Link>
+            <Link to="/maisVendidos" className="menuLink">Mais Vendidos</Link>
+            <Link to="/Contactos" className="menuLink">Contactos</Link>
+            <Link to="/Lojas" className="menuLink">Lojas</Link>
+            <Link to="/Ajuda" className="menuLink">Ajuda</Link>
+          </nav> 
+        </div>
+       
       </div>
 
-      {Artistas.map((artista) => (
-        <Artista
-          nome={artista.nome}
-          imagem={artista.imagem}
-          estilo={artista.estilo}
-          descricao={artista.descricao}
-          data={artista.data}
-          hora={artista.hora}
-          urlvideo={artista.urlvideo}
-          id={artista.id}
-          key={artista.id}
-          length={Artistas.length - 1}
-        />
-      ))}
+
     </>
   );
 }

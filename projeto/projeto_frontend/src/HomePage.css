@@ -15,7 +15,6 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 16px;   /* Espaço entre o texto e o card*/
   text-align: center;
-  
   max-width: calc(25% - 1.5rem); /* Prevent growing beyond row */
   box-sizing: border-box; /* Include padding in width */
 }

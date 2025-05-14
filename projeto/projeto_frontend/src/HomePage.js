@@ -33,6 +33,7 @@ function HomePage() {
     price: "$199.99",
     image: "https://via.placeholder.com/150",
   },
+  
 ];
     useEffect(() => {
     // Simulating a fetch from an API
