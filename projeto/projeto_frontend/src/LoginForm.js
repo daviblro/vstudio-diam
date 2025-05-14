@@ -32,7 +32,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post(
+      const response = await axios.post(
         "http://localhost:8000/api/login/",
         { email, password },
         {
@@ -57,40 +57,42 @@ function LoginForm() {
   };
 
   return (
-    <div className="loginContainer">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label className="labelLogin" htmlFor="email">
-            Email:
-          </label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label className="labelLogin" htmlFor="password">
-            Senha:
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Log In</button>
-        <button onClick={() => navigate("/SignUp")}>Sign Up</button>
-      </form>
-      {message && <p>{message}</p>}
-    </div>
+    <body className="loginForm">
+      <div className="loginContainer">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label className="labelLogin" htmlFor="email">
+              Email:
+            </label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className="labelLogin" htmlFor="password">
+              Senha:
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Log In</button>
+          <button onClick={() => navigate("/SignUp")}>Sign Up</button>
+        </form>
+        {message && <p>{message}</p>}
+      </div>
+    </body>
   );
 }
 

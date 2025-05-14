@@ -55,58 +55,60 @@ function SignUp() {
     };
 
     return (
-        <div className="SignUpContainer">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label className="labelLogin" htmlFor="username">Nome:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="labelLogin" htmlFor="email">Email:</label>
-                    <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="labelLogin" htmlFor="password">Senha:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="labelLogin" htmlFor="passwordConfirm">Confirmar Senha:</label>
-                    <input
-                        type="password"
-                        id="passwordConfirm"
-                        name="passwordConfirm"
-                        value={passwordConfirm}
-                        onChange={(e) => setPasswordConfirm(e.target.value)}
-                        required
-                    />
-                </div>
-                <button onClick={() => navigate("/Login")}>Voltar</button>
-                <button type="submit">Sign Up</button>
-            </form>
-            {message && <p>{message}</p>}
-        </div>
+        <body className="signUp">
+            <div className="SignUpContainer">
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label className="labelLogin" htmlFor="username">Nome:</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="labelLogin" htmlFor="email">Email:</label>
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="labelLogin" htmlFor="password">Senha:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="labelLogin" htmlFor="passwordConfirm">Confirmar Senha:</label>
+                        <input
+                            type="password"
+                            id="passwordConfirm"
+                            name="passwordConfirm"
+                            value={passwordConfirm}
+                            onChange={(e) => setPasswordConfirm(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button onClick={() => navigate("/")}>Voltar</button>
+                    <button type="submit">Sign Up</button>
+                </form>
+                {message && <p>{message}</p>}
+            </div>
+        </body>
     );
 }
 
