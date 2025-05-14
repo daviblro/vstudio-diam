@@ -2,6 +2,7 @@ import "./HomePage.css";
 import Header from "./Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import image from './img/images.jpg';
 
 function HomePage() {
     const [csrfToken, setCsrfToken] = useState("");
@@ -12,25 +13,25 @@ function HomePage() {
   {
     id: 1,
     name: "Wireless Headphones",
-    price: "$99.99",
-    image: "https://via.placeholder.com/150",
+    price: "€99.99",
+    image: "/img/images.jpg",
   },
   {
     id: 2,
     name: "Smartphone",
-    price: "$499.99",
+    price: "€499.99",
     image: "https://via.placeholder.com/150",
   },
   {
     id: 3,
     name: "Laptop",
-    price: "$999.99",
+    price: "€999.99",
     image: "https://via.placeholder.com/150",
   },
   {
     id: 4,
     name: "Smart Watch",
-    price: "$199.99",
+    price: "€199.99",
     image: "https://via.placeholder.com/150",
   },
   
@@ -57,7 +58,7 @@ function HomePage() {
             <Header />
             {/* <Content/> */}
                             {/* Product Listing */}
-      <main>
+      <body class="homepage">
         <h2>Our Products</h2>
         <div className="grid">
           {products.map((product) => (
@@ -66,11 +67,11 @@ function HomePage() {
               className="card"
             >
               <img
-                src={product.image}
+                src={image}
                 alt={product.name}
               />
-              <h3 className="card-title">{product.name}</h3>
               <p className="card-price">{product.price}</p>
+              <h1 className="card-title">{product.name}</h1>
               <div className="add-button">
                 <button>
                 Add to Cart
@@ -79,7 +80,7 @@ function HomePage() {
             </div>
           ))}
         </div>
-      </main>
+      </body>
             {/* <Footer/> */}
         </>
     );
