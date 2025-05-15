@@ -1,33 +1,26 @@
-from django.contrib.auth.models import User
+from .models import CustomUser as User
+from .models import Product, Category, Review, Order, OrderItem, Cart, CartItem
 from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
 from django.http import JsonResponse
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework import status, viewsets, permissions
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAuthenticated
+from .serializers import LoginSerializer, UserSerializer, ProductSerializer, CategorySerializer, ReviewSerializer, OrderSerializer, CartSerializer
 
 
 # Create your views here.
 
 @api_view(['POST'])
 def login_view(request):
-    
-    email = request.data.get('email')
-    password = request.data.get('password')
-
-    try:
-        user_obj = User.objects.get(email=email)
-    except User.DoesNotExist:
-        return Response({'error': 'Email não encontrado'}, status=status.HTTP_401_UNAUTHORIZED)
-
-    user = authenticate(request, username=user_obj.username, password=password)
-
-    if user is not None:
+    serializer = LoginSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.validated_data['user']
         login(request, user)
-        return Response({'success': True, 'user': {'username': user.username, 'email': user.email}}, status=status.HTTP_200_OK)
-    else:
-        return Response({'error': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+        user_data = UserSerializer(user).data
+        return Response({'success': True, 'user': user_data})
+    return Response({'success': False, 'message': serializer.errors}, status=400)
 
 @api_view(['GET'])
 def logout_view(request):   
@@ -58,3 +51,53 @@ def user_view(request):
 @api_view(['GET'])
 def csrf_view(request):
     return JsonResponse({'csrfToken': get_token(request)})
+
+# --- Produto ---
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all().order_by('-created_at')
+    serializer_class = ProductSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+# --- Categoria ---
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+# --- Avaliações ---
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all().order_by('-created_at')
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+# --- Pedidos ---
+class OrderViewSet(viewsets.ModelViewSet):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Order.objects.all()
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user).order_by('-created_at')
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+# --- Carrinho ---
+class CartViewSet(viewsets.ModelViewSet):
+    serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Cart.objects.all()
+
+    def get_queryset(self):
+        return Cart.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
