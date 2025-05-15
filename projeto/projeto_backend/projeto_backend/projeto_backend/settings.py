@@ -45,6 +45,7 @@ REST_FRAMEWORK = {
 # Application definition
 
 INSTALLED_APPS = [
+    'login',
     'corsheaders',
     'rest_framework',
     'django.contrib.admin',
