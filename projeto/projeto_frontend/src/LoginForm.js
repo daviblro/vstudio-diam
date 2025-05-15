@@ -46,7 +46,7 @@ function LoginForm() {
       if (response.data.success) {
         setMessage("Login bem-sucedido!");
         localStorage.setItem("user", JSON.stringify(response.data.user));
-        navigate("/HomePage", { state: { user: response.data.user } });
+        navigate("/", { state: { user: response.data.user } });
       } else {
         setMessage("Login falhou: " + response.data.message);
       }
@@ -88,7 +88,7 @@ function LoginForm() {
             />
           </div>
           <button type="submit">Log In</button>
-          <button onClick={() => navigate("/SignUp")}>Sign Up</button>
+          <button onClick={() => navigate("/cadastro")}>Sign Up</button>
         </form>
         {message && <p>{message}</p>}
       </div>

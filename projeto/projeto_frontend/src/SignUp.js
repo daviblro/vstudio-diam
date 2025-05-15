@@ -44,7 +44,7 @@ function SignUp() {
             if (response.data.success) {
                 setMessage("Conta criada com sucesso!");
                 localStorage.setItem("user", JSON.stringify(response.data.user));
-                navigate("/", { state: { email, password } });
+                navigate("/login", { state: { email, password } });
             } else {
                 setMessage("Erro: " + response.data.message);
             }
@@ -57,7 +57,7 @@ function SignUp() {
     return (
         <div className="signUp">
             <div className="SignUpContainer">
-                <h2>Login</h2>
+                <h2>Cadastro</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label className="labelLogin" htmlFor="username">Nome:</label>
@@ -103,7 +103,7 @@ function SignUp() {
                             required
                         />
                     </div>
-                    <button onClick={() => navigate("/")}>Voltar</button>
+                    <button onClick={() => navigate("/login")}>Voltar</button>
                     <button type="submit">Sign Up</button>
                 </form>
                 {message && <p>{message}</p>}

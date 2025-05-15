@@ -17,6 +17,7 @@ function Header() {
   const [user, setUser] = useState(null);
   const [showMenuBar, setShowMenuBar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -32,7 +33,7 @@ function Header() {
       });
       localStorage.removeItem("user");
       setUser(null);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     }
@@ -59,7 +60,7 @@ function Header() {
     <>
       <div className="Header">
         <div className="HeaderContent">
-          <Link to="/HomePage">
+          <Link to="/">
             <button className="logo">Our Store Logo</button>
           </Link>
 
@@ -75,15 +76,21 @@ function Header() {
           <div className="userSection">
             <FaUser color="white" size={24} style={{ marginRight: "8px" }} />
             {user ? (
-              <>
-                <span className="welcome">Olá, {user.username}</span>
-                <button className="btn" onClick={handleLogout}>
-                  <FaSignOutAlt style={{ marginRight: "4px" }} />
-                  Sair
+              <div className="dropdown">
+                <button className="btn dropdown-toggle" onClick={() => setShowDropdown(prev => !prev)}>
+                  Olá, {user.username}
                 </button>
-              </>
+                {showDropdown && (
+                  <div className="dropdown-menu">
+                    <button className="dropdown-item" onClick={() => navigate('/minhas-compras')}>Compras</button>
+                    <button className="dropdown-item" onClick={() => navigate('/gerir-produtos')}>Gerir Produtos</button>
+                    <button className="dropdown-item" onClick={() => navigate('/minha-conta')}>Conta</button>
+                    <button className="dropdown-item" onClick={handleLogout}>Terminar Sessão</button>
+                  </div>
+                )}
+              </div>
             ) : (
-              <Link to="/">
+              <Link to="/LoginForm">
                 <button className="btn">Iniciar Sessão</button>
               </Link>
             )}
@@ -98,7 +105,7 @@ function Header() {
       </div>
 
       <div className={`menuBar ${showMenuBar ? "show" : ""}`}>
-        
+
         <div className="menuBarContent">
           <nav className="menuBarLeft">
             <Link to="/Menu" className="menuLinkMenu"><FaBars style={{ marginRight: "8px" }} />Menu</Link>
@@ -110,9 +117,9 @@ function Header() {
             <Link to="/Contactos" className="menuLink">Contactos</Link>
             <Link to="/Lojas" className="menuLink">Lojas</Link>
             <Link to="/SobreNos" className="menuLink">Sobre nós</Link>
-          </nav> 
+          </nav>
         </div>
-       
+
       </div>
 
 

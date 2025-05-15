@@ -115,11 +115,10 @@
 
 .menuBar.show {
   transform: translateY(0);
-  z-index: 1000;
   opacity: 1;
 }
 
-.menuBarContent{
+.menuBarContent {
   width: 80vw;
   display: flex;
   align-items: center;
@@ -150,4 +149,44 @@
   color: white;
   font-size: 20px;
   text-decoration: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  background-color: rgb(152, 22, 22);
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.dropdown-item:hover {
+  background-color: #ff6464;
 }

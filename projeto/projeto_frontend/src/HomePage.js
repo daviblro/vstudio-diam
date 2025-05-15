@@ -64,7 +64,7 @@ function HomePage() {
           </div>
           <div className="Separator"></div>
           <div className="BGCinzento">
-            <div class="produtosEmDestaque">
+            <div className="produtosEmDestaque">
               <h2>EM DESTAQUE</h2>
               <div className="grid">
                 {products.map((product) => (
@@ -81,7 +81,7 @@ function HomePage() {
             </div>
           </div>
           <div className="BGBranco">
-            <div class="produtosEmDestaque">
+            <div className="produtosEmDestaque">
               <h2>Novos !!!!!!!</h2>
               <div className="grid">
                 {products.map((product) => (
