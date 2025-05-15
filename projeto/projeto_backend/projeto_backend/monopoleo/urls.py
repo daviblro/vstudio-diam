@@ -11,6 +11,7 @@ from .views import (
     logout_view,
     signup_view,
     change_password_view,
+    novidades_view,
 )
 
 router = DefaultRouter()
@@ -26,5 +27,6 @@ urlpatterns = [
     path('logout/', logout_view),
     path('signup/', signup_view),
     path('change-password/', change_password_view),
+    path('novidades/', novidades_view),
     path('', include(router.urls)),
 ]

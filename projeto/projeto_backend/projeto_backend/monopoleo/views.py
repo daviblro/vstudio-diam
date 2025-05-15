@@ -129,3 +129,12 @@ class UserViewSet(viewsets.ModelViewSet):
         if serializer.validated_data.get("email"):
             serializer.validated_data.pop("email")  # impedir update de email
         serializer.save()
+        
+        
+# --- Novidades ---
+@api_view(['GET'])  
+@permission_classes([IsAuthenticated])
+def novidades_view(request):
+    queryset = Product.objects.all().order_by('-created_at')
+    serializer_class = ProductSerializer
+    return Response(serializer_class(queryset, many=True).data) 
