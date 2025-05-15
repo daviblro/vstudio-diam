@@ -27,17 +27,17 @@ function App() {
       {shouldShowHeader && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/cadastro" element={<SignUp />} />
-        <Route path="/sobre-nos" element={<SobreNos />} />
-        <Route path="/novidades" element={<Novidades />} />
-        <Route path="/mais-vendidos" element={<MaisVendidos />} />
-        <Route path="/promocoes" element={<Promocoes />} />
-        <Route path="/lojas" element={<Lojas />} />
-        <Route path="/contactos" element={<Contactos />} />
-        <Route path="/conta" element={<Conta />} />
-        <Route path="/produtos" element={<Produtos />} />
-        <Route path="/compras" element={<Compras />} />
+        <Route path="/Login" element={<LoginForm />} />
+        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/SobreNos" element={<SobreNos />} />
+        <Route path="/Novidades" element={<Novidades />} />
+        <Route path="/MaisVendidos" element={<MaisVendidos />} />
+        <Route path="/Promocoes" element={<Promocoes />} />
+        <Route path="/Lojas" element={<Lojas />} />
+        <Route path="/Contactos" element={<Contactos />} />
+        <Route path="/Conta" element={<Conta />} />
+        <Route path="/Produtos" element={<Produtos />} />
+        <Route path="/Compras" element={<Compras />} />
       </Routes>
     </>
   );

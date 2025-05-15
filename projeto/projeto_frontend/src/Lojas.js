@@ -9,7 +9,7 @@ function Lojas() {
     {
       id: 1,
       name: "Monopoleo Lisboa Liberdade",
-      Morada: " Rua da Liberdade, 123, 7000-000 Lisboa",
+      Morada: " Av. da Liberdade 115, 1250-001 Lisboa",
       url: "https://www.google.com/maps/place/Av.+da+Liberdade+115,+1250-001+Lisboa/@38.7187996,-9.1464256,17z/data=!3m1!4b1!4m5!3m4!1s0xd19338215130a1b:0xfda87e7655fdceb2!8m2!3d38.7187954!4d-9.1438453?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D",
       horario:
         "Segunda a Sexta: 10h - 22h Sábado e Domingo: 10h - 20h Feriados: 10h - 14h",

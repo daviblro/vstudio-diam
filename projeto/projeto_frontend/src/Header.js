@@ -60,9 +60,12 @@ function Header() {
     <>
       <div className="Header">
         <div className="HeaderContent">
-          <Link to="/">
-            <button className="logo">Our Store Logo</button>
-          </Link>
+          <img
+            src={require("./img/monopoleo80x80.png")}
+            alt="Erro ao carregar logo."
+            className="logo"
+            onClick={() => navigate("/")}
+          />
 
           <div className="searchBar">
             <FaSearch className="searchIcon" />
@@ -111,9 +114,9 @@ function Header() {
             <Link to="/Menu" className="menuLinkMenu"><FaBars style={{ marginRight: "8px" }} />Menu</Link>
           </nav>
           <nav className="menuNav">
-            <Link to="/novidades" className="menuLink">Novidades</Link>
-            <Link to="/promocoes" className="menuLink">Promoções</Link>
-            <Link to="/maisVendidos" className="menuLink">Mais Vendidos</Link>
+            <Link to="/Novidades" className="menuLink">Novidades</Link>
+            <Link to="/Promocoes" className="menuLink">Promoções</Link>
+            <Link to="/MaisVendidos" className="menuLink">Mais Vendidos</Link>
             <Link to="/Contactos" className="menuLink">Contactos</Link>
             <Link to="/Lojas" className="menuLink">Lojas</Link>
             <Link to="/SobreNos" className="menuLink">Sobre nós</Link>
