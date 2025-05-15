@@ -58,24 +58,46 @@ function HomePage() {
       <Header />
       <div className="ajustarTop">
         <div className="HomePage">
+          <div className="SeparatorTopPage"></div>
           <div className="MainImages">
             <MainImages />
           </div>
-          <div class="produtos">
-            <h2>Our Products</h2>
-            <div className="grid">
-              {products.map((product) => (
-                <div key={product.id} className="card">
-                  <img src={image} alt={product.name} />
-                  <p className="card-price">{product.price}</p>
-                  <h1 className="card-title">{product.name}</h1>
-                  <div className="add-button">
-                    <button>Add to Cart</button>
+          <div className="Separator"></div>
+          <div className="BGCinzento">
+            <div class="produtosEmDestaque">
+              <h2>EM DESTAQUE</h2>
+              <div className="grid">
+                {products.map((product) => (
+                  <div key={product.id} className="card">
+                    <img src={image} alt={product.name} />
+                    <p className="card-price">{product.price}</p>
+                    <h1 className="card-title">{product.name}</h1>
+                    <div className="add-button">
+                      <button>Add to Cart</button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
+          <div className="BGBranco">
+            <div class="produtosEmDestaque">
+              <h2>Novos!!!!!!!</h2>
+              <div className="grid">
+                {products.map((product) => (
+                  <div key={product.id} className="card">
+                    <img src={image} alt={product.name} />
+                    <p className="card-price">{product.price}</p>
+                    <h1 className="card-title">{product.name}</h1>
+                    <div className="add-button">
+                      <button>Add to Cart</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* <Footer/> */}
         </div>
       </div>
