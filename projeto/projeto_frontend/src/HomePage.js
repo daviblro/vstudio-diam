@@ -6,7 +6,6 @@ import image from "./img/images.jpg";
 import MainImages from "./MainImages";
 
 function HomePage() {
-  const [csrfToken, setCsrfToken] = useState("");
   const [user, setUser] = useState("");
   const [products, setProducts] = useState([]);
 
@@ -40,19 +39,12 @@ function HomePage() {
     // Simulating a fetch from an API
     setProducts(dummyProducts);
   }, []);
-  useEffect(() => {
-    // Busca o CSRF token do endpoint backend
-    axios
-      .get("http://localhost:8000/api/csrf/", { withCredentials: true })
-      .then((response) => {
-        setCsrfToken(response.data.csrfToken);
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar CSRF token:", error);
-      });
-  }, []);
 
-  // Render the HomePage component with Header, Content, and Footer
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    return match ? match[2] : null;
+  }
+
   return (
     <>
       <Header />

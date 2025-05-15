@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignUp.css"
@@ -10,19 +10,11 @@ function SignUp() {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
-    const [csrfToken, setCsrfToken] = useState("");
 
-    useEffect(() => {
-        // Busca o CSRF token do endpoint backend
-        axios
-            .get("http://localhost:8000/api/csrf/", { withCredentials: true })
-            .then((response) => {
-                setCsrfToken(response.data.csrfToken);
-            })
-            .catch((error) => {
-                console.error("Erro ao buscar CSRF token:", error);
-            });
-    }, []);
+    function getCookie(name) {
+        const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+        return match ? match[2] : null;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +29,7 @@ function SignUp() {
                 {
                     withCredentials: true,
                     headers: {
-                        "X-CSRFToken": csrfToken,
+                        "X-CSRFToken": getCookie("csrftoken"),
                     },
                 });
 
@@ -103,8 +95,10 @@ function SignUp() {
                             required
                         />
                     </div>
-                    <button onClick={() => navigate("/login")}>Voltar</button>
-                    <button type="submit">Sign Up</button>
+                    <div className="buttonLine">
+                        <button onClick={() => navigate("/login")}>Voltar</button>
+                        <button type="submit">Sign Up</button>
+                    </div>
                 </form>
                 {message && <p>{message}</p>}
             </div>

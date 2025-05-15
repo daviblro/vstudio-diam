@@ -43,14 +43,28 @@ def signup_view(request):
     user = User.objects.create_user(username=username, email=email, password=password)
     return Response({'success': True, 'user': {'username': user.username, 'email': user.email}, 'message': 'Utilizador criado com sucesso.'}, status=status.HTTP_201_CREATED)
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def change_password_view(request):
+    user = request.user
+    old_password = request.data.get('old_password')
+    new_password = request.data.get('new_password')
+
+    if not user.check_password(old_password):
+        return Response({'error': 'Senha atual incorreta.'}, status=400)
+
+    if len(new_password) < 6:
+        return Response({'error': 'A nova senha deve ter pelo menos 6 caracteres.'}, status=400)
+
+    user.set_password(new_password)
+    user.save()
+
+    return Response({'message': 'Senha alterada com sucesso.'})
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_view(request):
     return Response({'username': request.user.username})
-
-@api_view(['GET'])
-def csrf_view(request):
-    return JsonResponse({'csrfToken': get_token(request)})
 
 # --- Produto ---
 class ProductViewSet(viewsets.ModelViewSet):
@@ -101,3 +115,17 @@ class CartViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
+    def perform_update(self, serializer):
+        if serializer.validated_data.get("email"):
+            serializer.validated_data.pop("email")  # impedir update de email
+        serializer.save()

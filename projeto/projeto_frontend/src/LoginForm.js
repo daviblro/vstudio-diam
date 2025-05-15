@@ -9,25 +9,19 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const [csrfToken, setCsrfToken] = useState("");
 
   useEffect(() => {
-    // Busca o CSRF token do endpoint backend
-    axios
-      .get("http://localhost:8000/api/csrf/", { withCredentials: true })
-      .then((response) => {
-        setCsrfToken(response.data.csrfToken);
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar CSRF token:", error);
-      });
-
     if (location.state) {
       const { email: emailFromSignup, password: passwordFromSignup } = location.state;
       if (emailFromSignup) setEmail(emailFromSignup);
       if (passwordFromSignup) setPassword(passwordFromSignup);
     }
   }, [location.state]);
+
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    return match ? match[2] : null;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +32,7 @@ function LoginForm() {
         {
           withCredentials: true,
           headers: {
-            "X-CSRFToken": csrfToken,
+            "X-CSRFToken": getCookie("csrftoken"),
           },
         }
       );
@@ -51,7 +45,25 @@ function LoginForm() {
         setMessage("Login falhou: " + response.data.message);
       }
     } catch (error) {
-      setMessage("Erro na comunicação com o servidor.");
+      // aqui cai quando status >=300 ou rede falhou
+      if (error.response) {
+        // recebemos resposta do servidor (p.ex. status 400)
+        const data = error.response.data;
+        // pode ser que message venha como objecto
+        let msg = "";
+        if (typeof data.message === "string") {
+          msg = data.message;
+        } else {
+          // por exemplo { non_field_errors: ["Credenciais inválidas."] }
+          msg = Object.values(data.message)
+            .flat()
+            .join(" ");
+        }
+        setMessage("Login falhou: " + msg);
+      } else {
+        // erro de rede mesmo
+        setMessage("Erro na comunicação com o servidor.");
+      }
       console.error(error);
     }
   };
@@ -87,8 +99,10 @@ function LoginForm() {
               required
             />
           </div>
-          <button type="submit">Log In</button>
-          <button onClick={() => navigate("/cadastro")}>Sign Up</button>
+          <div className="buttonLine">
+            <button type="submit">Log In</button>
+            <button onClick={() => navigate("/cadastro")}>Sign Up</button>
+          </div>
         </form>
         {message && <p>{message}</p>}
       </div>

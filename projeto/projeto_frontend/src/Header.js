@@ -87,13 +87,13 @@ function Header() {
                   <div className="dropdown-menu">
                     <button className="dropdown-item" onClick={() => navigate('/minhas-compras')}>Compras</button>
                     <button className="dropdown-item" onClick={() => navigate('/gerir-produtos')}>Gerir Produtos</button>
-                    <button className="dropdown-item" onClick={() => navigate('/minha-conta')}>Conta</button>
+                    <button className="dropdown-item" onClick={() => navigate('/conta')}>Conta</button>
                     <button className="dropdown-item" onClick={handleLogout}>Terminar Sessão</button>
                   </div>
                 )}
               </div>
             ) : (
-              <Link to="/LoginForm">
+              <Link to="/login">
                 <button className="btn">Iniciar Sessão</button>
               </Link>
             )}

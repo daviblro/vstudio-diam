@@ -1,6 +1,7 @@
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
+import PrivateRoute from './PrivateRoute';
 import HomePage from './HomePage';
 import LoginForm from './LoginForm';
 import SignUp from './SignUp';
@@ -11,8 +12,8 @@ import Promocoes from './Promocoes';
 import Lojas from './Lojas';
 import Contactos from './Contactos';
 import Conta from './Conta';
-import Produtos from './Produtos';
-import Compras from './Compras';
+import GerirProdutos from './GerirProdutos';
+import MinhasCompras from './MinhasCompras';
 import Header from './Header';
 
 function App() {
@@ -27,17 +28,38 @@ function App() {
       {shouldShowHeader && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/Login" element={<LoginForm />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/SobreNos" element={<SobreNos />} />
-        <Route path="/Novidades" element={<Novidades />} />
-        <Route path="/MaisVendidos" element={<MaisVendidos />} />
-        <Route path="/Promocoes" element={<Promocoes />} />
-        <Route path="/Lojas" element={<Lojas />} />
-        <Route path="/Contactos" element={<Contactos />} />
-        <Route path="/Conta" element={<Conta />} />
-        <Route path="/Produtos" element={<Produtos />} />
-        <Route path="/Compras" element={<Compras />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/cadastro" element={<SignUp />} />
+        <Route path="/sobre-nos" element={<SobreNos />} />
+        <Route path="/novidades" element={<Novidades />} />
+        <Route path="/mais-vendidos" element={<MaisVendidos />} />
+        <Route path="/promocoes" element={<Promocoes />} />
+        <Route path="/lojas" element={<Lojas />} />
+        <Route path="/contactos" element={<Contactos />} />
+        <Route
+          path="/conta"
+          element={
+            <PrivateRoute>
+              <Conta />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/minhas-compras"
+          element={
+            <PrivateRoute>
+              <MinhasCompras />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/gerir-produtos"
+          element={
+            <PrivateRoute>
+              <GerirProdutos />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );
