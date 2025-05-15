@@ -111,15 +111,15 @@ function Header() {
 
         <div className="menuBarContent">
           <nav className="menuBarLeft">
-            <Link to="/Menu" className="menuLinkMenu"><FaBars style={{ marginRight: "8px" }} />Menu</Link>
+            <Link to="/menu" className="menuLinkMenu"><FaBars style={{ marginRight: "8px" }} />Menu</Link>
           </nav>
           <nav className="menuNav">
-            <Link to="/Novidades" className="menuLink">Novidades</Link>
-            <Link to="/Promocoes" className="menuLink">Promoções</Link>
-            <Link to="/MaisVendidos" className="menuLink">Mais Vendidos</Link>
-            <Link to="/Contactos" className="menuLink">Contactos</Link>
-            <Link to="/Lojas" className="menuLink">Lojas</Link>
-            <Link to="/SobreNos" className="menuLink">Sobre nós</Link>
+            <Link to="/novidades" className="menuLink">Novidades</Link>
+            <Link to="/promocoes" className="menuLink">Promoções</Link>
+            <Link to="/mais-vendidos" className="menuLink">Mais Vendidos</Link>
+            <Link to="/contactos" className="menuLink">Contactos</Link>
+            <Link to="/lojas" className="menuLink">Lojas</Link>
+            <Link to="/sobre-nos" className="menuLink">Sobre nós</Link>
           </nav>
         </div>
 
