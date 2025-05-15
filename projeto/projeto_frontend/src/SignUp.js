@@ -55,7 +55,7 @@ function SignUp() {
     };
 
     return (
-        <body className="signUp">
+        <div className="signUp">
             <div className="SignUpContainer">
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
@@ -108,7 +108,7 @@ function SignUp() {
                 </form>
                 {message && <p>{message}</p>}
             </div>
-        </body>
+        </div>
     );
 }
 

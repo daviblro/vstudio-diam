@@ -1,13 +1,8 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-class User(models.Model):
-    username = models.CharField(max_length=150, unique=True)
+class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    password = models.CharField(max_length=128) 
-    date_joined = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.username
@@ -25,15 +20,17 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)  # Ligado à categoria
+    image = models.ImageField(upload_to='product_images/', blank=True, null=True)  # Imagem do Produto
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="products")  # Ligado ao User (Dono do Produto)
 
     def __str__(self):
         return self.name
     
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')  # # Ligado ao Produto
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Ligado ao User
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # Ligado ao User
     rating = models.IntegerField()  # 1 - 5 estrelas
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -42,7 +39,7 @@ class Review(models.Model):
         return f"Review by {self.user.username} for {self.product.name}"
     
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Ligado ao User
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # Ligado ao User
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=[
         ('Pending', 'Pending'),
@@ -63,7 +60,7 @@ class OrderItem(models.Model):
         return f"{self.quantity} x {self.product.name} in Order {self.order.id}"
 
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Ligado ao User
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)  # Ligado ao User
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
