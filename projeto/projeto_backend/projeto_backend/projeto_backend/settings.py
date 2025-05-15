@@ -45,7 +45,7 @@ REST_FRAMEWORK = {
 # Application definition
 
 INSTALLED_APPS = [
-    'login',
+    'monopoleo',
     'corsheaders',
     'rest_framework',
     'django.contrib.admin',

@@ -83,7 +83,7 @@ function Header() {
                 </button>
               </>
             ) : (
-              <Link to="/Login">
+              <Link to="/">
                 <button className="btn">Iniciar Sessão</button>
               </Link>
             )}
