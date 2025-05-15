@@ -3,6 +3,7 @@ import "./Contactos.css";
 import { useState, useEffect } from "react";
 import phoneIcon from "./img/customer_support.png";
 import emailIcon from "./img/email.png";
+
 function Contactos() {
   const metodosContacto = [
     {

@@ -82,7 +82,7 @@ function HomePage() {
           </div>
           <div className="BGBranco">
             <div class="produtosEmDestaque">
-              <h2>Novos!!!!!!!</h2>
+              <h2>Novos !!!!!!!</h2>
               <div className="grid">
                 {products.map((product) => (
                   <div key={product.id} className="card">

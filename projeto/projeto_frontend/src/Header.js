@@ -109,7 +109,7 @@ function Header() {
             <Link to="/maisVendidos" className="menuLink">Mais Vendidos</Link>
             <Link to="/Contactos" className="menuLink">Contactos</Link>
             <Link to="/Lojas" className="menuLink">Lojas</Link>
-            <Link to="/Ajuda" className="menuLink">Ajuda</Link>
+            <Link to="/SobreNos" className="menuLink">Sobre nós</Link>
           </nav> 
         </div>
        
