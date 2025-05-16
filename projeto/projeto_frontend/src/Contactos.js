@@ -51,7 +51,7 @@ function Contactos() {
     <>
       <Header />
       <div className="Contactos">
-        <div className="title">Contactos</div>
+        <div className="title">CONTACTOS</div>
         <div className="main_contactos">
           <section className="text_contactos">
             <p>Perguntas mais frequentes:</p>

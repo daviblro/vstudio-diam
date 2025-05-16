@@ -67,7 +67,7 @@ function Lojas() {
     <>
       <Header />
       <div className="ajustarTopo">
-        <div className="title">Lojas</div>
+        <div className="title">LOJAS</div>
         <div className="FilterLojasBG">
           <div className="mainLojas">
             <section className="FilterLojas">
