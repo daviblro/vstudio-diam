@@ -1,3 +1,75 @@
-body{
-    padding-top: 120px;
+.Carrinho {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20vh;
+    padding-bottom: 10vh;
+    min-height: 90vh;
+}
+
+.CarrinhoContainer {
+    background-color: #eeeeee;
+    padding: 30px;
+    border-radius: 10px;
+    width: 60vw;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-card {
+    width: 60%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.item-card img {
+    width: 80%;
+    border-radius: 8px;
+}
+
+.item-card h3 {
+    margin: 10px 0 5px;
+}
+
+.item-card p {
+    margin: 5px 0;
+}
+
+.btn-danger {
+    background-color: rgb(204, 38, 38);
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-finalizar {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 30px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-finalizar:hover {
+    background-color: #0056b3;
+}
+
+.mensagem {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 15px;
 }

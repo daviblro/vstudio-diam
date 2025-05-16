@@ -72,22 +72,22 @@ class OrderSerializer(serializers.ModelSerializer):
 # --- CartItem ---
 class CartItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(),
+        source='product',
+        write_only=True
+    )
 
     class Meta:
         model = CartItem
-        fields = '__all__'
+        fields = ['id', 'quantity', 'product', 'product_id', 'cart']
+        read_only_fields = ['id', 'cart']
 
 # --- Cart ---
 class CartSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    items = CartItemSerializer(many=True, read_only=True)
+    items = CartItemSerializer(many=True, read_only=True)  # Importante para listar os itens
 
     class Meta:
         model = Cart
-        fields = '__all__'
-
-class AddCartSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = CartItem
-        fields = ('product_id','quantity', 'cart_id')
+        fields = ['id', 'user', 'created_at', 'items']

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./DetalhesProduto.css";
-import { FaQuran } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -77,9 +77,9 @@ function DetalhesProduto() {
         const csrfToken = getCookie("csrftoken");
 
         try {
-            await axios.post("http://localhost:8000/api/add/", {
+            const response = await axios.post("http://localhost:8000/api/cart-items/", {
                 quantity: 1,
-                product_id: 5,
+                product_id: product.id,
             }, {
                 withCredentials: true,
                 headers: {
@@ -87,10 +87,10 @@ function DetalhesProduto() {
                 },
             });
 
-            setMessage("Produto adicionado ao carrinho com sucesso!");
+            toast.success(response.data.message); // Mensagem vinda do backend
         } catch (error) {
             console.error("Erro ao adicionar os produtos:", error);
-            setMessage("Erro ao adicionar os produtoss.");
+            toast.error("Erro ao adicionar o produto ao carrinho.");
         }
     };
 

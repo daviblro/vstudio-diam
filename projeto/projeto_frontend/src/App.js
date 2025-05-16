@@ -1,5 +1,7 @@
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import PrivateRoute from './PrivateRoute';
 import HomePage from './HomePage';
@@ -29,6 +31,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer position="top-right" autoClose={3000} />
       {shouldShowHeader && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />

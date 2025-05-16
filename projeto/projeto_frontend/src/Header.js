@@ -1,7 +1,7 @@
 // Header.js (atualizado com layout central de 80vw)
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import {
   FaUser,
@@ -18,6 +18,7 @@ function Header() {
   const [showMenuBar, setShowMenuBar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -56,15 +57,36 @@ function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setShowDropdown(false);
+      }
+    }
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
+
   return (
     <>
       <div className="Header">
-        <div className="HeaderLogo">
-          <img
-            src={require("./img/monopoleo80x80.png")}
-            alt="Erro ao carregar logo."
-            onClick={() => navigate("/")}
-          />
+        <div className="HeaderContent">
+          <div className="logo">
+            <img
+              src={require("./img/monopoleo80x80.png")}
+              alt="Erro ao carregar logo."
+              onClick={() => navigate("/")}
+            />
+          </div>
 
           <div className="searchBar">
             <FaSearch className="searchIcon" />
@@ -84,34 +106,26 @@ function Header() {
                 </button>
                 {showDropdown && (
                   <div className="dropdown-menu">
-                    <button className="dropdown-item" onClick={() =>{setShowDropdown(false);navigate('/minhas-compras')}}>Compras</button>
-                    <button className="dropdown-item" onClick={() => {setShowDropdown(false);navigate('/gerir-produtos')}}>Gerir Produtos</button>
-                    <button className="dropdown-item" onClick={() => {setShowDropdown(false);navigate('/conta')}}>Conta</button>
+                    <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/minhas-compras') }}>Compras</button>
+                    <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/gerir-produtos') }}>Gerir Produtos</button>
+                    <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/conta') }}>Conta</button>
                     <button className="dropdown-item" onClick={handleLogout}>Terminar Sessão</button>
                   </div>
                 )}
               </div>
             ) : (
-              <Link to="/login">
-                <button className="btn">Iniciar Sessão</button>
-              </Link>
+              <button className="btn" onClick={() => navigate('/login')}>Iniciar Sessão</button>
             )}
-            <Link to="/carrinho ">
-              <button className="btn">
-                <FaShoppingCart style={{ marginRight: "8px" }} />
-                Carrinho
-              </button>
-            </Link>
+            <button className="btn" onClick={() => navigate('/carrinho')}>
+              <FaShoppingCart style={{ marginRight: "8px" }} />
+              Carrinho
+            </button>
           </div>
         </div>
       </div>
 
       <div className={`menuBar ${showMenuBar ? "show" : ""}`}>
-
         <div className="menuBarContent">
-          <nav className="menuBarLeft">
-            <Link to="/menu" className="menuLinkMenu"><FaBars style={{ marginRight: "8px" }} />Menu</Link>
-          </nav>
           <nav className="menuNav">
             <Link to="/novidades" className="menuLink">Novidades</Link>
             <Link to="/promocoes" className="menuLink">Promoções</Link>

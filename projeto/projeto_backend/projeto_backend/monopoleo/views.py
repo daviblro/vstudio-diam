@@ -4,11 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
 from django.http import JsonResponse
 from django.core.files.storage import default_storage
+from django.db.models import Avg
 from rest_framework.response import Response
 from rest_framework import status, viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAuthenticated
-from .serializers import AddCartSerializer, LoginSerializer, UserSerializer, ProductSerializer, CartItemSerializer, CategorySerializer, ReviewSerializer, OrderSerializer, CartSerializer
+from .serializers import LoginSerializer, UserSerializer, ProductSerializer, CartItemSerializer, CategorySerializer, ReviewSerializer, OrderSerializer, CartSerializer
 
 
 # Create your views here.
@@ -129,35 +130,76 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 # --- Carrinho ---
 class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
     serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Garante que o utilizador veja apenas o seu carrinho
+        return Cart.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        # Não é esperado criar carrinhos manualmente via API, pois o signal já cuida disso
+        serializer.save(user=self.request.user)
+
+
+class CartItemViewSet(viewsets.ModelViewSet):
+    serializer_class = CartItemSerializer
     permission_classes = [IsAuthenticated]
     queryset = Cart.objects.all()
 
     def get_queryset(self):
-        return Cart.objects.filter(user=self.request.user)
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-class CartAddViewSet(viewsets.ModelViewSet):
-    queryset = CartItem.objects.all().order_by('id')
-    serializer_class = CartItemSerializer
-    permission_classes = [permissions.IsAuthenticated]  
-
-    def get_queryset(self):
         user = self.request.user
-        queryset = Cart.objects.filter(user=user)
-        cartid = queryset[0]
-        if user.is_staff:
-            return CartItem.objects.filter(cart=cartid)  # Admin vê tudo
-        return CartItem.objects.filter(owner=user)
+        cart = Cart.objects.get(user=user)
+        return CartItem.objects.filter(cart=cart)
+
+    def create(self, request, *args, **kwargs):
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user)
+
+        product_id = request.data.get('product_id') or request.data.get('product')
+        quantity = int(request.data.get('quantity', 1))
+
+        if not product_id:
+            return Response({"error": "Produto é obrigatório"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Obter o objeto produto
+        try:
+            product_obj = Product.objects.get(pk=product_id)
+        except Product.DoesNotExist:
+            return Response({"error": "Produto não existe."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Verifica se já existe item no carrinho para esse produto
+        existing_item = CartItem.objects.filter(cart=cart, product=product_obj).first()
+
+        if existing_item:
+            existing_item.quantity += quantity
+            existing_item.save()
+            serializer = self.get_serializer(existing_item)
+            return Response({
+                "message": "Quantidade atualizada no carrinho.",
+                "item": serializer.data
+            }, status=status.HTTP_200_OK)
+        else:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save(cart=cart, product=product_obj, quantity=quantity)
+            return Response({
+                "message": "Produto adicionado ao carrinho com sucesso.",
+                "item": serializer.data
+            }, status=status.HTTP_201_CREATED)
     
-    def perform_create(self, serializer):
-        user = self.request.user
-        queryset = Cart.objects.filter(user=user)
-        cartid = queryset[0]
-
-        serializer.save(cart = cartid)
+    @action(detail=True, methods=['patch'])
+    def decrement(self, request, pk=None):
+        cart_item = self.get_object()
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+            serializer = self.get_serializer(cart_item)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            cart_item.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -188,4 +230,7 @@ class DestaquesViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     
     def get_queryset(self):
-        return Product.objects.all().order_by('name')[:5] # Retorna os 5 produtos mais bem avaliados
+        return (
+            Product.objects.annotate(avg_rating=Avg('reviews__rating'))
+            .order_by('-avg_rating')[:5]
+        ) # Retorna os 5 produtos mais bem avaliados

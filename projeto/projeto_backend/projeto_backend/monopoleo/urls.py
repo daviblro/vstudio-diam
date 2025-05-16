@@ -13,7 +13,7 @@ from .views import (
     change_password_view,
     NovidadesViewSet,
     DestaquesViewSet,
-    CartAddViewSet,
+    CartItemViewSet,
 )
 
 router = DefaultRouter()
@@ -25,7 +25,7 @@ router.register(r'cart', CartViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'novidades', NovidadesViewSet, basename='novidades')
 router.register(r'destaques', DestaquesViewSet, basename='destaques')
-router.register(r'add', CartAddViewSet,basename="add")
+router.register(r'cart-items', CartItemViewSet, basename='cart-items')
 
 urlpatterns = [
     path('login/', login_view),
