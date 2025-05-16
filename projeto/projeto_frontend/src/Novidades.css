@@ -1,46 +1,51 @@
 .ajustarTop {
-  padding-top: 120px;
-  padding-left: 10vw;
-  padding-right: 10vw;
-  background-color: white;
-}
-
-.HomePage {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  width: 100vw;
+  padding: 120px 0;
+  display: block;
   align-items: center;
-}
+  justify-content: center;
+  background-color: #f6f6f6;
+  margin: 0;
 
-.SeparatorTopPage {
-  height: 10px;
-  width: 100%;
-  background-color: white;
 }
-
-.Separator {
-  height: 40px;
+.titleNovidades {
+  height: 60px;
   width: 100%;
-  background-color: white;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  padding-top: 10px;
+  background-color: #d8d8d8;
+}
+.NovidadesBG{
+  width: 100vw;
+  height: auto;
+  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
+  padding-right: 0;
+  padding-left: 0;
+  background-color: #ffffff;
 }
 
 /* SECTIONS */
 
-.DestaqueSection,
 .NovosSection {
-  width: 100%;
-  padding: 40px 10vw;
-  background-color: #f6f6f6;
+  padding: 0px 10vw;
+  margin: 0 auto;
+  width: auto;
+  height:100vh;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* TÍTULO DAS SECÇÕES */
-.productSection h2 {
-  font-size: 24px;
+.productSection h2{
+  font-size: 30px;
   font-weight: bold;
   margin-bottom: 20px;
+  padding: 10px 0;
   text-align: center;
 }
-
 /* GRID DE PRODUTOS */
 .productGrid {
   display: flex;

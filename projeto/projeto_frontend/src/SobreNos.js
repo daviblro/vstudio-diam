@@ -6,7 +6,7 @@ function SobreNos() {
     <>
       <Header />
       <div className="ajustarTopo">
-        <div className="title">Sobre nós</div>
+        <div className="title">SOBRE NÓS</div>
         <div className="SobreNosBG">
           <div className="mainSobreNos">
             <section className="textSectionSobreNos1">

@@ -1,9 +1,8 @@
-import { use } from "react";
 import "./Novidades.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 function getCookie(name) {
   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -15,7 +14,8 @@ function Novidades() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/novidades/", { withCredentials: true })
+    axios
+      .get("http://localhost:8000/api/novidades/", { withCredentials: true })
       .then((res) => {
         setProducts(res.data);
       })
@@ -25,37 +25,39 @@ function Novidades() {
   }, []);
 
   return (
-    <div className="ajustarTop">
-      <div className="HomePage">
-        <div className="NovosSection">
-          <div className="productSection">
-            <h2>NOVIDADES</h2>
-            <div className="productGrid">
-              {products.length === 0 ? (
-                <p>Não existem produtos disponíveis.</p>
-              ) : (
-                products.map((product) => (
-                  <div
-                    key={product.id}
-                    className="productCard"
-                    onClick={() => navigate(`/produto/${product.id}`)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <img src={product.image} alt={product.name} />
-                    <p className="card-price">€{product.price}</p>
-                    <h1 className="card-title">{product.name}</h1>
-                    <div className="add-button">
-                      <button>Add to Cart</button>
+    <>
+      <div className="ajustarTop">
+        <div className="titleNovidades">NOVIDADES</div>
+        <div className="NovidadesBG">
+          <div className="NovosSection">
+            <div className="productSection">
+              <h2 >Dá uma olhada nas nossas mais recentes novidades!</h2>
+              <div className="productGrid">
+                {products.length === 0 ? (
+                  <p>Não existem produtos disponíveis.</p>
+                ) : (
+                  products.map((product) => (
+                    <div
+                      key={product.id}
+                      className="productCard"
+                      onClick={() => navigate(`/produto/${product.id}`)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <img src={product.image} alt={product.name} />
+                      <p className="card-price">€{product.price}</p>
+                      <h1 className="card-title">{product.name}</h1>
+                      <div className="add-button">
+                        <button>Add to Cart</button>
+                      </div>
                     </div>
-                  </div>
-                ))
-              )}
+                  ))
+                )}
+              </div>
             </div>
           </div>
         </div>
-
       </div>
-    </div>
+    </>
   );
 }
 
