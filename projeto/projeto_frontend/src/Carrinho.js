@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function MinhasCompras() {
+function Carrinho() {
     const [compras, setCompras] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/orders/", { withCredentials: true })
+        axios.get("http://localhost:8000/api/cart/", { withCredentials: true })
             .then(res => setCompras(res.data))
             .catch(err => console.error("Erro ao buscar compras:", err));
     }, []);
@@ -13,19 +13,21 @@ function MinhasCompras() {
     return (
         
         <div className="container">
-                
-            <h2>Minhas Compras</h2>
+            <h1>oi</h1> 
+            <h1></h1>
+
+            <h2>O meu carrinho</h2>
             {compras.length === 0 ? (
                 <p>Você ainda não fez compras.</p>
             ) : (
                 <ul>
-                    {compras.map(order => (
-                        <li key={order.id}>
-                            Pedido #{order.id} - {order.status} - {new Date(order.created_at).toLocaleDateString()}
+                    {compras.map(cart => (
+                        <li key={cart.id}>
+                            Carrinho #{cart.id} de {cart.user.id} - {new Date(cart.created_at).toLocaleDateString()}
                             <ul>
-                                {order.items.map(item => (
+                                {cart.items.map(item => (
                                     <li key={item.id}>
-                                        {item.product.name} — {item.quantity} x €{item.price}
+                                        {item.product.name} — {item.quantity} x €{item.product.price}
                                     </li>
                                 ))}
                             </ul>
@@ -38,4 +40,4 @@ function MinhasCompras() {
     );
 }
 
-export default MinhasCompras;
+export default Carrinho;

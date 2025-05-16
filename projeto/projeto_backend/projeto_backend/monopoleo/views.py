@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAuthenticated
-from .serializers import LoginSerializer, UserSerializer, ProductSerializer, CategorySerializer, ReviewSerializer, OrderSerializer, CartSerializer
+from .serializers import LoginSerializer, UserSerializer, ProductSerializer, CartItemSerializer, CategorySerializer, ReviewSerializer, OrderSerializer, CartSerializer
 
 
 # Create your views here.
@@ -138,6 +138,20 @@ class CartViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class CartAddViewSet(viewsets.ModelViewSet):
+    queryset = CartItem.objects.all().order_by('id')
+    serializer_class = CartItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff:
+            return CartItem.objects.all()  # Admin vê tudo
+        return CartItem.objects.filter(owner=user)
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class UserViewSet(viewsets.ModelViewSet):

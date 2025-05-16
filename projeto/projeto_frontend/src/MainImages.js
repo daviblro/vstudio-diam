@@ -55,6 +55,7 @@ export default function MainImages() {
                 onMouseDown={handleStart}
                 onMouseUp={handleEnd}
               />
+              
             </div>
           </div>
         ))}

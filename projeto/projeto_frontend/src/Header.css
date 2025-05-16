@@ -19,11 +19,16 @@
   margin-top: 5px;
 }
 
-.HeaderContent {
+.HeaderLogo {
   width: 80vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+}
+
+.HeaderLogo :hover {
+  cursor: pointer;
 }
 
 .btn {

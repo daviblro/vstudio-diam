@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./DetalhesProduto.css";
+import { FaQuran } from "react-icons/fa";
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -70,6 +71,29 @@ function DetalhesProduto() {
         }
     };
 
+    const addToCart = async (e) => {
+        e.preventDefault();
+
+        const csrfToken = getCookie("csrftoken");
+
+        try {
+            await axios.post("http://localhost:8000/api/add_cart/", {
+                product_id: 5,
+                quantity: 1,
+            }, {
+                withCredentials: true,
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                },
+            });
+
+            setMessage("Produto adicionado ao carrinho com sucesso!");
+        } catch (error) {
+            console.error("Erro ao adicionar os produtos:", error);
+            setMessage("Erro ao adicionar os produtoss.");
+        }
+    };
+
     if (!product) return <div className="ProductDetail">Carregando produto...</div>;
 
     return (
@@ -87,7 +111,7 @@ function DetalhesProduto() {
                         {product.stock > 0 ? `${product.stock} em stock` : "Esgotado"}
                     </p>
                     <p className="ProductDescription">{product.description}</p>
-                    <button className="AddToCartButton">Adicionar ao Carrinho</button>
+                    <button className="AddToCartButton" onClick={addToCart}>Adicionar ao Carrinho</button>
                 </div>
             </div>
         </div>
