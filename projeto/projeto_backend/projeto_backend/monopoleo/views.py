@@ -104,6 +104,15 @@ class ProductPublicViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
 
+class MaisVendidosViewSet(viewsets.ModelViewSet):
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Product.objects.all().order_by('times_purchased')
+
+    def get_queryset(self):
+        queryset = Product.objects.all().order_by('times_purchased')
+        return queryset[:10]
+
 
 # --- Categoria ---
 class CategoryViewSet(viewsets.ModelViewSet):

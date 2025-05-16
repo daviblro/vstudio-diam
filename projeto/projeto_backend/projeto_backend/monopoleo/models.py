@@ -23,7 +23,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="products")  # Ligado ao User (Dono do Produto)
+    times_purchased = models.IntegerField()
 
+    
     def __str__(self):
         return self.name
     
