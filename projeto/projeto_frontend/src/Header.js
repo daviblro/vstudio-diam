@@ -59,7 +59,7 @@ function Header() {
   return (
     <>
       <div className="Header">
-        <div className="HeaderContent">
+        <div className="HeaderLogo">
           <img
             src={require("./img/monopoleo80x80.png")}
             alt="Erro ao carregar logo."
@@ -96,7 +96,7 @@ function Header() {
                 <button className="btn">Iniciar Sessão</button>
               </Link>
             )}
-            <Link to="/">
+            <Link to="/carrinho ">
               <button className="btn">
                 <FaShoppingCart style={{ marginRight: "8px" }} />
                 Carrinho

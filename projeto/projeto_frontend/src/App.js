@@ -17,8 +17,9 @@ import MinhasCompras from './MinhasCompras';
 import CriarProduto from './CriarProduto';
 import EditarProduto from './EditarProduto';
 import DetalhesProduto from "./DetalhesProduto";
+import Carrinho from "./Carrinho"
 import Header from './Header';
-
+  
 function App() {
   const location = useLocation();
 
@@ -77,6 +78,14 @@ function App() {
           element={
             <PrivateRoute>
               <EditarProduto />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/carrinho"
+          element={
+            <PrivateRoute>
+              <Carrinho />
             </PrivateRoute>
           }
         />
