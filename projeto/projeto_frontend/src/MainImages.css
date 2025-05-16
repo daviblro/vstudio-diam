@@ -1,21 +1,20 @@
-/* Garante que o slideshow ocupa a largura total e altura máxima de 800px */
 .container {
-  width: 100%; /* Agora é 100% do espaço entre os 10vw dos lados => 80vw */
-  max-height: 500px;
+  width: 100%;
+  max-width: 100vw;
+  padding: 0 10vw;
+  box-sizing: border-box;
 }
 
-/* Wrapper de cada imagem */
 .img-body {
   width: 100%;
-  height: 500px;
-  margin: 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  /* centraliza */
 }
 
-/* Imagens adaptadas para cobrir sem distorcer */
 .img-body img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  border-radius: 20px;
   display: block;
-  margin: 0 auto;
-
 }

@@ -63,7 +63,6 @@ function Header() {
           <img
             src={require("./img/monopoleo80x80.png")}
             alt="Erro ao carregar logo."
-            className="logo"
             onClick={() => navigate("/")}
           />
 

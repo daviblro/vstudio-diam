@@ -14,26 +14,16 @@
   z-index: 1000;
 }
 
+.Header img {
+  border-radius: 20px;
+  margin-top: 5px;
+}
+
 .HeaderContent {
   width: 80vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.logo {
-  width: auto;
-  height: 100%;
-  background-color: #e51b15;
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.logo:hover {
-  background-color: #e51b15;
 }
 
 .btn {
@@ -87,12 +77,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.welcome {
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
 }
 
 /* Menu bar */

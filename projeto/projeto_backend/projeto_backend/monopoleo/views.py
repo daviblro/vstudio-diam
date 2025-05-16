@@ -3,6 +3,7 @@ from .models import Product, Category, Review, Order, OrderItem, Cart, CartItem
 from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
 from django.http import JsonResponse
+from django.core.files.storage import default_storage
 from rest_framework.response import Response
 from rest_framework import status, viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes, action
@@ -68,16 +69,38 @@ def user_view(request):
 
 # --- Produto ---
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all().order_by('-created_at')
+    queryset = Product.objects.all().order_by('name')
     serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff:
+            return Product.objects.all()  # Admin vê tudo
+        return Product.objects.filter(owner=user)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def update(self, request, *args, **kwargs):
+        product = self.get_object()
+        if request.user != product.owner and not request.user.is_staff:
+            return Response({'error': 'Sem permissão para editar este produto.'}, status=status.HTTP_403_FORBIDDEN)
+        return super().update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        product = self.get_object()
+        if request.user != product.owner and not request.user.is_staff:
+            return Response({'error': 'Sem permissão para apagar este produto.'}, status=status.HTTP_403_FORBIDDEN)
+        # Deleta a imagem associada, se existir
+        if product.image and default_storage.exists(product.image.name):
+            product.image.delete(save=False)
+        return super().destroy(request, *args, **kwargs)
+
 
 # --- Categoria ---
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by('name')
     serializer_class = CategorySerializer
 
 
@@ -85,7 +108,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all().order_by('-created_at')
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -132,9 +155,17 @@ class UserViewSet(viewsets.ModelViewSet):
         
         
 # --- Novidades ---
-@api_view(['GET'])  
-@permission_classes([IsAuthenticated])
-def novidades_view(request):
-    queryset = Product.objects.all().order_by('-created_at')
+class NovidadesViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    return Response(serializer_class(queryset, many=True).data) 
+    
+    def get_queryset(self):
+        return Product.objects.all().order_by('-created_at')[:5] # Retorna os 5 produtos mais recentes
+    
+# --- Destaques ---
+class DestaquesViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
+    def get_queryset(self):
+        return Product.objects.all().order_by('name')[:5] # Retorna os 5 produtos mais bem avaliados

@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     height: 90vh;
-    padding-top: 50px;
+    padding-top: 10vh;
 }
 
 .ContaContainer {
@@ -31,7 +31,7 @@
 
 .Conta li {
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #dadada;
     font-size: 16px;
     color: #444;
 }

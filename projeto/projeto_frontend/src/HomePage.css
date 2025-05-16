@@ -2,95 +2,111 @@
   padding-top: 120px;
   padding-left: 10vw;
   padding-right: 10vw;
-  display: block;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0px 0px 0px -1px rgba(0, 0, 0, 0.34);
+  background-color: white;
 }
+
 .HomePage {
   width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 0;
 }
 
-.BGCinzento{
-  width:100vw;
-  padding-left: 0;
-  padding-right: 0;
-  background-color: #f6f6f6;
-  padding: 20px 0;
-
-}
-.BGBranco{
-  width:100vw;
-  padding-left: 0;
-  padding-right: 0;
-  background-color: #ffffff;
-}
-.produtosEmDestaque{
-  padding-left: 10vw;
-  padding-right: 10vw;
-}
-
-/* Style for the grid container */
-.grid {
-  display: flex; /* Use flexbox for a row layout */
-  flex-wrap: wrap; /* Allow wrapping if items don't fit in a single row */
-  gap: 1.5rem; /* Add spacing between items */
-}
-
-/* Style for individual cards */
-.card {
-  display: flex;             /* Enables flexbox */
-  flex-direction: column; 
-  justify-content: space-between;
+.SeparatorTopPage {
+  height: 10px;
+  width: 100%;
   background-color: white;
-  border-radius: 8px;
-  padding: 16px;   /* Espaço entre o texto e o card*/
-  max-width: calc(25% - 1.5rem); /* Prevent growing beyond row */
-  box-sizing: border-box; /* Include padding in width */
 }
 
-.card:hover {
-  box-shadow: 0px 7px 10px -1px rgba(0, 0, 0, 0.34);
+.Separator {
+  height: 40px;
+  width: 100%;
+  background-color: white;
+}
+
+.MainImages {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* SECTIONS */
+
+.DestaqueSection,
+.NovosSection {
+  width: 100%;
+  padding: 40px 10vw;
+  background-color: #f6f6f6;
+}
+
+/* TÍTULO DAS SECÇÕES */
+.productSection h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* GRID DE PRODUTOS */
+.productGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+/* CARTÕES DE PRODUTO */
+.productCard {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 220px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.productCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
+}
+
+.productCard img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card-price {
+  color: #e51b15;
+  font-size: 1.3rem;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .card-title {
   font-size: 1rem;
+  margin-top: 5px;
   color: #333;
-}
-
-.card-price {
-  padding-top: 10%;
-  font-size: 1.5rem;
-  font-family: "Calibri";
-  color: #e51b15;
-  font-weight: bold;
+  text-align: center;
 }
 
 .add-button {
-  text-align: center;
-  padding-bottom: 20px;
-}
-  
-.MainImages {
-  display: flex;
-  width: 100%;
-  height: 100%;
+  margin-top: auto;
 }
 
-.SeparatorTopPage{
-  width: 100%;
-  background-color:  white;
-  height: 10px;
+.add-button button {
+  padding: 8px 16px;
+  background-color: #e51b15;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
 }
-.Separator{
-  width: 100%;
-  background-color:  white;
-  height: 40px;
+
+.add-button button:hover {
+  background-color: #c91410;
 }

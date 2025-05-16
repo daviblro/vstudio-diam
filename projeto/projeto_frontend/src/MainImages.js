@@ -16,8 +16,8 @@ const images = [
 ];
 
 export default function MainImages() {
-  
-    const navigate = useNavigate();
+
+  const navigate = useNavigate();
   const startX = useRef(0);
 
   const handleStart = (e) => {
@@ -38,6 +38,9 @@ export default function MainImages() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
   };
 
   return (

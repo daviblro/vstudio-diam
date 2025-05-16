@@ -2,98 +2,96 @@ import "./HomePage.css";
 import Header from "./Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import image from "./img/images.jpg";
 import MainImages from "./MainImages";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
-  const [user, setUser] = useState("");
-  const [products, setProducts] = useState([]);
+  const [destaques, setDestaques] = useState([]);
+  const [novidades, setNovidades] = useState([]);
+  const navigate = useNavigate();
 
-  const dummyProducts = [
-    {
-      id: 1,
-      name: "Wireless Headphones",
-      price: "€99.99",
-      image: "/img/images.jpg",
-    },
-    {
-      id: 2,
-      name: "Smartphone",
-      price: "€499.99",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 3,
-      name: "Laptop",
-      price: "€999.99",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 4,
-      name: "Smart Watch",
-      price: "€199.99",
-      image: "https://via.placeholder.com/150",
-    },
-  ];
   useEffect(() => {
-    // Simulating a fetch from an API
-    setProducts(dummyProducts);
+    axios.get("http://localhost:8000/api/destaques/", { withCredentials: true })
+      .then((res) => {
+        setDestaques(res.data);
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar produtos:", err);
+      });
+    axios.get("http://localhost:8000/api/novidades/", { withCredentials: true })
+      .then((res) => {
+        setNovidades(res.data);
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar produtos:", err);
+      });
   }, []);
 
-  function getCookie(name) {
-    const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-    return match ? match[2] : null;
-  }
-
   return (
-    <>
-      <Header />
-      <div className="ajustarTop">
-        <div className="HomePage">
-          <div className="SeparatorTopPage"></div>
-          <div className="MainImages">
-            <MainImages />
-          </div>
-          <div className="Separator"></div>
-          <div className="BGCinzento">
-            <div className="produtosEmDestaque">
-              <h2>EM DESTAQUE</h2>
-              <div className="grid">
-                {products.map((product) => (
-                  <div key={product.id} className="card">
-                    <img src={image} alt={product.name} />
-                    <p className="card-price">{product.price}</p>
-                    <h1 className="card-title">{product.name}</h1>
-                    <div className="add-button">
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="BGBranco">
-            <div className="produtosEmDestaque">
-              <h2>Novos !!!!!!!</h2>
-              <div className="grid">
-                {products.map((product) => (
-                  <div key={product.id} className="card">
-                    <img src={image} alt={product.name} />
-                    <p className="card-price">{product.price}</p>
-                    <h1 className="card-title">{product.name}</h1>
-                    <div className="add-button">
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* <Footer/> */}
+    <div className="ajustarTop">
+      <div className="HomePage">
+        <div className="SeparatorTopPage"></div>
+        <div className="MainImages">
+          <MainImages />
         </div>
+        <div className="Separator"></div>
+
+        <div className="DestaqueSection">
+          <div className="productSection">
+            <h2>EM DESTAQUE</h2>
+            <div className="productGrid">
+              {destaques.length === 0 ? (
+                <p>Não existem produtos disponíveis.</p>
+              ) : (
+                destaques.map((product) => (
+                  <div
+                    key={product.id}
+                    className="productCard"
+                    onClick={() => navigate(`/produto/${product.id}`)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <img src={product.image} alt={product.name} />
+                    <p className="card-price">€{product.price}</p>
+                    <h1 className="card-title">{product.name}</h1>
+                    <div className="add-button">
+                      <button>Add to Cart</button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="NovosSection">
+          <div className="productSection">
+            <h2>NOVIDADES</h2>
+            <div className="productGrid">
+              {novidades.length === 0 ? (
+                <p>Não existem produtos disponíveis.</p>
+              ) : (
+                novidades.map((product) => (
+                  <div
+                    key={product.id}
+                    className="productCard"
+                    onClick={() => navigate(`/produto/${product.id}`)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <img src={product.image} alt={product.name} />
+                    <p className="card-price">€{product.price}</p>
+                    <h1 className="card-title">{product.name}</h1>
+                    <div className="add-button">
+                      <button>Add to Cart</button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
       </div>
-    </>
+    </div>
   );
 }
 

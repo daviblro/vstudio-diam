@@ -3,61 +3,59 @@ import "./Novidades.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
- function getCookie(name) {
-    const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-    return match ? match[2] : null;
-  }
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return match ? match[2] : null;
+}
 
 function Novidades() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProdutos = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/novidades/",
-          {
-            withCredentials: true,
-            headers: {
-              "X-CSRFToken": getCookie("csrftoken"),
-            },
-          }
-        );
-        setProducts(response.data); // guarda os produtos no state
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchProdutos(); // chama a função ao carregar a página
+    axios.get("http://localhost:8000/api/novidades/", { withCredentials: true })
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar produtos:", err);
+      });
   }, []);
 
   return (
-    <>
-      <Header />
-      <div className="ajustarTop">
-        <div className="Novidades">
-          <div className="BGCinzento">
-            <div className="produtosEmDestaque">
-              <h2>EM DESTAQUE</h2>
-              <div className="grid">
-                {products.map((product) => (
-                  <div key={product.id} className="card">
+    <div className="ajustarTop">
+      <div className="HomePage">
+        <div className="NovosSection">
+          <div className="productSection">
+            <h2>NOVIDADES</h2>
+            <div className="productGrid">
+              {products.length === 0 ? (
+                <p>Não existem produtos disponíveis.</p>
+              ) : (
+                products.map((product) => (
+                  <div
+                    key={product.id}
+                    className="productCard"
+                    onClick={() => navigate(`/produto/${product.id}`)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <img src={product.image} alt={product.name} />
-                    <p className="card-price">{product.price}</p>
+                    <p className="card-price">€{product.price}</p>
                     <h1 className="card-title">{product.name}</h1>
                     <div className="add-button">
                       <button>Add to Cart</button>
                     </div>
                   </div>
-                ))}
-              </div>
+                ))
+              )}
             </div>
           </div>
         </div>
+
       </div>
-    </>
+    </div>
   );
 }
 

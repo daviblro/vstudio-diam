@@ -1,0 +1,59 @@
+.CriarProduto {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    padding-top: 10vh;
+}
+
+.CriarProdutoContainer {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.formulario-produto {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario-produto label {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.formulario-produto input,
+.formulario-produto textarea,
+.formulario-produto select {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.formulario-produto button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgb(21, 107, 197);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formulario-produto button:hover {
+    background-color: rgb(16, 85, 160);
+}
+
+.mensagem {
+    color: green;
+    text-align: center;
+    font-weight: bold;
+}

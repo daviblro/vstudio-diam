@@ -40,21 +40,17 @@ class CategorySerializer(serializers.ModelSerializer):
 
 # --- Product ---
 class ProductSerializer(serializers.ModelSerializer):
-    owner = UserSerializer(read_only=True)
-    category = CategorySerializer(read_only=True)
-
     class Meta:
         model = Product
         fields = '__all__'
+        read_only_fields = ['id', 'owner', 'created_at', 'updated_at']
 
 # --- Review ---
 class ReviewSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
-
     class Meta:
         model = Review
         fields = '__all__'
+        read_only_fields = ['id', 'user', 'product', 'created_at']
 
 # --- OrderItem ---
 class OrderItemSerializer(serializers.ModelSerializer):

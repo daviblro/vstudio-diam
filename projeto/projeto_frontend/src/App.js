@@ -14,6 +14,9 @@ import Contactos from './Contactos';
 import Conta from './Conta';
 import GerirProdutos from './GerirProdutos';
 import MinhasCompras from './MinhasCompras';
+import CriarProduto from './CriarProduto';
+import EditarProduto from './EditarProduto';
+import DetalhesProduto from "./DetalhesProduto";
 import Header from './Header';
 
 function App() {
@@ -36,6 +39,7 @@ function App() {
         <Route path="/promocoes" element={<Promocoes />} />
         <Route path="/lojas" element={<Lojas />} />
         <Route path="/contactos" element={<Contactos />} />
+        <Route path="/produto/:id" element={<DetalhesProduto />} />
         <Route
           path="/conta"
           element={
@@ -57,6 +61,22 @@ function App() {
           element={
             <PrivateRoute>
               <GerirProdutos />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/criar-produto"
+          element={
+            <PrivateRoute>
+              <CriarProduto />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/editar-produto/:id"
+          element={
+            <PrivateRoute>
+              <EditarProduto />
             </PrivateRoute>
           }
         />
