@@ -1,4 +1,3 @@
-import Header from "./Header";
 import "./Lojas.css";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
@@ -64,8 +63,7 @@ function Lojas() {
   );
 
   return (
-    <>
-      <Header />
+    <div className="Lojas">
       <div className="ajustarTopo">
         <div className="title">LOJAS</div>
         <div className="FilterLojasBG">
@@ -104,7 +102,7 @@ function Lojas() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

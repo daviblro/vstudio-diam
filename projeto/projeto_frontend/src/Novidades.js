@@ -23,39 +23,50 @@ function Novidades() {
       });
   }, []);
 
+  function slugify(text) {
+    return text
+      .toString()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .toLowerCase()
+      .replace(/\s+/g, '-')           // Espaços para hífens
+      .replace(/[^\w\-]+/g, '')       // Remove caracteres especiais
+      .replace(/\-\-+/g, '-')         // Hífens duplos para simples
+      .replace(/^-+/, '')             // Remove hífens do início
+      .replace(/-+$/, '');            // Remove hífens do fim
+  }
+
   return (
-    <div className="ajustarTop">
-      <div className="titleNovidades">NOVIDADES</div>
-      <div className="NovidadesBG">
-        <div className="NovosSection">
-          <div className="productSection">
-            <h2 >Dá uma olhada nas nossas mais recentes novidades!</h2>
-            <div className="productGrid">
-              {products.length === 0 ? (
-                <p>Não existem produtos disponíveis.</p>
-              ) : (
-                products.map((product) => (
-                  <div
-                    key={product.id}
-                    className="productCard"
-                    onClick={() => navigate(`/produto/${product.id}`)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <img src={product.image} alt={product.name} />
-                    <p className="card-price">€{product.price}</p>
-                    <h1 className="card-title">{product.name}</h1>
-                    <div className="add-button">
-                      <button>Add to Cart</button>
-                    </div>
+    <div className="Novidades">
+      <div className="ajustarTopNovidades">
+        <div className="titleNovidades">NOVIDADES</div>
+        <div className="productSection">
+          <h2>Dá uma olhada nas nossas mais recentes novidades!</h2>
+          <div className="productGrid">
+            {products.length === 0 ? (
+              <p>Não existem produtos disponíveis.</p>
+            ) : (
+              products.map((product) => (
+                <div
+                  key={product.id}
+                  className="productCard"
+                  onClick={() => navigate(`/produto/${product.id}/${slugify(product.name)}`)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img src={product.image} alt={product.name} />
+                  <p className="card-price">€{product.price}</p>
+                  <h1 className="card-title">{product.name}</h1>
+                  <div className="add-button">
+                    <button>Add to Cart</button>
                   </div>
-                ))
-              )}
-            </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
     </div>
   );
+
 }
 
 export default Novidades;

@@ -1,23 +1,20 @@
-.ajustarTopo {
+.Lojas .ajustarTopo {
   padding-top: 120px;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  box-shadow: 0px 0px 0px -1px rgba(0, 0, 0, 0.34);
+  background-color: white;
 }
 
-.title {
-  height: 40px;
+.Lojas .title {
+  height: 60px;
   width: 100%;
-  background-color: #d8d8d8;
   font-size: 32px;
-  padding: 10px 0px;
   font-weight: bold;
   text-align: center;
-  margin: 0;
+  justify-content: center;
+  padding-top: 10px;
+  background-color: #d8d8d8;
 }
-.mainLojas {
+
+.Lojas .mainLojas {
   padding-left: 15vw;
   padding-right: 15vw;
   padding-top: 0;
@@ -26,29 +23,32 @@
   display: block;
   justify-content: space-between;
   background-color: transparent;
-  margin: 0 auto; /*Calcula o espaço que sobra e distribui nas margens, no caso o 20 para 10 esq e 10 dir. arg: 0 cima e baixo, auto dir e esq.*/
+  margin: 0 auto;
+  /*Calcula o espaço que sobra e distribui nas margens, no caso o 20 para 10 esq e 10 dir. arg: 0 cima e baixo, auto dir e esq.*/
 }
-.FilterLojasBG {
+
+.Lojas .FilterLojasBG {
   width: 100vw;
   height: 200px;
   background-color: #f6f6f6;
-  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
   padding: 10px 0px;
 }
-.FilterLojas {
+
+.Lojas .FilterLojas {
   width: 100%;
   height: 100%;
   max-height: 200px;
   padding: 20px 0px;
 }
 
-.textLojas {
+.Lojas .textLojas {
   width: 100%;
   align-items: left;
   font-size: 28px;
   font-weight: bold;
 }
-.lojasContentBG {
+
+.Lojas .lojasContentBG {
   padding: 0;
   margin: 0;
   width: 100vw;
@@ -56,7 +56,7 @@
   box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
 }
 
-.lojasContent {
+.Lojas .lojasContent {
   padding-top: 0;
   margin-top: 0;
   padding-left: 15vw;
@@ -64,7 +64,7 @@
   box-shadow: 0px 7px 10px -1px rgba(0, 0, 0, 0.34);
 }
 
-.searchBar {
+.Lojas .searchBar {
   width: 100%;
   min-width: 200px;
   max-width: 900px;
@@ -78,7 +78,8 @@
   overflow: hidden;
   position: relative;
 }
-.searchInput {
+
+.Lojas .searchInput {
   width: 100%;
   padding: 10px 10px 10px 36px;
   margin: 0;
@@ -88,7 +89,7 @@
   font-size: 20px;
 }
 
-.searchIcon {
+.Lojas .searchIcon {
   position: absolute;
   top: 50%;
   left: 10px;
@@ -97,27 +98,31 @@
   font-size: 16px;
   pointer-events: none;
 }
-.lojaTitle {
+
+.Lojas .lojaTitle {
   font-size: 24px;
   font-weight: bold;
 }
 
-.lojaMorada {
+.Lojas .lojaMorada {
   font-size: 24px;
   font-weight: normal;
   color: #000000;
   text-decoration: none;
 }
-.lojaMorada:hover {
+
+.Lojas .lojaMorada:hover {
   text-decoration: underline;
   color: #e51b15;
 }
-.lojaHorario {
+
+.Lojas .lojaHorario {
   font-size: 16px;
   font-weight: normal;
   color: #000000;
 }
-.lojaCard {
+
+.Lojas .lojaCard {
   padding: 10px;
   border-radius: 20px;
   box-shadow: 0px 7px 10px -1px rgba(0, 0, 0, 0.34);

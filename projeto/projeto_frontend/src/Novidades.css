@@ -1,14 +1,9 @@
-.ajustarTop {
-  width: 100vw;
-  padding: 120px 0;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  background-color: #f6f6f6;
-  margin: 0;
-
+.Novidades .ajustarTopNovidades {
+  padding-top: 120px;
+  background-color: white;
 }
-.titleNovidades {
+
+.Novidades .titleNovidades {
   height: 60px;
   width: 100%;
   font-size: 32px;
@@ -18,44 +13,23 @@
   padding-top: 10px;
   background-color: #d8d8d8;
 }
-.NovidadesBG{
-  width: 100vw;
-  height: auto;
-  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
-  padding-right: 0;
-  padding-left: 0;
-  background-color: #ffffff;
-}
 
-/* SECTIONS */
-
-.NovosSection {
-  padding: 0px 10vw;
-  margin: 0 auto;
-  width: auto;
-  height:100vh;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* TÍTULO DAS SECÇÕES */
-.productSection h2{
+.Novidades .productSection h2 {
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 20px;
   padding: 10px 0;
   text-align: center;
 }
-/* GRID DE PRODUTOS */
-.productGrid {
+
+.Novidades .productGrid {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
 }
 
-/* CARTÕES DE PRODUTO */
-.productCard {
+.Novidades .productCard {
   background-color: white;
   border-radius: 10px;
   padding: 20px;
@@ -67,36 +41,36 @@
   align-items: center;
 }
 
-.productCard:hover {
+.Novidades .productCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
 }
 
-.productCard img {
+.Novidades .productCard img {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.card-price {
+.Novidades .card-price {
   color: #e51b15;
   font-size: 1.3rem;
   margin-top: 10px;
   font-weight: bold;
 }
 
-.card-title {
+.Novidades .card-title {
   font-size: 1rem;
   margin-top: 5px;
   color: #333;
   text-align: center;
 }
 
-.add-button {
+.Novidades .add-button {
   margin-top: auto;
 }
 
-.add-button button {
+.Novidades .add-button button {
   padding: 8px 16px;
   background-color: #e51b15;
   color: white;
@@ -107,6 +81,6 @@
   transition: background-color 0.2s ease;
 }
 
-.add-button button:hover {
+.Novidades .add-button button:hover {
   background-color: #c91410;
 }

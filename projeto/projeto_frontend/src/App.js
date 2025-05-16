@@ -21,7 +21,7 @@ import EditarProduto from './EditarProduto';
 import DetalhesProduto from "./DetalhesProduto";
 import Carrinho from "./Carrinho"
 import Header from './Header';
-  
+
 function App() {
   const location = useLocation();
 
@@ -43,7 +43,7 @@ function App() {
         <Route path="/promocoes" element={<Promocoes />} />
         <Route path="/lojas" element={<Lojas />} />
         <Route path="/contactos" element={<Contactos />} />
-        <Route path="/produto/:id" element={<DetalhesProduto />} />
+        <Route path="/produto/:id/:slug" element={<DetalhesProduto />} />
         <Route
           path="/conta"
           element={

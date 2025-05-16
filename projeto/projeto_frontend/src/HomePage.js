@@ -26,6 +26,18 @@ function HomePage() {
       });
   }, []);
 
+  function slugify(text) {
+    return text
+      .toString()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .toLowerCase()
+      .replace(/\s+/g, '-')           // Espaços para hífens
+      .replace(/[^\w\-]+/g, '')       // Remove caracteres especiais
+      .replace(/\-\-+/g, '-')         // Hífens duplos para simples
+      .replace(/^-+/, '')             // Remove hífens do início
+      .replace(/-+$/, '');            // Remove hífens do fim
+  }
+
   return (
     <div className="ajustarTopHomePage">
       <div className="HomePage">
@@ -46,7 +58,7 @@ function HomePage() {
                   <div
                     key={product.id}
                     className="productCard"
-                    onClick={() => navigate(`/produto/${product.id}`)}
+                    onClick={() => navigate(`/produto/${product.id}/${slugify(product.name)}`)}
                     style={{ cursor: "pointer" }}
                   >
                     <img src={product.image} alt={product.name} />

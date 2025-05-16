@@ -99,6 +99,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         return super().destroy(request, *args, **kwargs)
 
 
+class ProductPublicViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]
+
+
 # --- Categoria ---
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all().order_by('name')

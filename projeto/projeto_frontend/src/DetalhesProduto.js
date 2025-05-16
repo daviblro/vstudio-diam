@@ -19,7 +19,7 @@ function DetalhesProduto() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/products/${id}/`, {
+        axios.get(`http://localhost:8000/api/products-public/${id}/`, {
             withCredentials: true,
         })
             .then((res) => {

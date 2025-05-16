@@ -1,10 +1,8 @@
-import Header from "./Header";
 import "./SobreNos.css";
 
 function SobreNos() {
   return (
-    <>
-      <Header />
+    <div className="SobreNos">
       <div className="ajustarTopo">
         <div className="title">SOBRE NÓS</div>
         <div className="SobreNosBG">
@@ -21,30 +19,30 @@ function SobreNos() {
                 rápidas e acessíveis para todos.
               </p>
             </section>
-            <section className="imageSectionSobreNos">
+            <div className="imageSectionSobreNos">
               <img
                 src={require("./img/monopoleo.png")}
                 alt="Sobre nós"
                 className="imgSobreNos"
               />
-            </section>
+            </div>
           </div>
           <section className="textSectionSobreNos2">
-              <p className="textSobreNos2">
-                Na Monopoleo, acreditamos na inovação e na qualidade como
-                pilares do nosso crescimento. Apostamos numa plataforma
-                intuitiva, num serviço de apoio ao cliente de excelência e em
-                entregas eficazes, para garantir a melhor experiência possível.
-                A nossa equipa é jovem, apaixonada e está comprometida com o
-                futuro. Trabalhamos todos os dias para melhorar e evoluir,
-                sempre com os nossos clientes no centro de tudo o que fazemos.
-                Obrigado por confiares na Monopoleo. <br></br>Estamos só a começar — e
-                queremos crescer contigo.
-              </p>
-            </section>
+            <p className="textSobreNos2">
+              Na Monopoleo, acreditamos na inovação e na qualidade como
+              pilares do nosso crescimento. Apostamos numa plataforma
+              intuitiva, num serviço de apoio ao cliente de excelência e em
+              entregas eficazes, para garantir a melhor experiência possível.
+              A nossa equipa é jovem, apaixonada e está comprometida com o
+              futuro. Trabalhamos todos os dias para melhorar e evoluir,
+              sempre com os nossos clientes no centro de tudo o que fazemos.
+              Obrigado por confiares na Monopoleo. <br></br>Estamos só a começar — e
+              queremos crescer contigo.
+            </p>
+          </section>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

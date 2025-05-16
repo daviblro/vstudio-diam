@@ -1,70 +1,62 @@
-.ajustarTopo {
+.Promocoes .ajustarTopo {
   padding-top: 120px;
-  height: auto;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  background-color: #d8d8d8;
-  box-shadow: 0px 0px 0px -1px rgba(0, 0, 0, 0.34);
+  background-color: white;
 }
 
-.titlePromocoes{
-  height: 40px;
+.Promocoes .titlePromocoes {
+  height: 60px;
   width: 100%;
-  background-color: #d8d8d8;
   font-size: 32px;
-  padding: 10px 0px;
   font-weight: bold;
   text-align: center;
-  margin: 0;
-}
-.PromocoesBG{
-  width: 100vw;
-  height: auto;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
+  justify-content: center;
+  padding-top: 10px;
+  background-color: #d8d8d8;
 }
 
-.NovosSection {
+.Promocoes .NovosSection {
   padding: 0px 10vw;
   margin: 0 auto;
-  height:auto;
+  height: auto;
   background-color: transparent;
 }
 
-.content{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: auto;
+.Promocoes .content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
 }
 
-
-/*  Filters Categorias    */
-
-.filters{
-    display: block;
-    align-items: left;
-    width: 20%;
-    height: fit-content;
-    padding: 0px 10px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px -1px rgba(13, 227, 95, 0.34);   
-}
-.labelFilter{
-    font-size: 20px;
+/*  Filters Categorias  */
+.Promocoes .filters {
+  display: block;
+  width: 20%;
+  height: fit-content;
+  padding: 0px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.checkboxFilter{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin: 10px;
+.Promocoes .labelFilter {
+  font-size: 16px;
 }
-.clickableFilter {
+
+.Promocoes .checkboxFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+.Promocoes .clickableFilter {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -72,54 +64,53 @@
   gap: 10px;
 }
 
-/*    FILTER PRICE        */
-.filterPrice{
-    height: auto;
-    padding: 10px 10px;
-    margin: 10px 0px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px -1px rgba(13, 227, 95, 0.34);
-}
-.filterPriceContent{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px -1px rgba(13, 227, 95, 0.34);
-}
-.labelRangePrice{
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-.price-range-container {
-    margin: 10px 0px;
+/* Filter Price */
+.Promocoes .filterPrice {
+  height: auto;
+  padding: 10px 10px;
+  margin: 10px 0px;
+  border-radius: 10px;
 }
 
+.Promocoes .filterPriceContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
 
-/* Listagem de PRODUTOS */
+.Promocoes .labelRangePrice {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
 
+.Promocoes .price-range-container {
+  margin: 10px 0px;
+}
 
-.productSection{
-    width: 80%;
-    height:auto;
+/* Listagem de Produtos */
+.Promocoes .productSection {
+  width: 80%;
+  height: auto;
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 20px;
   padding: 10px 0;
   text-align: center;
 }
-/* GRID DE PRODUTOS */
-.productGrid {
-height: auto;
+
+/* Grid de Produtos */
+.Promocoes .productGrid {
+  height: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
 }
 
-/* CARTÕES DE PRODUTO */
-.productCard {
+/* Cartões de Produto */
+.Promocoes .productCard {
   background-color: white;
   border-radius: 10px;
   padding: 20px;
@@ -132,43 +123,44 @@ height: auto;
   align-items: center;
 }
 
-.productCard:hover {
+.Promocoes .productCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
 }
 
-.productCard img {
+.Promocoes .productCard img {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.card-price {
+.Promocoes .card-price {
   color: #e51b15;
   font-size: 1.3rem;
   margin-top: 10px;
   font-weight: bold;
   text-decoration: line-through;
 }
-.card-price-newPrice{
+
+.Promocoes .card-price-newPrice {
   color: #e51b15;
   font-size: 2rem;
   margin-top: 10px;
   font-weight: bold;
-
 }
-.card-title {
+
+.Promocoes .card-title {
   font-size: 1rem;
   margin-top: 5px;
   color: #333;
   text-align: center;
 }
 
-.add-button {
+.Promocoes .add-button {
   margin-top: auto;
 }
 
-.add-button button {
+.Promocoes .add-button button {
   padding: 8px 16px;
   background-color: #e51b15;
   color: white;
@@ -179,6 +171,11 @@ height: auto;
   transition: background-color 0.2s ease;
 }
 
-.add-button button:hover {
+.Promocoes .add-button button:hover {
   background-color: #c91410;
+}
+
+.Promocoes h2 {
+  font-size: 24px;
+  margin-left: 12px;
 }

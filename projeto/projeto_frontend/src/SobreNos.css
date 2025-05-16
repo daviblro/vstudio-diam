@@ -1,58 +1,68 @@
-.ajustarTopo {
+.SobreNos .ajustarTopo {
   padding-top: 120px;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  background-color: #d8d8d8;
-  box-shadow: 0px 0px 0px -1px rgba(0, 0, 0, 0.34);
+  background-color: white;
 }
 
-.title {
-  height: 40px;
+.SobreNos .title {
+  height: 60px;
   width: 100%;
-  background-color: #d8d8d8;
   font-size: 32px;
-  padding: 10px 0px;
   font-weight: bold;
   text-align: center;
-  margin: 0;
-}
-.SobreNosBG {
-  width: 100vw;
+  justify-content: center;
+  padding-top: 10px;
   background-color: #d8d8d8;
-  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
 }
-.mainSobreNos {
+
+.SobreNos .SobreNosBG {
+  width: 100vw;
+  height: 50vh;
+  background-color: white;
+}
+
+.SobreNos .mainSobreNos {
   padding: 0 10vw;
   height: 100%;
   max-height: 600px;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto; /*Calcula o espaço que sobra e distribui nas margens, no caso o 20 para 10 esq e 10 dir. arg: 0 cima e baixo, auto dir e esq.*/
+  margin: 0 auto;
+  /*Calcula o espaço que sobra e distribui nas margens, no caso o 20 para 10 esq e 10 dir. arg: 0 cima e baixo, auto dir e esq.*/
 }
-.textSectionSobreNos1 {
+
+.SobreNos .textSectionSobreNos1 {
   width: 100%;
-}
-.textSobreNos1 {
-  font-style: normal;
-  font-size: 24px;
-}
-.imageSectionSobreNos {
-  margin: 30px 0 0 0;  /*Para estar no mesmo nivel que o texto à esquerda.*/
-  width: 50%;
-  max-height: 600px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.textSectionSobreNos2 {
-  padding: 0 10vw;
-  margin: 0;
-  background-color: #d8d8d8;
-}
-.textSobreNos2 {
-  margin: 0;
-  padding: 0;
+
+.SobreNos .textSobreNos1 {
   font-style: normal;
   font-size: 24px;
+  width: 80%;
+  text-align: justify;
+}
+
+.SobreNos .imageSectionSobreNos {
+  margin: 30px 0 0 0;
+}
+
+.SobreNos .imgSobreNos {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.SobreNos .textSectionSobreNos2 {
+  padding: 0 10vw;
+  background-color: white;
+}
+
+.SobreNos .textSobreNos2 {
+  margin: 0;
+  font-style: normal;
+  font-size: 24px;
+  text-align: justify;
 }

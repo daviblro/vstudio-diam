@@ -1,4 +1,3 @@
-import Header from "./Header";
 import "./Contactos.css";
 import { useState } from "react";
 import phoneIcon from "./img/customer_support.png";
@@ -48,51 +47,48 @@ function Contactos() {
   const [perguntaAberta, setPerguntaAberta] = useState(null);
 
   return (
-    <>
-      <Header />
-      <div className="Contactos">
-        <div className="title">CONTACTOS</div>
-        <div className="main_contactos">
-          <section className="text_contactos">
-            <p>Perguntas mais frequentes:</p>
+    <div className="Contactos">
+      <div className="title">CONTACTOS</div>
+      <div className="main_contactos">
+        <section className="text_contactos">
+          <p>Perguntas mais frequentes:</p>
 
-            {perguntasFrequentes.map((item, i) => (
-              <div key={i} className="faq-item">
-                <p
-                  className="faq-question"
-                  onClick={() =>
-                    setPerguntaAberta(i === perguntaAberta ? null : i)
-                  }
-                >
-                  {item.pergunta}
-                </p>
-                {perguntaAberta === i && (
-                  <p className="faq-answer">R.: {item.resposta}</p>
-                )}
+          {perguntasFrequentes.map((item, i) => (
+            <div key={i} className="faq-item">
+              <p
+                className="faq-question"
+                onClick={() =>
+                  setPerguntaAberta(i === perguntaAberta ? null : i)
+                }
+              >
+                {item.pergunta}
+              </p>
+              {perguntaAberta === i && (
+                <p className="faq-answer">R.: {item.resposta}</p>
+              )}
+            </div>
+          ))}
+          <p className="bottom-text">
+            Se ainda precisares de ajuda fala conosco através dos nossos
+            canais de atendimento:
+          </p>
+        </section>
+
+        <div className="contactosContent">
+          <div className="grid">
+            {metodosContacto.map((metodo) => (
+              <div key={metodo.id} className="card">
+                <img src={metodo.image} alt={metodo.name} />
+                <p className="card-description">{metodo.description}</p>
+                <div className="add-button">
+                  <button>Ir</button>
+                </div>
               </div>
             ))}
-            <p className="bottom-text">
-              Se ainda precisares de ajuda fala conosco através dos nossos
-              canais de atendimento:
-            </p>
-          </section>
-
-          <div className="contactosContent">
-            <div className="grid">
-              {metodosContacto.map((metodo) => (
-                <div key={metodo.id} className="card">
-                  <img src={metodo.image} alt={metodo.name} />
-                  <p className="card-description">{metodo.description}</p>
-                  <div className="add-button">
-                    <button>Ir</button>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

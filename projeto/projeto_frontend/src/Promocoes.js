@@ -51,10 +51,22 @@ function Promocoes() {
       .catch((err) => console.error("Erro ao buscar categorias:", err));
   }, []);
 
+  function slugify(text) {
+    return text
+      .toString()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .toLowerCase()
+      .replace(/\s+/g, '-')           // Espaços para hífens
+      .replace(/[^\w\-]+/g, '')       // Remove caracteres especiais
+      .replace(/\-\-+/g, '-')         // Hífens duplos para simples
+      .replace(/^-+/, '')             // Remove hífens do início
+      .replace(/-+$/, '');            // Remove hífens do fim
+  }
+
   return (
-    <div className="ajustarTopo">
-      <div className="titlePromocoes">PROMOÇÕES</div>
-      <div className="PromocoesBG">
+    <div className="Promocoes">
+      <div className="ajustarTopo">
+        <div className="titlePromocoes">PROMOÇÕES</div>
         <div className="NovosSection">
           <div className="content">
             <aside className="filters">
@@ -76,7 +88,6 @@ function Promocoes() {
                         checked={selectedCategories.includes(categoria.id)}
                         onChange={() => handleCategoryChange(categoria.id)}
                         className="checkboxFilter"
-                        style={{ width: "16px", height: "16px" }}
                       />
                       <span className="labelFilter">{categoria.name}</span>
                     </label>
@@ -150,7 +161,7 @@ function Promocoes() {
                     <div
                       key={product.id}
                       className="productCard"
-                      onClick={() => navigate(`/produto/${product.id}`)}
+                      onClick={() => navigate(`/produto/${product.id}/${slugify(product.name)}`)}
                       style={{ cursor: "pointer" }}
                     >
                       <img src={product.image} alt={product.name} />
