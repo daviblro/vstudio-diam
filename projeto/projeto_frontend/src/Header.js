@@ -7,8 +7,6 @@ import {
   FaUser,
   FaShoppingCart,
   FaSearch,
-  FaSignOutAlt,
-  FaBars,
 } from "react-icons/fa";
 import axios from "axios";
 

@@ -24,39 +24,37 @@ function Novidades() {
   }, []);
 
   return (
-    <>
-      <div className="ajustarTop">
-        <div className="titleNovidades">NOVIDADES</div>
-        <div className="NovidadesBG">
-          <div className="NovosSection">
-            <div className="productSection">
-              <h2 >Dá uma olhada nas nossas mais recentes novidades!</h2>
-              <div className="productGrid">
-                {products.length === 0 ? (
-                  <p>Não existem produtos disponíveis.</p>
-                ) : (
-                  products.map((product) => (
-                    <div
-                      key={product.id}
-                      className="productCard"
-                      onClick={() => navigate(`/produto/${product.id}`)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <img src={product.image} alt={product.name} />
-                      <p className="card-price">€{product.price}</p>
-                      <h1 className="card-title">{product.name}</h1>
-                      <div className="add-button">
-                        <button>Add to Cart</button>
-                      </div>
+    <div className="ajustarTop">
+      <div className="titleNovidades">NOVIDADES</div>
+      <div className="NovidadesBG">
+        <div className="NovosSection">
+          <div className="productSection">
+            <h2 >Dá uma olhada nas nossas mais recentes novidades!</h2>
+            <div className="productGrid">
+              {products.length === 0 ? (
+                <p>Não existem produtos disponíveis.</p>
+              ) : (
+                products.map((product) => (
+                  <div
+                    key={product.id}
+                    className="productCard"
+                    onClick={() => navigate(`/produto/${product.id}`)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <img src={product.image} alt={product.name} />
+                    <p className="card-price">€{product.price}</p>
+                    <h1 className="card-title">{product.name}</h1>
+                    <div className="add-button">
+                      <button>Add to Cart</button>
                     </div>
-                  ))
-                )}
-              </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

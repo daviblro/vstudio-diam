@@ -1,7 +1,5 @@
-.ajustarTop {
-  padding-top: 120px;
-  padding-left: 10vw;
-  padding-right: 10vw;
+.ajustarTopHomePage {
+  padding-top: 15vh;
   background-color: white;
 }
 
@@ -9,19 +7,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.SeparatorTopPage {
-  height: 10px;
-  width: 100%;
-  background-color: white;
-}
-
-.Separator {
-  height: 40px;
-  width: 100%;
-  background-color: white;
 }
 
 .MainImages {
@@ -31,11 +16,18 @@
 
 /* SECTIONS */
 
-.DestaqueSection,
-.NovosSection {
-  width: 100%;
+.HomePage .DestaqueSection {
   padding: 40px 10vw;
   background-color: #f6f6f6;
+  display: flex;
+  justify-content: center;
+}
+
+.HomePage .NovosSection {
+  padding: 40px 10vw;
+  background-color: #f6f6f6;
+  display: flex;
+  justify-content: center;
 }
 
 /* TÍTULO DAS SECÇÕES */
@@ -51,7 +43,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  justify-content: left;
+  justify-content: center;
 }
 
 /* CARTÕES DE PRODUTO */

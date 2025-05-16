@@ -1,5 +1,4 @@
 import "./HomePage.css";
-import Header from "./Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MainImages from "./MainImages";
@@ -28,7 +27,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="ajustarTop">
+    <div className="ajustarTopHomePage">
       <div className="HomePage">
         <div className="SeparatorTopPage"></div>
         <div className="MainImages">

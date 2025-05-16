@@ -1,6 +1,6 @@
 import Header from "./Header";
 import "./Contactos.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import phoneIcon from "./img/customer_support.png";
 import emailIcon from "./img/email.png";
 
@@ -55,7 +55,7 @@ function Contactos() {
         <div className="main_contactos">
           <section className="text_contactos">
             <p>Perguntas mais frequentes:</p>
-            
+
             {perguntasFrequentes.map((item, i) => (
               <div key={i} className="faq-item">
                 <p
