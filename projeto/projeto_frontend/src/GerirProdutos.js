@@ -58,7 +58,7 @@ function GerirProdutos() {
                     ) : (
                         produtos.map((produto) => (
                             <div key={produto.id} className="produto-card">
-                                <img src={produto.image} alt={produto.name} />
+                                <img className="produto-card img" src={produto.image} alt={produto.name} />
                                 <h3>{produto.name}</h3>
                                 <p><strong>Preço:</strong> €{produto.price}</p>
                                 <p><strong>Stock:</strong> {produto.stock}</p>

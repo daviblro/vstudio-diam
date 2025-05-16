@@ -84,9 +84,9 @@ function Header() {
                 </button>
                 {showDropdown && (
                   <div className="dropdown-menu">
-                    <button className="dropdown-item" onClick={() => navigate('/minhas-compras')}>Compras</button>
-                    <button className="dropdown-item" onClick={() => navigate('/gerir-produtos')}>Gerir Produtos</button>
-                    <button className="dropdown-item" onClick={() => navigate('/conta')}>Conta</button>
+                    <button className="dropdown-item" onClick={() =>{setShowDropdown(false);navigate('/minhas-compras')}}>Compras</button>
+                    <button className="dropdown-item" onClick={() => {setShowDropdown(false);navigate('/gerir-produtos')}}>Gerir Produtos</button>
+                    <button className="dropdown-item" onClick={() => {setShowDropdown(false);navigate('/conta')}}>Conta</button>
                     <button className="dropdown-item" onClick={handleLogout}>Terminar Sessão</button>
                   </div>
                 )}
