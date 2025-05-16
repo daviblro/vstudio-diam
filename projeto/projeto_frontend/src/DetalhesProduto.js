@@ -77,9 +77,9 @@ function DetalhesProduto() {
         const csrfToken = getCookie("csrftoken");
 
         try {
-            await axios.post("http://localhost:8000/api/add_cart/", {
-                product_id: 5,
+            await axios.post("http://localhost:8000/api/add/", {
                 quantity: 1,
+                product_id: 5,
             }, {
                 withCredentials: true,
                 headers: {
