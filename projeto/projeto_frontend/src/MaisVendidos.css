@@ -1,90 +1,93 @@
 .MaisVendidos .ajustarTop {
-    padding-top: 120px;
-    background-color: white;
+  padding-top: 120px;
+  background-color: white;
 }
 
 .MaisVendidos .title {
-    height: 60px;
-    width: 100%;
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-    justify-content: center;
-    padding-top: 10px;
-    background-color: #d8d8d8;
+  height: 60px;
+  width: 100%;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  padding-top: 10px;
+  background-color: #d8d8d8;
+  margin: 0;
 }
 
 .MaisVendidos .productSection {
-    box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
+  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.34);
+  padding: 0 10vw;
 }
 
 .MaisVendidos .productSection h2 {
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    padding: 10px 0;
-    text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 00px;
+  padding: 20px 0;
+  text-align: center;
 }
 
 .MaisVendidos .productGrid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
 }
 
 .MaisVendidos .productCard {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    width: 220px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 220px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .MaisVendidos .productCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
 }
 
 .MaisVendidos .productCard img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .MaisVendidos .card-price {
-    color: #e51b15;
-    font-size: 1.3rem;
-    margin-top: 10px;
-    font-weight: bold;
+  color: #e51b15;
+  font-size: 1.3rem;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .MaisVendidos .card-title {
-    font-size: 1rem;
-    margin-top: 5px;
-    color: #333;
-    text-align: center;
+  font-size: 1rem;
+  margin-top: 5px;
+  color: #333;
+  text-align: center;
 }
 
 .MaisVendidos .add-button {
-    margin-top: auto;
+  margin-top: auto;
 }
 
 .MaisVendidos .add-button button {
-    padding: 8px 16px;
-    background-color: #e51b15;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
+  padding: 8px 16px;
+  background-color: #e51b15;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
 }
 
 .MaisVendidos .add-button button:hover {
-    background-color: #c91410;
+  background-color: #c91410;
 }

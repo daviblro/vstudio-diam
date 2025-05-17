@@ -9,6 +9,7 @@ class CustomUser(AbstractUser):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    promotion_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)  # Percentagem de promoção
 
     def __str__(self):
         return self.name
@@ -23,8 +24,8 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="products")  # Ligado ao User (Dono do Produto)
-    times_purchased = models.IntegerField()
-
+    times_purchased = models.IntegerField(null=True, blank=True)
+    promotion_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)  # Percentagem de promoção
     
     def __str__(self):
         return self.name

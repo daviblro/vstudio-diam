@@ -32,7 +32,7 @@ function Promocoes() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/novidades/", { withCredentials: true })
+      .get("http://localhost:8000/api/promocoes/", { withCredentials: true })
       .then((res) => {
         setProducts(res.data);
         if (res.data.length > 0) {
@@ -152,7 +152,6 @@ function Promocoes() {
               <h2>
                 Não vais querer perder, só de 16/05/2025 até 31/05/2025.{" "}
               </h2>
-              <h2>30% DESCONTO DIRETO, em artigos listados.</h2>
               <div className="productGrid">
                 {filteredProducts.length === 0 ? (
                   <p>Não existem produtos disponíveis.</p>
@@ -167,7 +166,7 @@ function Promocoes() {
                       <img src={product.image} alt={product.name} />
                       <p className="card-price">€{product.price}</p>
                       <p className="card-price-newPrice">
-                        € {(product.price * 0.7).toFixed(2)}
+                        € {(product.price * (1-product.promotion_percentage)).toFixed(2)}
                       </p>
                       <h1 className="card-title">{product.name}</h1>
                       <div className="add-button">

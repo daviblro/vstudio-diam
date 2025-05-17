@@ -16,6 +16,7 @@ from .views import (
     CartItemViewSet,
     ProductPublicViewSet,
     MaisVendidosViewSet,
+    PromocoesViewSet
 )
 
 router = DefaultRouter()
@@ -29,7 +30,9 @@ router.register(r'novidades', NovidadesViewSet, basename='novidades')
 router.register(r'destaques', DestaquesViewSet, basename='destaques')
 router.register(r'cart-items', CartItemViewSet, basename='cart-items')
 router.register(r'products-public', ProductPublicViewSet, basename='products-public')
-router.register(r'mais-vendidos', MaisVendidosViewSet)
+router.register(r'mais-vendidos', MaisVendidosViewSet, basename='mais-vendidos')
+router.register(r'promocoes', PromocoesViewSet, basename='promocoes')
+
 
 urlpatterns = [
     path('login/', login_view),

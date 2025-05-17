@@ -239,6 +239,16 @@ class NovidadesViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Product.objects.all().order_by('-created_at')[:5] # Retorna os 5 produtos mais recentes
     
+#--- Produtos em Promoção ---
+
+class PromocoesViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
+    def get_queryset(self):
+        return Product.objects.filter(promotion_percentage__gt=0).order_by('-promotion_percentage') # Retorna os produtos com maior percentagem de promoção
+
+
 # --- Destaques ---
 class DestaquesViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()

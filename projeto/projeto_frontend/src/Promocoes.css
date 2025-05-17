@@ -99,6 +99,16 @@
   padding: 10px 0;
   text-align: center;
 }
+.Promocoes .productSection h2{
+  width: 100%;
+  height: auto;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  text-align: center;
+}
+
 
 /* Grid de Produtos */
 .Promocoes .productGrid {
