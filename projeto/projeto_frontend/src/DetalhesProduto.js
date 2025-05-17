@@ -15,7 +15,6 @@ function DetalhesProduto() {
     const [reviews, setReviews] = useState([]);
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(5);
-    const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -59,7 +58,7 @@ function DetalhesProduto() {
                     withCredentials: true,
                 }
             );
-            setMessage("Comentário enviado com sucesso!");
+            toast.success("Comentário enviado com sucesso!");
             setComment("");
             setRating(5);
             // Atualizar lista de comentários
@@ -67,7 +66,7 @@ function DetalhesProduto() {
             setReviews(res.data);
         } catch (err) {
             console.error(err);
-            setMessage("Erro ao enviar comentário.");
+            toast.error("Erro ao enviar comentário.");
         }
     };
 

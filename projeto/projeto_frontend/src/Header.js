@@ -1,7 +1,7 @@
-// Header.js (atualizado com layout central de 80vw)
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { UserContext } from "./UserContext";
 
 import {
   FaUser,
@@ -12,18 +12,11 @@ import axios from "axios";
 
 function Header() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const { user, updateUser } = useContext(UserContext);
   const [showMenuBar, setShowMenuBar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
 
   const handleLogout = async () => {
     try {
@@ -31,7 +24,7 @@ function Header() {
         withCredentials: true,
       });
       localStorage.removeItem("user");
-      setUser(null);
+      updateUser(null);
       navigate("/login");
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
@@ -80,7 +73,7 @@ function Header() {
         <div className="HeaderContent">
           <div className="logo">
             <img
-              src={require("./img/monopoleo80x80.png")}
+              src={require("./img/monopoleo80.png")}
               alt="Erro ao carregar logo."
               onClick={() => navigate("/")}
             />
@@ -106,6 +99,11 @@ function Header() {
                   <div className="dropdown-menu">
                     <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/minhas-compras') }}>Compras</button>
                     <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/gerir-produtos') }}>Gerir Produtos</button>
+                    {user && user.is_staff && (
+                      <button className="dropdown-item" onClick={() => navigate('/gerir-usuarios')}>
+                        Gerir Usuários
+                      </button>
+                    )}
                     <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/conta') }}>Conta</button>
                     <button className="dropdown-item" onClick={handleLogout}>Terminar Sessão</button>
                   </div>

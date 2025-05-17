@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./LoginForm.css";
+import { toast } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
 function LoginForm() {
+  const { updateUser } = useContext(UserContext);
   const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,11 +41,12 @@ function LoginForm() {
       );
 
       if (response.data.success) {
-        setMessage("Login bem-sucedido!");
+        toast.success("Login bem-sucedido!");
         localStorage.setItem("user", JSON.stringify(response.data.user));
+        updateUser(response.data.user); // Atualiza o estado global do user
         navigate("/", { state: { user: response.data.user } });
       } else {
-        setMessage("Login falhou: " + response.data.message);
+        toast.error("Login falhou: " + response.data.message);
       }
     } catch (error) {
       // aqui cai quando status >=300 ou rede falhou
@@ -59,10 +63,10 @@ function LoginForm() {
             .flat()
             .join(" ");
         }
-        setMessage("Login falhou: " + msg);
+        toast.error("Login falhou: " + msg);
       } else {
         // erro de rede mesmo
-        setMessage("Erro na comunicação com o servidor.");
+        toast.error("Erro na comunicação com o servidor.");
       }
       console.error(error);
     }
@@ -104,7 +108,6 @@ function LoginForm() {
             <button onClick={() => navigate("/cadastro")}>Sign Up</button>
           </div>
         </form>
-        {message && <p>{message}</p>}
       </div>
     </div>
   );

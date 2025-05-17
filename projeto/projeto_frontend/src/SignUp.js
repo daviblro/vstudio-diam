@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignUp.css"
+import { toast } from "react-toastify";
 
 function SignUp() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
     function getCookie(name) {
@@ -20,7 +20,7 @@ function SignUp() {
         e.preventDefault();
 
         if (password !== passwordConfirm) {
-            setMessage("As senhas não coincidem.");
+            toast.error("As senhas não coincidem.");
             return;
         }
 
@@ -34,14 +34,14 @@ function SignUp() {
                 });
 
             if (response.data.success) {
-                setMessage("Conta criada com sucesso!");
+                toast.success("Conta criada com sucesso!");
                 localStorage.setItem("user", JSON.stringify(response.data.user));
                 navigate("/login", { state: { email, password } });
             } else {
-                setMessage("Erro: " + response.data.message);
+                toast.error("Erro: " + response.data.message);
             }
         } catch (error) {
-            setMessage("Erro ao comunicar com o servidor.");
+            toast.error("Erro ao comunicar com o servidor.");
             console.error(error);
         }
     };
@@ -100,7 +100,6 @@ function SignUp() {
                         <button type="submit">Sign Up</button>
                     </div>
                 </form>
-                {message && <p>{message}</p>}
             </div>
         </div>
     );

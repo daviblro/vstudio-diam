@@ -18,6 +18,7 @@ function EditarProduto() {
         name: "",
         description: "",
         price: "",
+        promotion_percentage: 0,
         stock: "",
         category: "",
         image: null,
@@ -32,6 +33,7 @@ function EditarProduto() {
                     name: prod.name,
                     description: prod.description,
                     price: prod.price,
+                    promotion_percentage: prod.promotion_percentage,
                     stock: prod.stock,
                     category: prod.category, // se for ID
                     image: null, // não trazemos imagem como file
@@ -108,6 +110,16 @@ function EditarProduto() {
                         step="0.01"
                         onChange={handleChange}
                         required
+                    />
+
+                    <label>Promoção (%):</label>
+                    <input
+                        type="number"
+                        name="promotion_percentage"
+                        value={formData.promotion_percentage}
+                        onChange={handleChange}
+                        min="0"
+                        max="100"
                     />
 
                     <label>Stock:</label>

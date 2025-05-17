@@ -21,7 +21,7 @@ function SobreNos() {
             </section>
             <div className="imageSectionSobreNos">
               <img
-                src={require("./img/monopoleo.png")}
+                src={require("./img/monopoleo512.png")}
                 alt="Sobre nós"
                 className="imgSobreNos"
               />

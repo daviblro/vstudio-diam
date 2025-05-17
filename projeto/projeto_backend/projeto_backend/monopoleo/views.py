@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
 from django.http import JsonResponse
 from django.core.files.storage import default_storage
-from django.db.models import Avg
+from django.db.models import Avg, Sum
+from django.db import transaction
 from rest_framework.response import Response
 from rest_framework import status, viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes, action
@@ -104,14 +105,15 @@ class ProductPublicViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
 
-class MaisVendidosViewSet(viewsets.ModelViewSet):
+
+class MaisVendidosViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
-    queryset = Product.objects.all().order_by('times_purchased')
 
     def get_queryset(self):
-        queryset = Product.objects.all().order_by('times_purchased')
-        return queryset[:10]
+        return Product.objects.annotate(
+            total_vendido=Sum('orderitem__quantity')
+        ).order_by('-total_vendido')[:10]
 
 
 # --- Categoria ---
@@ -137,7 +139,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user).order_by('-created_at')
+        return Order.objects.filter(user=self.request.user).order_by('created_at')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -229,8 +231,16 @@ class UserViewSet(viewsets.ModelViewSet):
         if serializer.validated_data.get("email"):
             serializer.validated_data.pop("email")  # impedir update de email
         serializer.save()
-        
-        
+
+
+class UsersManagementViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser]  # Só admins podem acessar
+
+    def get_queryset(self):
+        # Retorna todos os usuários que NÃO são admins (is_staff=False)
+        return User.objects.filter(is_staff=False)
+
 # --- Novidades ---
 class NovidadesViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
@@ -259,3 +269,48 @@ class DestaquesViewSet(viewsets.ModelViewSet):
             Product.objects.annotate(avg_rating=Avg('reviews__rating'))
             .order_by('-avg_rating')[:5]
         ) # Retorna os 5 produtos mais bem avaliados
+
+
+class PromocoesViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]  # ou AllowAny se quiser público
+
+    def get_queryset(self):
+        return Product.objects.filter(promotion_percentage__gt=0).order_by('-promotion_percentage')
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@transaction.atomic
+def finalizar_compra(request):
+    user = request.user
+    try:
+        cart = Cart.objects.get(user=user)
+        cart_items = CartItem.objects.filter(cart=cart)
+
+        if not cart_items.exists():
+            return Response({'error': 'Carrinho vazio.'}, status=400)
+
+        for item in cart_items:
+            if item.quantity > item.product.stock:
+                return Response({'error': f"Estoque insuficiente para o produto {item.product.name}."}, status=400)
+
+        order = Order.objects.create(user=user)
+
+        for item in cart_items:
+            OrderItem.objects.create(
+                order=order,
+                product=item.product,
+                quantity=item.quantity,
+                price=item.product.price
+            )
+
+            item.product.stock -= item.quantity
+            item.product.save()
+
+        cart_items.delete()  # Esvazia o carrinho
+        return Response({'message': 'Compra finalizada com sucesso.'}, status=200)
+
+    except Cart.DoesNotExist:
+        return Response({'error': 'Carrinho não encontrado.'}, status=404)

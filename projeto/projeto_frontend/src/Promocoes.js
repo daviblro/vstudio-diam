@@ -166,7 +166,7 @@ function Promocoes() {
                       <img src={product.image} alt={product.name} />
                       <p className="card-price">€{product.price}</p>
                       <p className="card-price-newPrice">
-                        € {(product.price * (1-product.promotion_percentage)).toFixed(2)}
+                        € {(product.price - (product.price * product.promotion_percentage / 100)).toFixed(2)}
                       </p>
                       <h1 className="card-title">{product.name}</h1>
                       <div className="add-button">

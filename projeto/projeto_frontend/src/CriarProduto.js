@@ -13,6 +13,7 @@ function CriarProduto() {
         name: "",
         description: "",
         price: "",
+        promotion_percentage: 0,
         stock: "",
         category: "", // ID da categoria
         image: null,
@@ -45,7 +46,7 @@ function CriarProduto() {
 
         const data = new FormData();
         Object.entries(formData).forEach(([key, value]) => {
-            if (value) data.append(key, value);
+            if (value !== null && value !== "") data.append(key, value);
         });
 
         try {
@@ -79,6 +80,15 @@ function CriarProduto() {
 
                     <label>Preço (€):</label>
                     <input type="number" name="price" step="0.01" onChange={handleChange} required />
+                    
+                    <label>Promoção (%):</label>
+                    <input
+                        type="number"
+                        name="promotion_percentage"
+                        onChange={handleChange}
+                        min="0"
+                        max="100"
+                    />
 
                     <label>Stock:</label>
                     <input type="number" name="stock" onChange={handleChange} required />

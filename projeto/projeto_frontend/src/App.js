@@ -20,6 +20,7 @@ import CriarProduto from './CriarProduto';
 import EditarProduto from './EditarProduto';
 import DetalhesProduto from "./DetalhesProduto";
 import Carrinho from "./Carrinho"
+import GerirUsuarios from './GerirUsuarios';
 import Header from './Header';
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="bottom-right" autoClose={3000} />
       {shouldShowHeader && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -89,6 +90,14 @@ function App() {
           element={
             <PrivateRoute>
               <Carrinho />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/gerir-usuarios"
+          element={
+            <PrivateRoute>
+              <GerirUsuarios />
             </PrivateRoute>
           }
         />

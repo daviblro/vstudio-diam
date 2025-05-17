@@ -65,7 +65,7 @@ function HomePage() {
                     <p className="card-price">€{product.price}</p>
                     <h1 className="card-title">{product.name}</h1>
                     <div className="add-button">
-                      <button>Add to Cart</button>
+                      <button>Adicionar ao Carrinho</button>
                     </div>
                   </div>
                 ))
@@ -85,14 +85,14 @@ function HomePage() {
                   <div
                     key={product.id}
                     className="productCard"
-                    onClick={() => navigate(`/produto/${product.id}`)}
+                    onClick={() => navigate(`/produto/${product.id}/${slugify(product.name)}`)}
                     style={{ cursor: "pointer" }}
                   >
                     <img src={product.image} alt={product.name} />
                     <p className="card-price">€{product.price}</p>
                     <h1 className="card-title">{product.name}</h1>
                     <div className="add-button">
-                      <button>Add to Cart</button>
+                      <button>Adicionar ao Carrinho</button>
                     </div>
                   </div>
                 ))

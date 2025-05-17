@@ -1,6 +1,6 @@
 .ajustarTopHomePage {
   padding-top: 15vh;
-  background-color: white;
+  background-color: #f6f6f6;
 }
 
 .HomePage {
@@ -12,6 +12,7 @@
 .MainImages {
   width: 100%;
   margin: 0 auto;
+  background-color: #f6f6f6;
 }
 
 /* SECTIONS */

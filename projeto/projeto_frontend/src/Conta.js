@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import "./Conta.css";
+import { toast } from "react-toastify";
+import { UserContext } from "./UserContext";
 
 function Conta() {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    const [username, setUsername] = useState(storedUser.username);
-    const [firstName, setFirstName] = useState(storedUser.first_name || "");
-    const [lastName, setLastName] = useState(storedUser.last_name || "");
+    const { user, updateUser } = useContext(UserContext);
+    const [username, setUsername] = useState(user?.username);
+    const [firstName, setFirstName] = useState(user?.first_name || "");
+    const [lastName, setLastName] = useState(user?.last_name || "");
     const [editMode, setEditMode] = useState(false);
-    const [message, setMessage] = useState("");
     const [showPasswordForm, setShowPasswordForm] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -22,12 +23,12 @@ function Conta() {
     const handleSave = async () => {
         try {
             const response = await axios.put(
-                `http://localhost:8000/api/users/${storedUser.id}/`,
+                `http://localhost:8000/api/users/${user.id}/`,
                 {
                     username,
                     first_name: firstName,
                     last_name: lastName,
-                    email: storedUser.email,
+                    email: user.email,
                 },
                 {
                     withCredentials: true,
@@ -36,18 +37,18 @@ function Conta() {
                     },
                 }
             );
-            setMessage("Dados atualizados com sucesso.");
-            localStorage.setItem("user", JSON.stringify(response.data));
+            toast.success("Dados atualizados com sucesso.");
+            updateUser(response.data);
             setEditMode(false);
         } catch (err) {
-            setMessage("Erro ao atualizar dados.");
+            toast.error("Erro ao atualizar dados.");
             console.error(err);
         }
     };
 
     const handlePasswordChange = async () => {
         if (newPassword !== confirmNewPassword) {
-            setMessage("A nova senha e a confirmação não coincidem.");
+            toast.error("A nova senha e a confirmação não coincidem.");
             return;
         }
 
@@ -68,7 +69,7 @@ function Conta() {
                 }
             );
 
-            setMessage(response.data.message);
+            toast.success(response.data.message);
             setShowPasswordForm(false);
             setCurrentPassword("");
             setNewPassword("");
@@ -84,9 +85,9 @@ function Conta() {
                 } else {
                     msg = Object.values(data).flat().join(" ");
                 }
-                setMessage("Erro ao alterar senha: " + msg);
+                toast.error("Erro ao alterar senha: " + msg);
             } else {
-                setMessage("Erro na comunicação com o servidor.");
+                toast.error("Erro na comunicação com o servidor.");
             }
             console.error(err);
         }
@@ -114,7 +115,7 @@ function Conta() {
                             onChange={(e) => setLastName(e.target.value)}
                             placeholder="Último nome"
                         />
-                        <input value={storedUser.email} disabled />
+                        <input value={user.email} disabled />
                         <div className="buttonLine">
                             <button className="editarButton" onClick={handleSave}>Salvar</button>
                             <button className="editarButton" onClick={() => setEditMode(false)}>Cancelar</button>
@@ -126,7 +127,7 @@ function Conta() {
                             <li><strong>Nome de usuário:</strong> {username}</li>
                             <li><strong>Primeiro nome:</strong> {firstName}</li>
                             <li><strong>Último nome:</strong> {lastName}</li>
-                            <li><strong>Email:</strong> {storedUser.email}</li>
+                            <li><strong>Email:</strong> {user.email}</li>
                         </ul>
                         <div className="buttonLine">
                             <button className="editarButton" onClick={() => setEditMode(true)}>Editar Dados</button>
@@ -167,7 +168,6 @@ function Conta() {
                         </button>
                     </div>
                 )}
-                {message && <p>{message}</p>}
             </div>
         </div>
     );

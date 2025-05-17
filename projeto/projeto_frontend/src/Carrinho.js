@@ -68,6 +68,30 @@ function Carrinho() {
         }
     };
 
+    const finalizarCompra = async () => {
+        const confirmar = window.confirm("Deseja finalizar a compra?");
+        if (!confirmar) return;
+
+        try {
+            await axios.post("http://localhost:8000/api/checkout/", {}, {
+                withCredentials: true,
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+            });
+
+            setItens([]);  // Esvazia o frontend também
+            toast.success("Compra finalizada com sucesso!");
+        } catch (err) {
+            console.error("Erro ao finalizar compra:", err);
+            if (err.response?.data?.error) {
+                toast.error(err.response.data.error);
+            } else {
+                toast.error("Erro ao finalizar a compra.");
+            }
+        }
+    };
+
 
     return (
         <div className="Carrinho">
@@ -95,7 +119,9 @@ function Carrinho() {
                 )}
 
                 {itens.length > 0 && (
-                    <button className="btn-finalizar">Finalizar Compra</button>
+                    <button className="btn-finalizar" onClick={finalizarCompra}>
+                        Finalizar Compra
+                    </button>
                 )}
             </div>
         </div>
