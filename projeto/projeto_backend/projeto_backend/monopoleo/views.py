@@ -69,6 +69,19 @@ def change_password_view(request):
 def user_view(request):
     return Response({'username': request.user.username})
 
+@api_view(['GET'])
+def check_auth(request):
+    user = request.user
+    if user.is_authenticated:
+        return Response({
+            "id": user.id,
+            "username": user.username,
+            "is_staff": user.is_staff,
+            "email": user.email
+        })
+    else:
+        return Response({"detail": "Usuário não autenticado."}, status=status.HTTP_401_UNAUTHORIZED)
+
 # --- Produto ---
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')
@@ -108,7 +121,7 @@ class ProductPublicViewSet(viewsets.ReadOnlyModelViewSet):
 
 class MaisVendidosViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         return Product.objects.annotate(
@@ -128,8 +141,29 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    def get_queryset(self):
+        return Review.objects.filter(product_id=self.request.query_params.get("product"))
+
+    def create(self, request, *args, **kwargs):
+        user = request.user
+        product_id = request.data.get("product")
+
+        if not product_id:
+            return Response({"error": "ID do produto é obrigatório."}, status=400)
+
+        # Verifica se o usuário comprou o produto
+        has_ordered = OrderItem.objects.filter(
+            order__user=user,
+            product_id=product_id
+        ).exists()
+
+        if not has_ordered:
+            return Response({"error": "Você só pode avaliar produtos que comprou."}, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=user)  # Aqui você passa o user explicitamente
+        return Response(serializer.data, status=201)
 
 
 # --- Pedidos ---
@@ -280,10 +314,12 @@ class PromocoesViewSet(viewsets.ReadOnlyModelViewSet):
         return Product.objects.filter(promotion_percentage__gt=0).order_by('-promotion_percentage')
 
 
-class ResultadosPesquisaViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [permissions.AllowAny]  # ou AllowAny se quiser público
+@api_view(['GET'])
+def search_products(request):
+    query = request.GET.get("q", "")
+    produtos = Product.objects.filter(name__icontains=query)[:5]
+    serializer = ProductSerializer(produtos, many=True, context={'request': request})
+    return Response(serializer.data)
 
 
 @api_view(['POST'])

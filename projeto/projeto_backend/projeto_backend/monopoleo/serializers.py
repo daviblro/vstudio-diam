@@ -47,10 +47,19 @@ class ProductSerializer(serializers.ModelSerializer):
 
 # --- Review ---
 class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+
     class Meta:
         model = Review
         fields = '__all__'
-        read_only_fields = ['id', 'user', 'product', 'created_at']
+        read_only_fields = ['id', 'user', 'created_at']
+
+    def get_user(self, obj):
+        return {
+            'id': obj.user.id,
+            'username': obj.user.username,
+            'email': obj.user.email
+        } if obj.user else None
 
 # --- OrderItem ---
 class OrderItemSerializer(serializers.ModelSerializer):

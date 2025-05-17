@@ -34,8 +34,11 @@ function ResultadosPesquisa() {
   );
 
   useEffect(() => {
+
     axios
-      .get("http://localhost:8000/api/products/", { withCredentials: true })
+      .get(`http://localhost:8000/api/search-products/?q=${searchText}`, {
+        withCredentials: true
+      })
       .then((res) => {
         setProducts(res.data);
         if (res.data.length > 0) {
@@ -47,11 +50,13 @@ function ResultadosPesquisa() {
       .catch((err) => {
         console.error("Erro ao buscar produtos:", err);
       });
+
     axios
       .get("http://localhost:8000/api/categories/", { withCredentials: true })
       .then((res) => setCategorias(res.data))
       .catch((err) => console.error("Erro ao buscar categorias:", err));
-  }, []);
+
+  }, [searchText]);
 
   function slugify(text) {
     return text
@@ -183,13 +188,13 @@ function ResultadosPesquisa() {
                               {(
                                 product.price -
                                 (product.price * product.promotion_percentage) /
-                                  100
+                                100
                               ).toFixed(2)}
                             </p>
                           </>
                         ) : (
                           <>
-                            <p style={{color:"transparent"}} className="card-price">€{product.price}</p>
+                            <p style={{ color: "transparent" }} className="card-price">€{product.price}</p>
                             <p className="card-price-newPrice">€{product.price}</p>
                           </>
                         )}

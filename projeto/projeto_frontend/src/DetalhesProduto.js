@@ -28,7 +28,7 @@ function DetalhesProduto() {
                 console.error("Erro ao buscar produto:", err);
                 navigate("/"); // volta à homepage se erro
             });
-        axios.get(`http://localhost:8000/api/reviews/?product=${id}/`, {
+        axios.get(`http://localhost:8000/api/reviews/?product=${id}`, {
             withCredentials: true,
         })
             .then((res) => {
@@ -47,7 +47,7 @@ function DetalhesProduto() {
             await axios.post(
                 "http://localhost:8000/api/reviews/",
                 {
-                    product: id,
+                    product: Number(id),
                     rating,
                     comment,
                 },
@@ -66,7 +66,7 @@ function DetalhesProduto() {
             setReviews(res.data);
         } catch (err) {
             console.error(err);
-            toast.error("Erro ao enviar comentário.");
+            toast.error("Erro ao enviar comentário: " + err.response.data.error);
         }
     };
 
@@ -98,19 +98,60 @@ function DetalhesProduto() {
     return (
         <div className="ProductDetail">
             <div className="ProductDetailContainer">
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    className="ProductImage"
-                />
-                <div className="ProductInfo">
-                    <h2>{product.name}</h2>
-                    <p className="ProductPrice">€{product.price}</p>
-                    <p className="ProductStock">
-                        {product.stock > 0 ? `${product.stock} em stock` : "Esgotado"}
-                    </p>
-                    <p className="ProductDescription">{product.description}</p>
-                    <button className="AddToCartButton" onClick={addToCart}>Adicionar ao Carrinho</button>
+                <div className="ProductLeft">
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="ProductImage"
+                    />
+                    <div className="ProductInfo">
+                        <h2>{product.name}</h2>
+                        <p className="ProductPrice">€{product.price}</p>
+                        <p className="ProductStock">
+                            {product.stock > 0 ? `${product.stock} em stock` : "Esgotado"}
+                        </p>
+                        <p className="ProductDescription">{product.description}</p>
+                        <button className="AddToCartButton" onClick={addToCart}>Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                <div className="ProductRight">
+                    {/* Avaliações existentes */}
+                    <div className="ReviewSection">
+                        <h3>Avaliações</h3>
+                        {reviews.length === 0 ? (
+                            <p>Este produto ainda não foi avaliado.</p>
+                        ) : (
+                            reviews.map((review, index) => (
+                                <div key={index} className="ReviewItem">
+                                    <strong>{review.user.username}</strong> — {review.rating}★
+                                    <span style={{ fontSize: "0.85rem", color: "#555", marginLeft: "10px" }}>
+                                        ({new Date(review.created_at).toLocaleDateString("pt-PT")})
+                                    </span>
+                                    {review.comment && <p>{review.comment}</p>}
+                                </div>
+                            ))
+                        )}
+                    </div>
+
+                    {/* Formulário de avaliação */}
+                    <div className="ReviewForm">
+                        <h3>Deixe sua avaliação</h3>
+                        <form onSubmit={handleSubmit}>
+                            <label>
+                                Nota (1 a 5):
+                            </label>
+                            <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+                                {[1, 2, 3, 4, 5].map((val) => (
+                                    <option key={val} value={val}>{val}</option>
+                                ))}
+                            </select>
+                            <label>
+                                Comentário (opcional):
+                            </label>
+                            <textarea value={comment} onChange={(e) => setComment(e.target.value)} />
+                            <button type="submit">Enviar Avaliação</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

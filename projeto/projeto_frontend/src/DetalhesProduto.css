@@ -10,13 +10,30 @@
 
 .ProductDetailContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    /* ← lado a lado */
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 40px;
     background-color: rgb(227, 227, 227);
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 90%;
+}
+
+.ProductLeft {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    flex: 1;
+}
+
+.ProductRight {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .ProductImage {
@@ -64,4 +81,75 @@
 
 .AddToCartButton:hover {
     background-color: #105ec0;
+}
+
+.ReviewSection {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 300px;
+    /* altura fixa */
+    overflow-y: auto;
+    /* scroll vertical quando exceder */
+    padding-right: 10px;
+    /* espaço pro scroll */
+    border-radius: 6px;
+}
+
+.ReviewItem {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ReviewForm {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ReviewForm label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+}
+
+.ReviewForm textarea {
+    resize: vertical;
+    min-height: 60px;
+    padding: 6px;
+    display: block;
+    width: 100%;
+}
+
+.ReviewForm select {
+    padding: 6px;
+    display: block;
+    width: 100%;
+}
+
+.ReviewForm button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #1675f1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ReviewForm button:hover {
+    background-color: #105ec0;
+}
+
+.ReviewForm *,
+.ReviewForm textarea,
+.ReviewForm select {
+    box-sizing: border-box;
 }

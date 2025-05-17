@@ -9,8 +9,14 @@ class CustomUser(AbstractUser):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    promotion_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)  # Percentagem de promoção
-
+    promotion_percentage = models.DecimalField(
+            max_digits=5,
+            decimal_places=2,
+            null=True,
+            blank=True,
+            help_text="Porcentagem de desconto (ex: 30 para 30%)"
+    )
+    
     def __str__(self):
         return self.name
 

@@ -42,7 +42,6 @@ function LoginForm() {
 
       if (response.data.success) {
         toast.success("Login bem-sucedido!");
-        localStorage.setItem("user", JSON.stringify(response.data.user));
         updateUser(response.data.user); // Atualiza o estado global do user
         navigate("/", { state: { user: response.data.user } });
       } else {

@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow: visible;
 }
 
 .Header img {
@@ -41,7 +42,7 @@
 }
 
 .btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .searchBar {
@@ -50,7 +51,7 @@
   display: flex;
   border: 1px solid #ccc;
   border-radius: 60px;
-  overflow: hidden;
+  overflow: visible;
   margin: 0 20px;
   position: relative;
 }
@@ -58,6 +59,7 @@
 .searchInput {
   width: 100%;
   padding: 10px 10px 10px 36px;
+  border-radius: 60px;
   margin: 0;
   flex: 1;
   border: none;
@@ -141,6 +143,8 @@
   border: none;
   cursor: pointer;
   font-size: 18px;
+  display: flex;
+  align-items: center;
 }
 
 .dropdown-menu {
@@ -167,4 +171,33 @@
 
 .dropdown-item:hover {
   background-color: #ff6464;
+}
+
+.searchDropdown {
+  position: absolute;
+  top: 110%;
+  /* aparece logo abaixo do input */
+  left: 0;
+  width: 100%;
+  /* mesma largura da .searchBar */
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  z-index: 1100;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchItem {
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: rgb(235, 235, 235);
+}
+
+.searchItem:hover {
+  background-color: #9c9c9c;
 }

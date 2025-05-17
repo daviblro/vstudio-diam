@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useState, useEffect, useRef, useContext } from "react";
 import { UserContext } from "./UserContext";
-
+import { toast } from "react-toastify";
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
 import axios from "axios";
 
@@ -13,6 +13,8 @@ function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
 
   const dropdownRef = useRef(null);
 
@@ -21,9 +23,8 @@ function Header() {
       await axios.get("http://localhost:8000/api/logout/", {
         withCredentials: true,
       });
-      localStorage.removeItem("user");
       updateUser(null);
-      navigate("/login");
+      toast.success("Logout bem-sucedido!");
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     }
@@ -62,6 +63,39 @@ function Header() {
     };
   }, [showDropdown]);
 
+  useEffect(() => {
+    if (searchText.trim() === "") {
+      setSuggestions([]);
+      return;
+    }
+
+    const fetchSuggestions = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8000/api/search-products/?q=${searchText}`, {
+          withCredentials: true,
+        });
+        setSuggestions(res.data.slice(0, 5)); // Limita no frontend
+        setShowSearchDropdown(true);
+      } catch (error) {
+        console.error("Erro ao buscar sugestões:", error);
+      }
+    };
+
+    fetchSuggestions();
+  }, [searchText]);
+
+  function slugify(text) {
+    return text
+      .toString()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .toLowerCase()
+      .replace(/\s+/g, '-')           // Espaços para hífens
+      .replace(/[^\w\-]+/g, '')       // Remove caracteres especiais
+      .replace(/\-\-+/g, '-')         // Hífens duplos para simples
+      .replace(/^-+/, '')             // Remove hífens do início
+      .replace(/-+$/, '');            // Remove hífens do fim
+  }
+
   return (
     <>
       <div className="Header">
@@ -80,27 +114,44 @@ function Header() {
               type="text"
               placeholder="Pesquisar..."
               className="searchInput"
-              onChange={(e) => {
-                const newSearchText = e.target.value;
-                setSearchText(e.target.value);
-                navigate("/resultados-pesquisa", {
-                  state:
-                    newSearchText.trim() !== ""
-                      ? { searchText: newSearchText }
-                      : null,
-                });
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  navigate(`/resultados-pesquisa/?q=${searchText}`, {
+                    state: { searchText },
+                  });
+                  setShowSearchDropdown(false);
+                }
               }}
             />
+            {showSearchDropdown && suggestions.length > 0 && (
+              <div className="searchDropdown">
+                {suggestions.map((product) => (
+                  <div
+                    key={product.id}
+                    className="searchItem"
+                    onClick={() => {
+                      navigate(`/produto/${product.id}/${slugify(product.name)}`);
+                      setSearchText("");
+                      setShowSearchDropdown(false);
+                    }}
+                  >
+                    {product.name}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="userSection">
-            <FaUser color="white" size={24} style={{ marginRight: "8px" }} />
             {user ? (
-              <div className="dropdown">
-                <button
-                  className="btn dropdown-toggle"
-                  onClick={() => setShowDropdown((prev) => !prev)}
-                >
+              <div className="dropdown"
+                onMouseEnter={() => setShowDropdown(true)}
+                onMouseLeave={() => setShowDropdown(false)}
+              >
+                <button className="btn dropdown-toggle">
+                  <FaUser color="white" size={24} style={{ marginRight: "8px" }} />
                   Olá, {user.username}
                 </button>
                 {showDropdown && (
