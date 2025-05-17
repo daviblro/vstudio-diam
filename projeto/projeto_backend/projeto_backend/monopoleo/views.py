@@ -280,6 +280,12 @@ class PromocoesViewSet(viewsets.ReadOnlyModelViewSet):
         return Product.objects.filter(promotion_percentage__gt=0).order_by('-promotion_percentage')
 
 
+class ResultadosPesquisaViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]  # ou AllowAny se quiser público
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @transaction.atomic

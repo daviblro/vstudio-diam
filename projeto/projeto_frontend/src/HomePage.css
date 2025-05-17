@@ -9,34 +9,45 @@
   flex-direction: column;
 }
 
-.MainImages {
+.HomePage .MainImages {
   width: 100%;
-  margin: 0 auto;
+  height: auto;
+  margin: 0px auto;
+  margin-bottom: 30px;
   background-color: #f6f6f6;
 }
 
 /* SECTIONS */
 
 .HomePage .DestaqueSection {
-  padding: 40px 10vw;
   background-color: #f6f6f6;
   display: flex;
   justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .HomePage .NovosSection {
-  padding: 40px 10vw;
   background-color: #f6f6f6;
   display: flex;
   justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 /* TÍTULO DAS SECÇÕES */
-.productSection h2 {
+.HomePage .productSection {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 20px;
   text-align: center;
+  padding: 20px 10vw;
+  margin: 0 auto;
+}
+
+.HomePage .productSection h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 /* GRID DE PRODUTOS */

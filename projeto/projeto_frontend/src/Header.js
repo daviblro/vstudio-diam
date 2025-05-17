@@ -3,11 +3,7 @@ import "./Header.css";
 import { useState, useEffect, useRef, useContext } from "react";
 import { UserContext } from "./UserContext";
 
-import {
-  FaUser,
-  FaShoppingCart,
-  FaSearch,
-} from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
 import axios from "axios";
 
 function Header() {
@@ -16,6 +12,8 @@ function Header() {
   const [showMenuBar, setShowMenuBar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
   const dropdownRef = useRef(null);
 
   const handleLogout = async () => {
@@ -50,10 +48,7 @@ function Header() {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
       }
     }
@@ -85,6 +80,16 @@ function Header() {
               type="text"
               placeholder="Pesquisar..."
               className="searchInput"
+              onChange={(e) => {
+                const newSearchText = e.target.value;
+                setSearchText(e.target.value);
+                navigate("/resultados-pesquisa", {
+                  state:
+                    newSearchText.trim() !== ""
+                      ? { searchText: newSearchText }
+                      : null,
+                });
+              }}
             />
           </div>
 
@@ -92,27 +97,61 @@ function Header() {
             <FaUser color="white" size={24} style={{ marginRight: "8px" }} />
             {user ? (
               <div className="dropdown">
-                <button className="btn dropdown-toggle" onClick={() => setShowDropdown(prev => !prev)}>
+                <button
+                  className="btn dropdown-toggle"
+                  onClick={() => setShowDropdown((prev) => !prev)}
+                >
                   Olá, {user.username}
                 </button>
                 {showDropdown && (
                   <div className="dropdown-menu">
-                    <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/minhas-compras') }}>Compras</button>
-                    <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/gerir-produtos') }}>Gerir Produtos</button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        setShowDropdown(false);
+                        navigate("/minhas-compras");
+                      }}
+                    >
+                      Compras
+                    </button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        setShowDropdown(false);
+                        navigate("/gerir-produtos");
+                      }}
+                    >
+                      Gerir Produtos
+                    </button>
                     {user && user.is_staff && (
-                      <button className="dropdown-item" onClick={() => navigate('/gerir-usuarios')}>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => navigate("/gerir-usuarios")}
+                      >
                         Gerir Usuários
                       </button>
                     )}
-                    <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/conta') }}>Conta</button>
-                    <button className="dropdown-item" onClick={handleLogout}>Terminar Sessão</button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        setShowDropdown(false);
+                        navigate("/conta");
+                      }}
+                    >
+                      Conta
+                    </button>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      Terminar Sessão
+                    </button>
                   </div>
                 )}
               </div>
             ) : (
-              <button className="btn" onClick={() => navigate('/login')}>Iniciar Sessão</button>
+              <button className="btn" onClick={() => navigate("/login")}>
+                Iniciar Sessão
+              </button>
             )}
-            <button className="btn" onClick={() => navigate('/carrinho')}>
+            <button className="btn" onClick={() => navigate("/carrinho")}>
               <FaShoppingCart style={{ marginRight: "8px" }} />
               Carrinho
             </button>
@@ -123,18 +162,27 @@ function Header() {
       <div className={`menuBar ${showMenuBar ? "show" : ""}`}>
         <div className="menuBarContent">
           <nav className="menuNav">
-            <Link to="/novidades" className="menuLink">Novidades</Link>
-            <Link to="/promocoes" className="menuLink">Promoções</Link>
-            <Link to="/mais-vendidos" className="menuLink">Mais Vendidos</Link>
-            <Link to="/contactos" className="menuLink">Contactos</Link>
-            <Link to="/lojas" className="menuLink">Lojas</Link>
-            <Link to="/sobre-nos" className="menuLink">Sobre nós</Link>
+            <Link to="/novidades" className="menuLink">
+              Novidades
+            </Link>
+            <Link to="/promocoes" className="menuLink">
+              Promoções
+            </Link>
+            <Link to="/mais-vendidos" className="menuLink">
+              Mais Vendidos
+            </Link>
+            <Link to="/contactos" className="menuLink">
+              Contactos
+            </Link>
+            <Link to="/lojas" className="menuLink">
+              Lojas
+            </Link>
+            <Link to="/sobre-nos" className="menuLink">
+              Sobre nós
+            </Link>
           </nav>
         </div>
-
       </div>
-
-
     </>
   );
 }

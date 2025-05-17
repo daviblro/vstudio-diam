@@ -1,9 +1,9 @@
-.Promocoes .ajustarTopo {
+.ResultadosPesquisa .ajustarTopo {
   padding-top: 120px;
   background-color: white;
 }
 
-.Promocoes .titlePromocoes {
+.ResultadosPesquisa .titleResultadosPesquisa {
   height: 60px;
   width: 100%;
   font-size: 32px;
@@ -14,14 +14,14 @@
   background-color: #d8d8d8;
 }
 
-.Promocoes .NovosSection {
+.ResultadosPesquisa .ResultadosPesquisaSection {
   padding: 0px 10vw;
   margin: 0 auto;
   height: auto;
   background-color: transparent;
 }
 
-.Promocoes .content {
+.ResultadosPesquisa .content {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -29,7 +29,7 @@
 }
 
 /*  Filters Categorias  */
-.Promocoes .filters {
+.ResultadosPesquisa .filters {
   display: block;
   width: 20%;
   height: fit-content;
@@ -40,11 +40,11 @@
   margin-bottom: 20px;
 }
 
-.Promocoes .labelFilter {
+.ResultadosPesquisa .labelFilter {
   font-size: 16px;
 }
 
-.Promocoes .checkboxFilter {
+.ResultadosPesquisa .checkboxFilter {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -56,7 +56,7 @@
   height: 16px;
 }
 
-.Promocoes .clickableFilter {
+.ResultadosPesquisa .clickableFilter {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -65,14 +65,14 @@
 }
 
 /* Filter Price */
-.Promocoes .filterPrice {
+.ResultadosPesquisa .filterPrice {
   height: auto;
   padding: 10px 10px;
   margin: 10px 0px;
   border-radius: 10px;
 }
 
-.Promocoes .filterPriceContent {
+.ResultadosPesquisa .filterPriceContent {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -80,17 +80,17 @@
   border-radius: 10px;
 }
 
-.Promocoes .labelRangePrice {
+.ResultadosPesquisa .labelRangePrice {
   font-size: 20px;
   margin-bottom: 10px;
 }
 
-.Promocoes .price-range-container {
+.ResultadosPesquisa .price-range-container {
   margin: 10px 0px;
 }
 
 /* Listagem de Produtos */
-.Promocoes .productSection {
+.ResultadosPesquisa .productSection {
   width: 80%;
   height: auto;
   font-size: 30px;
@@ -98,20 +98,11 @@
   margin-bottom: 20px;
   padding: 10px 0;
   text-align: center;
+  margin-top: 20px;
 }
-.Promocoes .productSection h2{
-  width: 100%;
-  height: auto;
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  padding: 10px 0;
-  text-align: center;
-}
-
 
 /* Grid de Produtos */
-.Promocoes .productGrid {
+.ResultadosPesquisa .productGrid {
   height: auto;
   display: flex;
   flex-wrap: wrap;
@@ -120,7 +111,7 @@
 }
 
 /* Cartões de Produto */
-.Promocoes .productCard {
+.ResultadosPesquisa .productCard {
   background-color: white;
   border-radius: 10px;
   padding: 20px;
@@ -133,44 +124,42 @@
   align-items: center;
 }
 
-.Promocoes .productCard:hover {
+.ResultadosPesquisa .productCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
 }
 
-.Promocoes .productCard img {
+.ResultadosPesquisa .productCard img {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.Promocoes .card-price {
+.ResultadosPesquisa .card-price {
   color: #e51b15;
-  font-size: 24px;
-  margin-top: 10px;
-  font-weight: bold;
-  text-decoration: line-through;
-}
-
-.Promocoes .card-price-newPrice {
-  color: #e51b15;
-  font-size: 32px;
+  font-size: 1.3rem;
   margin-top: 10px;
   font-weight: bold;
 }
+.ResultadosPesquisa .card-price-newPrice {
+  color: #e51b15;
+  font-size: 2rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
 
-.Promocoes .card-title {
+.ResultadosPesquisa .card-title {
   font-size: 1rem;
   margin-top: 5px;
   color: #333;
   text-align: center;
 }
 
-.Promocoes .add-button {
+.ResultadosPesquisa .add-button {
   margin-top: auto;
 }
 
-.Promocoes .add-button button {
+.ResultadosPesquisa .add-button button {
   padding: 8px 16px;
   background-color: #e51b15;
   color: white;
@@ -181,11 +170,11 @@
   transition: background-color 0.2s ease;
 }
 
-.Promocoes .add-button button:hover {
+.ResultadosPesquisa .add-button button:hover {
   background-color: #c91410;
 }
 
-.Promocoes h2 {
+.ResultadosPesquisa h2 {
   font-size: 24px;
   margin-left: 12px;
 }

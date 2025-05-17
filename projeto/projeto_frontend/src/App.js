@@ -1,27 +1,28 @@
-import './App.css';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import "./App.css";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import PrivateRoute from './PrivateRoute';
-import HomePage from './HomePage';
-import LoginForm from './LoginForm';
-import SignUp from './SignUp';
-import SobreNos from './SobreNos';
-import Novidades from './Novidades';
-import MaisVendidos from './MaisVendidos';
-import Promocoes from './Promocoes';
-import Lojas from './Lojas';
-import Contactos from './Contactos';
-import Conta from './Conta';
-import GerirProdutos from './GerirProdutos';
-import MinhasCompras from './MinhasCompras';
-import CriarProduto from './CriarProduto';
-import EditarProduto from './EditarProduto';
+import PrivateRoute from "./PrivateRoute";
+import HomePage from "./HomePage";
+import LoginForm from "./LoginForm";
+import SignUp from "./SignUp";
+import SobreNos from "./SobreNos";
+import Novidades from "./Novidades";
+import MaisVendidos from "./MaisVendidos";
+import Promocoes from "./Promocoes";
+import Lojas from "./Lojas";
+import Contactos from "./Contactos";
+import Conta from "./Conta";
+import GerirProdutos from "./GerirProdutos";
+import MinhasCompras from "./MinhasCompras";
+import CriarProduto from "./CriarProduto";
+import EditarProduto from "./EditarProduto";
 import DetalhesProduto from "./DetalhesProduto";
-import Carrinho from "./Carrinho"
-import GerirUsuarios from './GerirUsuarios';
-import Header from './Header';
+import Carrinho from "./Carrinho";
+import GerirUsuarios from "./GerirUsuarios";
+import Header from "./Header";
+import ResultadosPesquisa from "./ResultadosPesquisa";
 
 function App() {
   const location = useLocation();
@@ -44,6 +45,8 @@ function App() {
         <Route path="/promocoes" element={<Promocoes />} />
         <Route path="/lojas" element={<Lojas />} />
         <Route path="/contactos" element={<Contactos />} />
+        <Route path="/resultados-pesquisa" element={<ResultadosPesquisa />} />
+
         <Route path="/produto/:id/:slug" element={<DetalhesProduto />} />
         <Route
           path="/conta"

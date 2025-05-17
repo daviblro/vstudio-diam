@@ -73,6 +73,7 @@
   color: gray;
   font-size: 16px;
   pointer-events: none;
+  cursor: pointer;
 }
 
 .userSection {
