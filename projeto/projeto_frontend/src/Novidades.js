@@ -2,6 +2,7 @@ import "./Novidades.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function getCookie(name) {
   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -35,6 +36,32 @@ function Novidades() {
       .replace(/^-+/, "") // Remove hífens do início
       .replace(/-+$/, ""); // Remove hífens do fim
   }
+
+  const addToCart = async (product, e) => {
+    e.stopPropagation();
+
+    const csrfToken = getCookie("csrftoken");
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/cart-items/",
+        {
+          quantity: 1,
+          product_id: product.id,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "X-CSRFToken": csrfToken,
+          },
+        }
+      );
+
+      toast.success(response.data.message); // Mensagem vinda do backend
+    } catch (error) {
+      console.error("Erro ao adicionar os produtos:", error);
+      toast.error("Erro ao adicionar o produto ao carrinho.");
+    }
+  };
 
   return (
     <div className="Novidades">
@@ -89,7 +116,7 @@ function Novidades() {
                     )}
                     <h1 className="card-title">{product.name}</h1>
                     <div className="add-button">
-                      <button>Adicionar ao carrinho</button>
+                      <button onClick={(e) => addToCart(product, e)}>Adicionar ao Carrinho</button>
                     </div>
                   </div>
                 );

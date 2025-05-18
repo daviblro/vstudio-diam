@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CriarProduto.css";
+import { toast } from "react-toastify";
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -11,7 +12,6 @@ function getCookie(name) {
 function EditarProduto() {
     const { id } = useParams(); // ID do produto
     const navigate = useNavigate();
-    const [mensagem, setMensagem] = useState("");
     const [categorias, setCategorias] = useState([]);
 
     const [formData, setFormData] = useState({
@@ -71,11 +71,11 @@ function EditarProduto() {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            setMensagem("Produto atualizado com sucesso!");
+            toast.success("Produto atualizado com sucesso!");
             setTimeout(() => navigate("/gerir-produtos"), 1000);
         } catch (error) {
             console.error("Erro ao atualizar produto:", error);
-            setMensagem("Erro ao atualizar produto.");
+            toast.error("Erro ao atualizar produto.");
         }
     };
 
@@ -83,7 +83,6 @@ function EditarProduto() {
         <div className="CriarProduto">
             <div className="CriarProdutoContainer">
                 <h2>Editar Produto</h2>
-                {mensagem && <p className="mensagem">{mensagem}</p>}
                 <form onSubmit={handleSubmit} className="formulario-produto">
                     <label>Nome:</label>
                     <input

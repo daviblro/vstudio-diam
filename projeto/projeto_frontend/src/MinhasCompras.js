@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./MinhasCompras.css";
-
-function getCookie(name) {
-    const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-    return match ? match[2] : null;
-}
+import { toast } from "react-toastify";
 
 function MinhasCompras() {
     const [compras, setCompras] = useState([]);
-    const [mensagem, setMensagem] = useState("");
 
     useEffect(() => {
         axios
@@ -19,7 +14,7 @@ function MinhasCompras() {
             })
             .catch((err) => {
                 console.error("Erro ao carregar as compras:", err);
-                setMensagem("Erro ao carregar as compras.");
+                toast.error("Erro ao carregar as compras.");
             });
     }, []);
 
@@ -27,7 +22,6 @@ function MinhasCompras() {
         <div className="MinhasCompras">
             <div className="MinhasComprasContainer">
                 <h2>Minhas Compras</h2>
-                {mensagem && <p className="mensagem">{mensagem}</p>}
                 {compras.length === 0 ? (
                     <p>Você ainda não realizou nenhuma compra.</p>
                 ) : (

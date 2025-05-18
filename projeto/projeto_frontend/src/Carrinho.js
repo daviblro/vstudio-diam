@@ -10,7 +10,6 @@ function getCookie(name) {
 
 function Carrinho() {
     const [itens, setItens] = useState([]);
-    const [mensagem, setMensagem] = useState("");
 
     useEffect(() => {
         axios
@@ -24,7 +23,7 @@ function Carrinho() {
             })
             .catch((err) => {
                 console.error("Erro ao carregar o carrinho:", err);
-                setMensagem("Erro ao carregar o carrinho.");
+                toast.error("Erro ao carregar o carrinho.");
             });
     }, []);
 
@@ -97,8 +96,6 @@ function Carrinho() {
         <div className="Carrinho">
             <div className="CarrinhoContainer">
                 <h2>Meu Carrinho</h2>
-                {mensagem && <p className="mensagem">{mensagem}</p>}
-
                 {itens.length === 0 ? (
                     <p>O carrinho está vazio.</p>
                 ) : (

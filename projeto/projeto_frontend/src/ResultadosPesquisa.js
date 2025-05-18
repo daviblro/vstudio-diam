@@ -4,6 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { Range } from "react-range";
 import { useLocation } from "react-router-dom";
 import "./ResultadosPesquisa.css"; // Importando o CSS para ResultadosPesquisa
+import { toast } from "react-toastify";
+
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return match ? match[2] : null;
+}
 
 function ResultadosPesquisa() {
   const [products, setProducts] = useState([]);
@@ -70,6 +76,32 @@ function ResultadosPesquisa() {
       .replace(/^-+/, "") // Remove hífens do início
       .replace(/-+$/, ""); // Remove hífens do fim
   }
+
+  const addToCart = async (product, e) => {
+    e.stopPropagation();
+
+    const csrfToken = getCookie("csrftoken");
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/cart-items/",
+        {
+          quantity: 1,
+          product_id: product.id,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "X-CSRFToken": csrfToken,
+          },
+        }
+      );
+
+      toast.success(response.data.message); // Mensagem vinda do backend
+    } catch (error) {
+      console.error("Erro ao adicionar os produtos:", error);
+      toast.error("Erro ao adicionar o produto ao carrinho.");
+    }
+  };
 
   return (
     <div className="ResultadosPesquisa">
@@ -200,7 +232,7 @@ function ResultadosPesquisa() {
                         )}
                         <h1 className="card-title">{product.name}</h1>
                         <div className="add-button">
-                          <button>Adicionar ao Carrinho</button>
+                          <button onClick={(e) => addToCart(product, e)}>Adicionar ao Carrinho</button>
                         </div>
                       </div>
                     );

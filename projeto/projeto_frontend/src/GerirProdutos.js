@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./GerirProdutos.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function getCookie(name) {
   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -10,7 +11,6 @@ function getCookie(name) {
 
 function GerirProdutos() {
   const [produtos, setProdutos] = useState([]);
-  const [mensagem, setMensagem] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function GerirProdutos() {
       })
       .catch((err) => {
         console.error("Erro ao carregar produtos:", err);
-        setMensagem("Erro ao carregar produtos.");
+        toast.error("Erro ao carregar produtos.");
       });
   }, []);
 
@@ -39,10 +39,10 @@ function GerirProdutos() {
         },
       });
       setProdutos(produtos.filter((p) => p.id !== id));
-      setMensagem("Produto removido com sucesso.");
+      toast.success("Produto removido com sucesso.");
     } catch (err) {
       console.error("Erro ao deletar:", err);
-      setMensagem("Erro ao excluir produto.");
+      toast.error("Erro ao excluir produto.");
     }
   };
 
@@ -56,8 +56,6 @@ function GerirProdutos() {
         >
           + Criar Novo Produto
         </button>
-        {mensagem && <p className="mensagem">{mensagem}</p>}
-
         <div className="produtos-grid">
           {produtos.length === 0 ? (
             <p>Você ainda não tem produtos cadastrados.</p>

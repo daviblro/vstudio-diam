@@ -160,6 +160,12 @@ class ReviewViewSet(viewsets.ModelViewSet):
         if not has_ordered:
             return Response({"error": "Você só pode avaliar produtos que comprou."}, status=status.HTTP_403_FORBIDDEN)
 
+        # Verifica se já existe uma avaliação do mesmo usuário para o mesmo produto
+        already_reviewed = Review.objects.filter(user=user, product_id=product_id).exists()
+
+        if already_reviewed:
+            return Response({"error": "Você já avaliou este produto."}, status=status.HTTP_400_BAD_REQUEST)
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=user)  # Aqui você passa o user explicitamente

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./CriarProduto.css";
+import { toast } from "react-toastify";
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -19,7 +20,6 @@ function CriarProduto() {
         image: null,
     });
 
-    const [mensagem, setMensagem] = useState("");
     const [categorias, setCategorias] = useState([]);
     const navigate = useNavigate();
 
@@ -58,11 +58,11 @@ function CriarProduto() {
                 },
             });
 
-            setMensagem("Produto criado com sucesso!");
+            toast.success("Produto criado com sucesso!");
             navigate("/gerir-produtos");
         } catch (error) {
             console.error("Erro ao criar produto:", error);
-            setMensagem("Erro ao criar produto.");
+            toast.error("Erro ao criar produto.");
         }
     };
 
@@ -70,7 +70,6 @@ function CriarProduto() {
         <div className="CriarProduto">
             <div className="CriarProdutoContainer">
                 <h2>Criar Novo Produto</h2>
-                {mensagem && <p className="mensagem">{mensagem}</p>}
                 <form onSubmit={handleSubmit} className="formulario-produto">
                     <label>Nome:</label>
                     <input type="text" name="name" onChange={handleChange} required />

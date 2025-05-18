@@ -90,8 +90,8 @@ function Header() {
       .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
       .toLowerCase()
       .replace(/\s+/g, '-')           // Espaços para hífens
-      .replace(/[^\w\-]+/g, '')       // Remove caracteres especiais
-      .replace(/\-\-+/g, '-')         // Hífens duplos para simples
+      .replace(/[^\w-]+/g, '')       // Remove caracteres especiais
+      .replace(/--+/g, '-')         // Hífens duplos para simples
       .replace(/^-+/, '')             // Remove hífens do início
       .replace(/-+$/, '');            // Remove hífens do fim
   }
@@ -122,6 +122,7 @@ function Header() {
                     state: { searchText },
                   });
                   setShowSearchDropdown(false);
+                  setSearchText("");
                 }
               }}
             />
