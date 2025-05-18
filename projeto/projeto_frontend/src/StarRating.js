@@ -1,29 +1,17 @@
 import React from "react";
-import { FaStar } from "react-icons/fa"
+import { FaStar } from "react-icons/fa";
 
 const StarRating = ({ rating }) => {
-    let i = 0;
-    return(
-        <>
-        
-        {[...Array(5)].map(star => {
-            if (Math.floor(rating) < 5 && i < 4) {
-                i += 1
-            return (
-                <FaStar color="#e51b15"/>
-                
-            )} else {
-                i += 1
-                return (
-                    <FaStar color="e51b15"/>
-
-                )
-            }
-
-        })}
-            
-        </>
-    )
-}
+    return (
+        <div style={{ display: "flex", gap: "4px" }}>
+            {[...Array(5)].map((_, index) => (
+                <FaStar
+                    key={index}
+                    color={index < Math.round(rating) ? "#e51b15" : "#ccc"}
+                />
+            ))}
+        </div>
+    );
+};
 
 export default StarRating;

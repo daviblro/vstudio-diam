@@ -1,0 +1,16 @@
+Os scripts podem ser todos instalados de uma vez só ao fazer "npm install", devido à presença do package.json no zip.
+
+Mas, mesmo assim, aqui está uma lista dos comandos para instalar todas as dependências:
+
+npm install axios
+npm install react
+npm install react-dom
+npm install react-icons
+npm install react-range
+npm install react-router-dom
+npm install react-scripts
+npm install react-slick
+npm install react-slideshow-image
+npm install react-toastify
+npm install slick-carousel
+npm install web-vitals

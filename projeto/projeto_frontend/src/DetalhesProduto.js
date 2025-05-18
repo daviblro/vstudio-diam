@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, data } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./DetalhesProduto.css";
 import { toast } from "react-toastify";
@@ -37,9 +37,10 @@ function DetalhesProduto() {
       })
       .then((res) => {
         setReviews(res.data);
-        let sum = 0;
-        reviews.map(item => sum += item.rating); 
-        setAvgRating((sum / reviews.length).toFixed(2));
+        const data = res.data;
+        const sum = data.reduce((acc, review) => acc + review.rating, 0);
+        const avg = data.length > 0 ? (sum / data.length).toFixed(2) : 0;
+        setAvgRating(avg);
       })
       .catch((err) => {
         console.error("Erro ao buscar produto:", err);
@@ -78,7 +79,7 @@ function DetalhesProduto() {
       toast.error("Erro ao enviar comentário: " + err.response.data.error);
     }
   };
-  
+
   const addToCart = async (e) => {
     e.preventDefault();
 
@@ -120,10 +121,10 @@ function DetalhesProduto() {
             <img src={product.image} alt={product.name} />
             <h1 className="card-title">{product.name}</h1>
 
-            {(product.promotion_percentage>0) ? (
+            {(product.promotion_percentage > 0) ? (
               <>
                 <p
-                  style={{ textDecoration: "line-through"}}
+                  style={{ textDecoration: "line-through" }}
                   className="card-price"
                 >
                   €{product.price}

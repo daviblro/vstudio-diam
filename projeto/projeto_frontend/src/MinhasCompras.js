@@ -26,10 +26,11 @@ function MinhasCompras() {
                     <p>Você ainda não realizou nenhuma compra.</p>
                 ) : (
                     compras.map((compra) => {
-                        const total = compra.items.reduce(
-                            (acc, item) => acc + item.price * item.quantity,
-                            0
-                        );
+                        const total = compra.items.reduce((acc, item) => {
+                            const desconto = (item.price * item.product.promotion_percentage) / 100;
+                            const precoComDesconto = item.price - desconto;
+                            return acc + precoComDesconto * item.quantity;
+                        }, 0);
 
                         return (
                             <div key={compra.id} className="compra-card">
@@ -45,8 +46,8 @@ function MinhasCompras() {
                                             <div>
                                                 <p><strong>{item.product.name}</strong></p>
                                                 <p>Quantidade: {item.quantity}</p>
-                                                <p>Preço unitário: €{Number(item.price * ((100 - item.product.promotion_percentage)/100)).toFixed(2)}</p>
-                                                <p>Subtotal: €{(Number(item.price * ((100 - item.product.promotion_percentage)/100)) * item.quantity).toFixed(2)}</p>
+                                                <p>Preço unitário: €{Number(item.price * ((100 - item.product.promotion_percentage) / 100)).toFixed(2)}</p>
+                                                <p>Subtotal: €{(Number(item.price * ((100 - item.product.promotion_percentage) / 100)) * item.quantity).toFixed(2)}</p>
                                             </div>
                                         </div>
                                     ))}
