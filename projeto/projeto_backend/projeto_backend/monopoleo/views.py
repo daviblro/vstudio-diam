@@ -305,8 +305,9 @@ class DestaquesViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     
     def get_queryset(self):
+        user = self.request.user
         return (
-            Product.objects.annotate(avg_rating=Avg('reviews__rating'))
+            Product.objects.annotate(avg_rating=Avg('reviews__rating')).exclude(owner = user)
             .order_by('-avg_rating')[:5]
         ) # Retorna os 5 produtos mais bem avaliados
 

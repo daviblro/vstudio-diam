@@ -45,8 +45,8 @@ function MinhasCompras() {
                                             <div>
                                                 <p><strong>{item.product.name}</strong></p>
                                                 <p>Quantidade: {item.quantity}</p>
-                                                <p>Preço unitário: €{Number(item.price).toFixed(2)}</p>
-                                                <p>Subtotal: €{(Number(item.price) * item.quantity).toFixed(2)}</p>
+                                                <p>Preço unitário: €{Number(item.price * ((100 - item.product.promotion_percentage)/100)).toFixed(2)}</p>
+                                                <p>Subtotal: €{(Number(item.price * ((100 - item.product.promotion_percentage)/100)) * item.quantity).toFixed(2)}</p>
                                             </div>
                                         </div>
                                     ))}

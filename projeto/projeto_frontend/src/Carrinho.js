@@ -103,7 +103,7 @@ function Carrinho() {
                         <div key={item.id} className="item-card">
                             <img src={item.product.image} alt={item.product.name} />
                             <h3>{item.product.name}</h3>
-                            <p><strong>Preço:</strong> €{item.product.price}</p>
+                            <p><strong>Preço:</strong> €{item.product.price * ((100 - item.product.promotion_percentage) / 100) }</p>
                             <p><strong>Quantidade:</strong> {item.quantity}</p>
                             <div className="buttonLine">
                                 <button onClick={() => removerItem(item.id)} className="btn-danger">
