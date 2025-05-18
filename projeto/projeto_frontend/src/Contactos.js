@@ -10,12 +10,14 @@ function Contactos() {
       name: "Número de Telefone: 968527413",
       description:
         "Ligue para o nosso suporte ao cliente e obtenha assistência imediata.",
+      metodosContacto: "266875632",
       image: phoneIcon,
     },
     {
       id: 2,
       name: "Email",
       description: "Envie-nos um email e responderemos o mais rápido possível.",
+      metodosContacto: "monopoleo@suporte.com",
       image: emailIcon,
     },
   ];
@@ -69,8 +71,8 @@ function Contactos() {
             </div>
           ))}
           <p className="bottom-text">
-            Se ainda precisares de ajuda fala conosco através dos nossos
-            canais de atendimento:
+            Se ainda precisares de ajuda fala conosco através dos nossos canais
+            de atendimento:
           </p>
         </section>
 
@@ -80,9 +82,7 @@ function Contactos() {
               <div key={metodo.id} className="card">
                 <img src={metodo.image} alt={metodo.name} />
                 <p className="card-description">{metodo.description}</p>
-                <div className="add-button">
-                  <button>Ir</button>
-                </div>
+                <p className="card-metodosContacto">{metodo.metodosContacto}</p>
               </div>
             ))}
           </div>

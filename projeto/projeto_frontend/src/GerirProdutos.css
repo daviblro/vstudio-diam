@@ -51,6 +51,20 @@
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
 }
 
+.GerirProdutos .card-price {
+  color: #e51b15;
+  font-size: 1.3rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.GerirProdutos .card-price-newPrice {
+  color: #e51b15;
+  font-size: 2rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
 .botoes {
   width: 100%;
   margin-top: 10px;

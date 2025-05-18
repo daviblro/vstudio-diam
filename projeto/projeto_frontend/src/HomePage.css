@@ -82,9 +82,16 @@
   border-radius: 8px;
 }
 
-.card-price {
+.HomePage .card-price {
   color: #e51b15;
   font-size: 1.3rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.HomePage .card-price-newPrice {
+  color: #e51b15;
+  font-size: 2rem;
   margin-top: 10px;
   font-weight: bold;
 }

@@ -59,6 +59,14 @@
   font-weight: bold;
 }
 
+.Novidades .card-price-newPrice {
+  color: #e51b15;
+  font-size: 2rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+
 .Novidades .card-title {
   font-size: 1rem;
   margin-top: 5px;

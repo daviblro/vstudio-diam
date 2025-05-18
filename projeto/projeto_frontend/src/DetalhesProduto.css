@@ -1,155 +1,183 @@
 .ProductDetail {
-    font-family: Arial, sans-serif;
-    padding-top: 10vh;
-    background-color: #f8f8f8;
-    min-height: 90vh;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+  font-family: Arial, sans-serif;
+  padding-top: 120px;
+  background-color: #f8f8f8;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .ProductDetailContainer {
-    display: flex;
-    flex-direction: row;
-    /* ← lado a lado */
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    background-color: rgb(227, 227, 227);
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
-    width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  background-color: rgb(227, 227, 227);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  width: 100%;
 }
 
 .ProductLeft {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  flex: 1;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .ProductRight {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.ProductImage {
-    width: 400px;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
+.productCard {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.ProductInfo {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.productCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
 }
 
-.ProductPrice {
-    color: #e51b15;
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-top: 10px;
+.card-title {
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  margin: 10px 0;
 }
 
-.ProductStock {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
+.productCard img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0;
 }
 
-.ProductDescription {
-    font-size: 1rem;
-    color: #333;
-    line-height: 1.5;
+.card-price {
+  color: #e51b15;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.card-price-newPrice {
+  color: #e51b15;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.Product .card-stock {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #555;
+
+}
+
+.Product .card-description {
+      margin: 10px 0;
+
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
 }
 
 .AddToCartButton {
-    margin-top: auto;
-    padding: 12px;
-    background-color: #1675f1;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+  margin-top: auto;
+  padding: 12px;
+  background-color: #1675f1;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .AddToCartButton:hover {
-    background-color: #105ec0;
+  background-color: #105ec0;
 }
 
 .ReviewSection {
-    margin-top: 40px;
-    width: 100%;
-    max-width: 600px;
-    max-height: 300px;
-    /* altura fixa */
-    overflow-y: auto;
-    /* scroll vertical quando exceder */
-    padding-right: 10px;
-    /* espaço pro scroll */
-    border-radius: 6px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 300px;
+  /* altura fixa */
+  overflow-y: auto;
+  /* scroll vertical quando exceder */
+  padding-right: 10px;
+  /* espaço pro scroll */
+  border-radius: 6px;
 }
 
 .ReviewItem {
-    background-color: #fff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .ReviewForm {
-    margin-top: 30px;
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
 .ReviewForm label {
-    margin: 10px 0 5px;
-    font-weight: bold;
-    display: block;
-    width: 100%;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
 }
 
 .ReviewForm textarea {
-    resize: vertical;
-    min-height: 60px;
-    padding: 6px;
-    display: block;
-    width: 100%;
+  resize: vertical;
+  min-height: 60px;
+  padding: 6px;
+  display: block;
+  width: 100%;
 }
 
 .ReviewForm select {
-    padding: 6px;
-    display: block;
-    width: 100%;
+  padding: 6px;
+  display: block;
+  width: 100%;
 }
 
 .ReviewForm button {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #1675f1;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #1675f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .ReviewForm button:hover {
-    background-color: #105ec0;
+  background-color: #105ec0;
 }
 
 .ReviewForm *,
 .ReviewForm textarea,
 .ReviewForm select {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }

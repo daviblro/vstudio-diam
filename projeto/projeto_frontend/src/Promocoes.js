@@ -167,7 +167,7 @@ function Promocoes() {
                       </p>
                       <h1 className="card-title">{product.name}</h1>
                       <div className="add-button">
-                        <button>Add to Cart</button>
+                        <button>Adicionar ao carrinho</button>
                       </div>
                     </div>
                   ))

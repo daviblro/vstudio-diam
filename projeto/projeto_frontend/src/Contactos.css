@@ -83,6 +83,15 @@
   color: #000000;
   font-weight: bold;
 }
+.Contactos .card-metodosContacto {
+  width: 100%;
+  padding-top: 10%;
+  font-size: 1.5rem;
+  font-family: "Calibri";
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+}
 
 .Contactos .text_contactos {
   background-color: rgb(255, 255, 255);

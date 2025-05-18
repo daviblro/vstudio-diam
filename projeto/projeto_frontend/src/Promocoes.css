@@ -146,7 +146,7 @@
 
 .Promocoes .card-price {
   color: #e51b15;
-  font-size: 24px;
+  font-size: 1.3rem;
   margin-top: 10px;
   font-weight: bold;
   text-decoration: line-through;
@@ -154,7 +154,7 @@
 
 .Promocoes .card-price-newPrice {
   color: #e51b15;
-  font-size: 32px;
+  font-size: 2rem;
   margin-top: 10px;
   font-weight: bold;
 }
