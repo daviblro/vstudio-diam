@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, data } from "react-router-dom";
 import axios from "axios";
 import "./DetalhesProduto.css";
 import { toast } from "react-toastify";
+import StarRating from "./StarRating";
 
 function getCookie(name) {
   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -16,6 +17,7 @@ function DetalhesProduto() {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(5);
   const navigate = useNavigate();
+  const [avgRating, setAvgRating] = useState(0);
 
   useEffect(() => {
     axios
@@ -35,6 +37,9 @@ function DetalhesProduto() {
       })
       .then((res) => {
         setReviews(res.data);
+        let sum = 0;
+        reviews.map(item => sum += item.rating); 
+        setAvgRating((sum / reviews.length).toFixed(2));
       })
       .catch((err) => {
         console.error("Erro ao buscar produto:", err);
@@ -73,7 +78,7 @@ function DetalhesProduto() {
       toast.error("Erro ao enviar comentário: " + err.response.data.error);
     }
   };
-
+  
   const addToCart = async (e) => {
     e.preventDefault();
 
@@ -139,6 +144,8 @@ function DetalhesProduto() {
                 <p className="card-price-newPrice">€{product.price}</p>
               </>
             )}
+            <p>{avgRating} / 5.00</p>
+            <StarRating rating={avgRating} />
             <p className="card-stock">
               {product.stock > 0 ? `${product.stock} em stock` : "Esgotado"}
             </p>

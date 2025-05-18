@@ -218,7 +218,7 @@ class CartItemViewSet(viewsets.ModelViewSet):
         quantity = int(request.data.get('quantity', 1))
 
         if not product_id:
-            return Response({"error": "Produto é obrigatório."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Produto é obrigatório"}, status=status.HTTP_400_BAD_REQUEST)
         
         # Obter o objeto produto
         try:
