@@ -218,13 +218,17 @@ class CartItemViewSet(viewsets.ModelViewSet):
         quantity = int(request.data.get('quantity', 1))
 
         if not product_id:
-            return Response({"error": "Produto é obrigatório"}, status=status.HTTP_400_BAD_REQUEST)
-
+            return Response({"error": "Produto é obrigatório."}, status=status.HTTP_400_BAD_REQUEST)
+        
         # Obter o objeto produto
         try:
             product_obj = Product.objects.get(pk=product_id)
         except Product.DoesNotExist:
             return Response({"error": "Produto não existe."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Verificar se o produto e de Owner
+        if product_obj.owner == user: 
+            return Response({"error": "Produto é seu."}, status=status.HTTP_400_BAD_REQUEST)
 
         # Verifica se já existe item no carrinho para esse produto
         existing_item = CartItem.objects.filter(cart=cart, product=product_obj).first()
@@ -305,9 +309,8 @@ class DestaquesViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     
     def get_queryset(self):
-        user = self.request.user
         return (
-            Product.objects.annotate(avg_rating=Avg('reviews__rating')).exclude(owner = user)
+            Product.objects.annotate(avg_rating=Avg('reviews__rating'))
             .order_by('-avg_rating')[:5]
         ) # Retorna os 5 produtos mais bem avaliados
 
